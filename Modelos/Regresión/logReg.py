@@ -1,13 +1,14 @@
 # Imports necesarios
 import numpy as np
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegressionCV
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
+from sklearn.preprocessing import StandardScaler
 # Clase que implementa el modelo de regresión logística
 class LogReg:
-    def __init__(self, data, fit_intercept,copy_X, target,n_jobs, test_size, random_state):
+    def __init__(self, data,target, test_size, random_state):
         '''
         Constructor de la clase
         :param data: Datos de entrada
@@ -29,7 +30,13 @@ class LogReg:
         self.test_size = test_size
         self.random_state = random_state
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.data, self.target, test_size = self.test_size, random_state = self.random_state)
-        self.model = LogisticRegression(fit_intercept=fit_intercept, copy_X=copy_X,n_jobs=n_jobs)
+        # Escalamos los datos
+        self.scaler = StandardScaler()
+        self.scaler.fit(self.X_train)
+        self.X_train = self.scaler.transform(self.X_train)
+        self.X_test = self.scaler.transform(self.X_test)
+        # Creamos el modelo
+        self.model = LogisticRegressionCV(penalty='l1', max_iter=5000, solver='saga')
         self.model.fit(self.X_train, self.y_train)
         self.y_pred = self.model.predict(self.X_test) # type: ignore
         self.mse = mean_squared_error(self.y_test, self.y_pred)
