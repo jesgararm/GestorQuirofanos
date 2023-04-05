@@ -81,3 +81,19 @@ class LinearReg:
         return self.model.get_params()
     def getModel(self):
         return self.model
+    def exportModel(self, path):
+        '''
+        Exporta el modelo a un fichero .pkl
+        :param path: Ruta del fichero
+        :type path: str
+        '''
+        from joblib import dump
+        dump(self.model, path)
+    def importModel(self, path):
+        '''
+        Importa un modelo de un fichero .pkl
+        :param path: Ruta del fichero
+        :type path: str
+        '''
+        from joblib import load
+        self.model = load(path)

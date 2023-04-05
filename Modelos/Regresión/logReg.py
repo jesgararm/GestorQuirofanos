@@ -61,3 +61,13 @@ class LogReg:
         return self.cross_val_rmse
     def getCrossVal(self):
         return self.cross_val
+    def exportModel(self, filename):
+        '''
+        Exporta el modelo a un fichero
+        :param filename: Nombre del fichero donde se exporta el modelo
+        :type filename: str
+        '''
+        from joblib import dump
+        dump(self.model, filename)
+        
+        
