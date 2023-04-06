@@ -13,6 +13,8 @@ def divideData(data):
     Y = data['DURACIÓN']
     # Eliminamos las dos primeras columnas de X, que son los ID del paciente
     X = X.drop(['Unnamed: 0', 'NHC'], axis=1)
+    X = X.values
+    Y = Y.values
     return X, Y
 
 # Función que divide el DataFrame ampliado en X e Y para los modelos
@@ -30,5 +32,7 @@ def divideDataAmpli(data):
     Y = data['DURACIÓN']
     # Eliminamos la primera columna de X, que es el ID del paciente
     X = X.drop(['NHC'], axis=1)
+    X = X.values
+    Y = Y.values
     return X, Y
     

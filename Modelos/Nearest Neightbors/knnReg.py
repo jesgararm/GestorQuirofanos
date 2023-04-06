@@ -33,7 +33,7 @@ class KNNReg:
         # Creamos el modelo
         self.model = KNeighborsRegressor()
         # Creamos el grid de parámetros
-        self.param_grid = {'n_neighbors': np.arange(1, 50), 'weights': ['uniform', 'distance'], 'metric': ['euclidean', 'manhattan'], 'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute']}
+        self.param_grid = {'n_neighbors': np.arange(1, 15), 'weights': ['uniform', 'distance'], 'metric': ['euclidean', 'manhattan'], 'algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute']}
         # Creamos el grid search
         self.grid = GridSearchCV(self.model, self.param_grid, cv=10, scoring='neg_mean_squared_error')
         # Entrenamos el modelo
@@ -42,6 +42,7 @@ class KNNReg:
         self.best_params = self.grid.best_params_
         # Creamos el modelo con los mejores parámetros
         self.model = KNeighborsRegressor(n_neighbors = self.best_params['n_neighbors'], weights = self.best_params['weights'], metric = self.best_params['metric'], algorithm = self.best_params['algorithm'])
+        #self.model = KNeighborsRegressor(n_neighbors = 3, weights = 'uniform', metric = 'euclidean', algorithm = 'auto')
         self.model.fit(self.X_train, self.y_train)
         self.y_pred = self.model.predict(self.X_test) # type: ignore
         self.mse = mean_squared_error(self.y_test, self.y_pred)
@@ -58,3 +59,6 @@ class KNNReg:
         return self.cross_val_pred
     def getCrossValRMSE(self):
         return self.cross_val_rmse
+    def exportModel(self, filename):
+        from joblib import dump
+        dump(self.model, filename)
