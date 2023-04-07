@@ -33,15 +33,4 @@ class RegressionTree:
         plt.show()
     def getScores(self):
         return self.scores
-        
-    def DistributionPlot(self):
-        width = 12
-        height = 10
-        plt.figure(figsize=(width, height))  
-        ax1 = sns.distplot(self.y_test, hist=False, color="r", label='Real Values')
-        ax2 = sns.distplot(self.y_pred, hist=False, color="b", label='Predicted Values', ax=ax1)
-        
-        plt.title('Actual vs Fitted Values for Time')
-        plt.show()
-        plt.close()
     
