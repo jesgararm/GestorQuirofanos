@@ -3,21 +3,33 @@ from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
+from sklearn.model_selection import GridSearchCV
 import numpy as np
 import matplotlib.pyplot as plt
 import joblib
 # Clase que implementa un modelo de regresión de tipo MLP
 class MLP:
     # Constructor de la clase
-    def __init__(self, X, y, hidden_layer_sizes, activation, solver, alpha, batch_size, learning_rate, learning_rate_init, power_t, max_iter, shuffle, random_state, tol, verbose, warm_start, momentum, nesterovs_momentum, early_stopping, validation_fraction, beta_1, beta_2, epsilon, n_iter_no_change):
+    def __init__(self, X, y):
         # Dividimos los datos en entrenamiento y test
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.2, random_state=0)
-        # Creamos el modelo
-        self.model = MLPRegressor(hidden_layer_sizes=hidden_layer_sizes, activation=activation, solver=solver, alpha=alpha, batch_size=batch_size, learning_rate=learning_rate, learning_rate_init=learning_rate_init, power_t=power_t, max_iter=max_iter, shuffle=shuffle, random_state=random_state, tol=tol, verbose=verbose, warm_start=warm_start, momentum=momentum, nesterovs_momentum=nesterovs_momentum, early_stopping=early_stopping, validation_fraction=validation_fraction, beta_1=beta_1, beta_2=beta_2, epsilon=epsilon, n_iter_no_change=n_iter_no_change)
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        # Creamos la matriz de búsqueda de parámetros
+        self.param_grid = {
+        'hidden_layer_sizes': [(150,100,50), (120,80,40), (100,50,30)],
+        'max_iter': [50, 100],
+        'activation': ['tanh', 'relu'],
+        'solver': ['sgd', 'adam'],
+        'alpha': [0.0001, 0.05],
+        'learning_rate': ['constant','adaptive']}
+        self.grid = GridSearchCV(MLPRegressor(), self.param_grid, n_jobs=-1, cv=5)
         # Entrenamos el modelo
+        self.grid.fit(self.X_train, self.y_train)
+        # Obtenemos el mejor modelo
+        self.best_params = self.grid.best_params_
+        self.model = MLPRegressor(hidden_layer_sizes=self.best_params['hidden_layer_sizes'], max_iter=self.best_params['max_iter'], activation=self.best_params['activation'], solver=self.best_params['solver'], alpha=self.best_params['alpha'], learning_rate=self.best_params['learning_rate'])
         self.model.fit(self.X_train, self.y_train)
         # Predecimos los valores de test
-        self.y_pred = self.model.predict(self.X_test)
+        self.y_pred = self.model.predict(self.X_test) # type: ignore
         # Calculamos el error cuadrático medio
         self.mse = mean_squared_error(self.y_test, self.y_pred)
         # Calculamos el error absoluto medio
