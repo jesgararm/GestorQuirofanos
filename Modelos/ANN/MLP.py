@@ -1,79 +1,69 @@
-# Definimos modelo con Keras
-# Importamos librerias
-import tensorflow as tf
-import matplotlib.pyplot as plt
-from tensorflow.keras import Model
-from tensorflow.keras import Sequential
-from tensorflow.keras.optimizers import Adam
-from sklearn.preprocessing import StandardScaler
-from tensorflow.keras.layers import Dense, Dropout
+# Imports necesarios
+from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import train_test_split
-from tensorflow.keras.losses import MeanSquaredLogarithmicError
-import keras_tuner as kt
-from kerastuner import HyperModel
-class ANNHyperModel(HyperModel):
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
+import numpy as np
+import matplotlib.pyplot as plt
+import joblib
+# Clase que implementa un modelo de regresión de tipo MLP
+class MLP:
+    # Constructor de la clase
+    def __init__(self, X, y, hidden_layer_sizes, activation, solver, alpha, batch_size, learning_rate, learning_rate_init, power_t, max_iter, shuffle, random_state, tol, verbose, warm_start, momentum, nesterovs_momentum, early_stopping, validation_fraction, beta_1, beta_2, epsilon, n_iter_no_change):
+        # Dividimos los datos en entrenamiento y test
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+        # Creamos el modelo
+        self.model = MLPRegressor(hidden_layer_sizes=hidden_layer_sizes, activation=activation, solver=solver, alpha=alpha, batch_size=batch_size, learning_rate=learning_rate, learning_rate_init=learning_rate_init, power_t=power_t, max_iter=max_iter, shuffle=shuffle, random_state=random_state, tol=tol, verbose=verbose, warm_start=warm_start, momentum=momentum, nesterovs_momentum=nesterovs_momentum, early_stopping=early_stopping, validation_fraction=validation_fraction, beta_1=beta_1, beta_2=beta_2, epsilon=epsilon, n_iter_no_change=n_iter_no_change)
+        # Entrenamos el modelo
+        self.model.fit(self.X_train, self.y_train)
+        # Predecimos los valores de test
+        self.y_pred = self.model.predict(self.X_test)
+        # Calculamos el error cuadrático medio
+        self.mse = mean_squared_error(self.y_test, self.y_pred)
+        # Calculamos el error absoluto medio
+        self.mae = mean_absolute_error(self.y_test, self.y_pred)
+        # Calculamos el porcentaje de error
+        self.error = np.mean(np.abs((self.y_test - self.y_pred) / self.y_test)) * 100
+        # Calculamos el porcentaje de acierto
+        self.acierto = 100 - self.error
+
+    # Función que devuelve el error cuadrático medio
+    def getMSE(self):
+        return self.mse
+
+    # Función que devuelve el error absoluto medio
+    def getMAE(self):
+        return self.mae
+
+    # Función que devuelve el root mean squared error
+    def getRMSE(self):
+        return np.sqrt(self.mse)
     
-    def build(self, hp):
-      model = Sequential()
-      # Tune the number of units in the first Dense layer
-      # Choose an optimal value between 32-512
-      hp_units1 = hp.Int('units1', min_value=32, max_value=512, step=32)
-      hp_units2 = hp.Int('units2', min_value=32, max_value=512, step=32)
-      hp_units3 = hp.Int('units3', min_value=32, max_value=512, step=32)
-      model.add(Dense(units=hp_units1, activation= hp.Choice("activation", ["relu", "tanh", "sigmoid"])))
-      model.add(Dense(units=hp_units2, activation= hp.Choice("activation", ["relu", "tanh", "sigmoid"])))
-      model.add(Dense(units=hp_units3, activation= hp.Choice("activation", ["relu", "tanh", "sigmoid"])))
-      model.add(Dense(1, kernel_initializer='normal', activation='linear'))
-
-      # Tune the learning rate for the optimizer
-      # Choose an optimal value from 0.01, 0.001, or 0.0001
-      hp_learning_rate = hp.Float("lr", min_value=1e-4, max_value=1e-2, sampling="log")
-
-      model.compile(
-          optimizer=Adam(learning_rate=hp_learning_rate),
-          loss='mean_squared_error',
-          metrics=[tf.keras.metrics.MeanSquaredError()]
-      )
-
-      return model
-class MLP():
-    def __init__(self, X,Y):
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
-        self.scaler = StandardScaler()
-        self.scaler.fit(self.X_train)
-        self.X_train = self.scaler.transform(self.X_train)
-        self.X_test = self.scaler.transform(self.X_test)
-        # Definimos los hiperparámetros
-        self.hypermodel = ANNHyperModel()
-        self.tuner = kt.Hyperband(self.hypermodel, objective='val_mse', max_epochs=100, factor=3, directory='keras', project_name='gestorQuirofanos')
-        self.tuner.search(self.X_train, self.y_train, epochs=100, validation_data=(self.X_test, self.y_test))
-        self.best_hps = self.tuner.get_best_hyperparameters(num_trials=1)[0]
-        self.model = self.tuner.get_best_models(num_models=1)[0]
-        self.model.build(self.X_train.shape)
-        self.model.compile(optimizer=Adam(learning_rate=self.best_hps.get('learning_rate')), loss=MeanSquaredLogarithmicError(), metrics=['msle'])
-        self.history = self.model.fit(self.X_train, self.y_train, epochs=100, validation_data=(self.X_test, self.y_test))
-        self.model.save('model.h5')
-        self.model.summary()
-        self.plot_loss()
-    def plot_loss(self):
-        plt.plot(self.history.history['loss'], label='loss')
-        plt.plot(self.history.history['val_loss'], label='val_loss')
-        plt.xlabel('Epoch')
-        plt.ylabel('Error [MPG]')
-        plt.legend()
-        plt.grid(True)
-        plt.show()
-    def predict(self, X):
-        X = self.scaler.transform(X)
-        return self.model.predict(X)
-    def get_best_hps(self):
-        return self.best_hps
-    def get_model(self):
+    # Función que devuelve el porcentaje de error
+    def getError(self):
+        return self.error
+    # Función que devuelve el porcentaje de acierto
+    def getAcierto(self):
+        return self.acierto
+    # Función que devuelve el modelo
+    def getModel(self):
         return self.model
-    def get_history(self):
-        return self.history
-    def get_tuner(self):
-        return self.tuner
-    def get_scaler(self):
-        return self.scaler
+    # Función que devuelve las predicciones
+    def getPredicciones(self):
+        return self.y_pred
+    # Función que devuelve los valores reales
+    def getReales(self):
+        return self.y_test
+    # Función que guarda el modelo
+    def saveModel(self, path):
+        joblib.dump(self.model, path)
+    # Función que carga el modelo
+    def loadModel(self, path):
+        self.model = joblib.load(path)
+    # Función que muestra la gráfica de predicciones
+    def drawPerformance(self):
+        plt.plot(self.y_test, label='Real')
+        plt.plot(self.y_pred, label='Predicción')
+        plt.legend()
+        plt.show()
     
