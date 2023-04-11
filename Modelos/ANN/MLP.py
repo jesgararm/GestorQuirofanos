@@ -17,16 +17,24 @@ class MLP:
         self.param_grid = {
         'hidden_layer_sizes': [(150,100,50), (120,80,40), (100,50,30)],
         'max_iter': [50, 100],
-        'activation': ['tanh', 'relu'],
+        'activation': ['tanh', 'relu','logistic'],
         'solver': ['sgd', 'adam'],
         'alpha': [0.0001, 0.05],
-        'learning_rate': ['constant','adaptive']}
-        self.grid = GridSearchCV(MLPRegressor(), self.param_grid, n_jobs=-1, cv=5)
-        # Entrenamos el modelo
-        self.grid.fit(self.X_train, self.y_train)
+        'learning_rate': ['constant','adaptive'],
+        'beta_1': [0.9, 0.99],
+        'beta_2': [0.999, 0.9999],
+        'epsilon': [1e-08, 1e-07]}
+        modelo = MLPRegressor()
+        self.grid = GridSearchCV(modelo, self.param_grid, n_jobs=-1, cv=5)
+        # Entrenamos el modelo 
+        # Seleccionamos una muestra aleatoria de 1000 elementos
+        idx = np.random.choice(self.X_train.shape[0],1000,replace=False) # type: ignore
+        self.X_train_muestra = self.X_train[idx,:]
+        self.y_train_muestra = self.y_train[idx]
+        self.grid.fit(self.X_train_muestra, self.y_train_muestra)
         # Obtenemos el mejor modelo
         self.best_params = self.grid.best_params_
-        self.model = MLPRegressor(hidden_layer_sizes=self.best_params['hidden_layer_sizes'], max_iter=self.best_params['max_iter'], activation=self.best_params['activation'], solver=self.best_params['solver'], alpha=self.best_params['alpha'], learning_rate=self.best_params['learning_rate'])
+        self.model = MLPRegressor(hidden_layer_sizes=self.best_params['hidden_layer_sizes'], max_iter=self.best_params['max_iter'], activation=self.best_params['activation'], solver=self.best_params['solver'], alpha=self.best_params['alpha'], learning_rate=self.best_params['learning_rate'], beta_1=self.best_params['beta_1'], beta_2=self.best_params['beta_2'], epsilon=self.best_params['epsilon']) # type: ignore
         self.model.fit(self.X_train, self.y_train)
         # Predecimos los valores de test
         self.y_pred = self.model.predict(self.X_test) # type: ignore
