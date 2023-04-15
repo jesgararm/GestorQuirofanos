@@ -35,4 +35,20 @@ def divideDataAmpli(data):
     X = X.values
     Y = Y.values
     return X, Y
-    
+
+# Función que etiqueta los datos de duración de intervención
+def etiquetarDatos(data):
+    # Etiquetamos los datos de duración de intervención
+    # 0:Menos de 60 minutos
+    # 1:Entre 60 y 120 minutos
+    # 2:Entre 120 y 180 minutos
+    # 3:Entre 180 y 240 minutos
+    # 4:Entre 240 y 300 minutos
+    # 5: Más de 300 minutos
+    data.loc[data['DURACIÓN'] < 60, 'DURACIÓN'] = 0
+    data.loc[(data['DURACIÓN'] >= 60) & (data['DURACIÓN'] < 120), 'DURACIÓN'] = 1
+    data.loc[(data['DURACIÓN'] >= 120) & (data['DURACIÓN'] < 180), 'DURACIÓN'] = 2
+    data.loc[(data['DURACIÓN'] >= 180) & (data['DURACIÓN'] < 240), 'DURACIÓN'] = 3
+    data.loc[(data['DURACIÓN'] >= 240) & (data['DURACIÓN'] < 300), 'DURACIÓN'] = 4
+    data.loc[data['DURACIÓN'] >= 300, 'DURACIÓN'] = 5
+    return data
