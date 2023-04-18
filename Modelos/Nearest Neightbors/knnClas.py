@@ -22,12 +22,12 @@ class KNNClas():
         # Usamos train test split para separar los datos
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
         # Parámetros para grid search
-        self.n_neighbors = [3, 5, 7, 9, 11, 13, 15, 17, 19, 21]
+        self.n_neighbors = [3, 5, 7, 9, 11]
         self.weights = ['uniform', 'distance']
-        self.algorithm = ['auto', 'ball_tree', 'kd_tree', 'brute']
-        self.leaf_size = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        self.algorithm = ['auto', 'ball_tree', 'kd_tree']
+        self.leaf_size = [10, 20]
         self.p = [1, 2]
-        self.metric = ['minkowski', 'euclidean', 'manhattan']
+        self.metric = ['minkowski', 'euclidean']
         self.metric_params = [None]
         self.n_jobs = [None]
         # Iniciamos el modelo
