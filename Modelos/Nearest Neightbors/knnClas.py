@@ -13,27 +13,39 @@ from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.metrics import cohen_kappa_score
 from sklearn.metrics import matthews_corrcoef
-
+# Importamos grid search
+from sklearn.model_selection import GridSearchCV
 class KNNClas():
-    def __init__(self, X, y, n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None):
+    def __init__(self, X, y):
         self.X = X
         self.y = y
-        self.n_neighbors = n_neighbors
-        self.weights = weights
-        self.algorithm = algorithm
-        self.leaf_size = leaf_size
-        self.p = p
-        self.metric = metric
-        self.metric_params = metric_params
-        self.n_jobs = n_jobs
-
-    def train(self, test_size=0.2, random_state=0):
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=test_size, random_state=random_state)
-        self.model = KNeighborsClassifier(n_neighbors=self.n_neighbors, weights=self.weights, algorithm=self.algorithm, leaf_size=self.leaf_size, p=self.p, metric=self.metric, metric_params=self.metric_params, n_jobs=self.n_jobs)
+        # Usamos train test split para separar los datos
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
+        # Parámetros para grid search
+        self.n_neighbors = [3, 5, 7, 9, 11, 13, 15, 17, 19, 21]
+        self.weights = ['uniform', 'distance']
+        self.algorithm = ['auto', 'ball_tree', 'kd_tree', 'brute']
+        self.leaf_size = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        self.p = [1, 2]
+        self.metric = ['minkowski', 'euclidean', 'manhattan']
+        self.metric_params = [None]
+        self.n_jobs = [None]
+        # Iniciamos el modelo
+        self.model = KNeighborsClassifier()
+        # Iniciamos el grid search
+        self.grid = GridSearchCV(estimator=self.model, param_grid=dict(n_neighbors=self.n_neighbors, weights=self.weights, algorithm=self.algorithm, leaf_size=self.leaf_size, p=self.p, metric=self.metric, metric_params=self.metric_params, n_jobs=self.n_jobs), cv=5, scoring='accuracy', n_jobs=-1)
+        # Entrenamos el grid search
+        self.grid.fit(self.X_train, self.y_train)
+        # Obtenemos los mejores parámetros
+        self.best_params = self.grid.best_params_
+        # Iniciamos el modelo con los mejores parámetros
+        self.model = KNeighborsClassifier(n_neighbors=self.best_params['n_neighbors'], weights=self.best_params['weights'], algorithm=self.best_params['algorithm'], leaf_size=self.best_params['leaf_size'], p=self.best_params['p'], metric=self.best_params['metric'], metric_params=self.best_params['metric_params'], n_jobs=self.best_params['n_jobs'])
+        # Entrenamos el modelo
         self.model.fit(self.X_train, self.y_train)
+        # Obtenemos las predicciones
         self.y_pred = self.model.predict(self.X_test)
+        # Obtenemos las probabilidades
         self.y_pred_proba = self.model.predict_proba(self.X_test)
-
     def accuracy(self):
         return accuracy_score(self.y_test, self.y_pred)
 
