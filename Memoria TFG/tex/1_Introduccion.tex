@@ -1,5 +1,4 @@
 \capitulo{1}{Introducción}
-
 Durante muchos años, la comunidad científica ha tratado de elaborar modelos predictivos que ayuden en tareas de \textbf{organización industrial.}
 
 La necesidad de precisar métodos de planificación y producción que sean eficientes en tiempo y coste son cada día más importantes en los \textbf{mercados} competitivos actuales \cite{Geurtsen2023ProductionReview}. Para los fabricantes, resulta especialmente crucial disponer de métodos que garanticen la \textbf{optimización} del equipamiento y los recursos empleados, aunque siempre considerando que, en condiciones reales, pueden sucederse eventos impredecibles que hagan peligrar la viabilidad del modelo \cite{Geurtsen2023ProductionReview}.
@@ -23,21 +22,40 @@ En función del criterio a mejorar, los investigadores han propuesto diferentes 
 
 Podemos contribuir a la investigación desde diversos puntos de vista, adoptando múltiples estrategias.
 Por ello, derivado de disciplinas como la minería o el análisis de datos, se presentan estrategias novedosas que permitan contar con iniciativas prometedoras de cara a lograr la \textbf{eficiencia }\cite{Schouten2023OperatingReview}.
-
+\newpage
 
 \subsection{Métricas de Rendimiento}
 Antes de desarrollar cualquier medida que tenga como objetivo alcanzar una mejora de \textbf{rendimiento en la planificación quirúrgica (\textit{OR performance})}, debemos definir qué entendemos por rendimiento y, en su caso, \textit{cómo medirlo}. 
 
-Algunas de las más importantes son:
+Algunas de las más importantes son los referidos en \ref{Métricas de Quirófano}.
 \begin{table}[]
     \centering
     \begin{tabular}{c|c}
-         &  \\
-         & 
+        \toprule
+            \textbf{Métrica}   &  \textbf{Descripción}  \\
+         \midrule
+              \textit{Hora de Comienzo}  &  Retraso o anticipo en el comienzo de la actividad quirúrgica. \\
+              \textit{Tiempo de Recambio }& Tiempo entre cada uno de los pacientes. \\
+              \textit{Uso del bloque} & Proporción del tiempo asignado que se dedica a la realización de la actividad. \\
+              \textit{Tasa de Cancelaciones} & Las suspensiones o cancelaciones suponen tiempo de actividad desaprovechado. \\
+       \bottomrule
     \end{tabular}
-    \caption{Métricas de Rendimiento de Quirófano}
-    \label{tab:my_label}
+    \caption{Métricas de Quirófano}
+    \label{Métricas de Quirófano}
 \end{table}
+No obstante, las métricas usadas para cuantificar el rendimiento de las medidas de optimización en quirófano son muy diversas a lo largo de la literatura.
+Muchos artículos focalizan la eficiencia en aspectos meramente cualitativos, mientras que otros se centran en mejorar las métricas más objetivas, buscando la minimización del malgasto de recursos y la correcta gestión del tiempo. \cite{Schouten2023OperatingReview}.
 
-
+Podemos resumir, por tanto, que un correcto rendimiento debe satisfacer requisitos de \textbf{eficiencia }y \textbf{calidad} \cite{Sandbaek2014ImpactEfficiency} , referidas en \ref{Eficiencia y Calidad}
+\begin{table}[]
+    \centering
+    \begin{tabular}{c|c}
+       \textbf{Eficiencia}  &  \textbf{Calidad} \\
+        Maximizar utilización y reducción de retrasos y esperas. & Calidad en cuidados, Seguridad del paciente y Bienhacer profesional. 
+    \end{tabular}
+    \caption{Eficiencia y Calidad}
+    \label{Eficiencia y Calidad}
+\end{table}
+\newpage
+\subsection{Predicción de Duración}
 
