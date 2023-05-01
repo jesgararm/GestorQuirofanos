@@ -24,7 +24,7 @@ Podemos contribuir a la investigación desde diversos puntos de vista, adoptando
 Por ello, derivado de disciplinas como la minería o el análisis de datos, se presentan estrategias novedosas que permitan contar con iniciativas prometedoras de cara a lograr la \textbf{eficiencia }\cite{Schouten2023OperatingReview}.
 \newpage
 
-\subsection{Métricas de Rendimiento}
+\section{Métricas de Rendimiento}
 Antes de desarrollar cualquier medida que tenga como objetivo alcanzar una mejora de \textbf{rendimiento en la planificación quirúrgica (\textit{OR performance})}, debemos definir qué entendemos por rendimiento y, en su caso, \textit{cómo medirlo}. 
 
 Algunas de las más importantes son los referidos en \ref{Métricas de Quirófano}.
@@ -57,5 +57,18 @@ Podemos resumir, por tanto, que un correcto rendimiento debe satisfacer requisit
     \label{Eficiencia y Calidad}
 \end{table}
 \newpage
-\subsection{Predicción de Duración}
+\section{Machine Learning y Predicción del Tiempo Quirúrgico}
+Planificar quirófanos consiste en asignar bloques de tiempo a cada uno de los pacientes que forman parte de la cartera de servicios de un hospital, de manera que se lleven a cabo las intervenciones maximizando el uso de recursos y minimizando las pérdidas.
 
+Para ello, se han empleado múltiples herramientas cuantitativas que apoyen la toma de decisiones de los gestores a lo largo de la literatura, aunque a día de hoy prevalece la \textbf{estimación basada en la experiencia} \cite{Brailsford2011ORPerspective} frente a la exploración de nuevas iniciativas basadas en el aprendizaje máquina. 
+
+Si tratamos de \textit{minimizar el error humano} a la hora de estimar la duración de una intervención quirúrgica determinada, existen varios estudios que aplican diversos algoritmos \textbf{predictivos} a este problema, y comparan su rendimiento entre ellos y respecto al cálculo aplicando exclusivamente la experiencia del gestor.
+
+Por ejemplo, en un estudio reciente \cite{Master2017ImprovingLearning} basado en la población pediátrica, llegaron a la conclusión de que los algoritmos basados en \textbf{árboles} para la predicción basada en variables categóricas (Sexc, raza, edad, diagnóstico, riesgo anestésico...) obtienen menor error predictivo que el uso de las técnicas convencionales de predicción basadas en la experiencia.
+
+Por otro lado, en otro estudio que exploró hasta nueve especialidades quirúrgicas \cite{Martinez2021MachinePrediction} e incorporó variables como el identificador del cirujano responsable y su experiencia, comparó cuatro modelos de ML (Regresión Lineal, SVM, Árboles de Regresión y Bagged Trees), obteniendo \textbf{mejores métricas} que los estudios previos en todos los modelos, concluyendo que los mejores resultados se obtuvieron con Bagged Trees.
+
+Hasta el momento, podemos afirmar que los algoritmos de ML son capaces de predecir la duración de los quirófanos, aunque no hay ninguna solución definitiva, y el rendimiento de los modelos depende, fundamentalmente, del conjunto de datos que sirva como objeto de entrenamiento, así como al servicio de aplicación y sus características intrínsecas.
+
+\newpage
+\section{Optimización en Planificación}
