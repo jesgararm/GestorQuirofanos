@@ -9,6 +9,8 @@
 \usepackage{microtype}
 \usepackage{placeins}
 \usepackage[table,xcdraw]{xcolor}
+\usepackage{adjustbox}
+\usepackage{lipsum}
 \RequirePackage{booktabs}
 \RequirePackage[table]{xcolor}
 \RequirePackage{xtab}
@@ -107,7 +109,8 @@
 % Nuevo comando para tablas pequeñas (menos de una página).
 \newcommand{\tablaSmall}[5]{%
  \begin{table}
-  \begin{center}
+ \centering
+ \begin{adjustbox}{width=1\textwidth}
    \rowcolors {2}{gray!35}{}
    \begin{tabular}{#2}
     \toprule
@@ -116,9 +119,9 @@
     #5
     \bottomrule
    \end{tabular}
+    \end{adjustbox}
    \caption{#1}
    \label{tabla:#3}
-  \end{center}
  \end{table}
 }
 
