@@ -25,10 +25,17 @@ class Quirofano:
         self.id = id
         self.dia = dia
         self.tiempo = tiempo
+        self.pacientes = []
     def getId(self):
         return self.id
     def getDia(self):
         return self.dia
     def getTiempo(self):
         return self.tiempo
+    def getPacientes(self):
+        return self.pacientes
+    def addPaciente(self, paciente):
+        self.pacientes.append(paciente)
+    def removePaciente(self, paciente):
+        self.pacientes.remove(paciente)
 
