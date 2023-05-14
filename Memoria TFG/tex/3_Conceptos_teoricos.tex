@@ -1,21 +1,57 @@
 \capitulo{3}{Conceptos teóricos}
 
-En aquellos proyectos que necesiten para su comprensión y desarrollo de unos conceptos teóricos de una determinada materia o de un determinado dominio de conocimiento, debe existir un apartado que sintetice dichos conceptos.
+En el siguiente proyecto se hace uso de algunas técnicas de \textbf{aprendizaje automático} y \textbf{optimización} que conviene describir de cara a la mejor comprensión de los pasos seguidos hacia su resolución.
 
-Algunos conceptos teóricos de \LaTeX \footnote{Créditos a los proyectos de Álvaro López Cantero: Configurador de Presupuestos y Roberto Izquierdo Amo: PLQuiz}.
+Tal y como se ha comentado, se parte de un \textbf{modelo predictivo}, basado en técnicas de \textit{aprendizaje supervisado} para estimar la duración de una intervención quirúrgica en base a los datos introducidos por el usuario.
 
-\section{Secciones}
+Posteriormente, partiremos de la salida del modelo para realizar una \textbf{programación} de tipo \textit{parallel scheduling}\footnote{Programar n trabajos en m máquinas paralelas\cite{Xing2000ParallelJobs}, se asemeja a programar n intervenciones en m quirófanos simultáneos}, usando una aproximación con restricciones que definen un problema \textbf{MIP}\footnote{\textit{Mixed Integer Programming}: Problemas de programación dinámica en la que algunas de sus variables deben ser enteras.\cite{RichardsMixed-integerControl}} \cite{Lin2020AScheduling} y resultan en un problema \textit{NP-Hard}.
 
-Las secciones se incluyen con el comando section.
 
-\subsection{Subsecciones}
 
-Además de secciones tenemos subsecciones.
+\section{Aprendizaje Supervisado}
 
-\subsubsection{Subsubsecciones}
+El aprendizaje supervisado es un enfoque de inteligencia altificial en el cual un algoritmo es entrenado a partir de datos de entrada para producir una \textbf{determinada salida}. 
 
-Y subsecciones. 
+Este modelo es entrenado hasta que es capaz de detectar los patrones y relaciones entre los datos de entrada y las \textit{etiquetas} de salida, de forma que pueda otorgar resultados precisos cuando se le presenten datos \textit{nuevos}\cite{PeterssonSupervisedLearning}.
 
+Reflejaremos en las siguientes subsecciones los diferentes algoritmos empleados para el proceso predictivo.
+
+\subsection{Regresión Lineal}
+
+Existen diferentes tipos de algoritmos de regresión, siendo cada uno de ellos el más adecuado en función del problema a resolver.
+
+El mecanismo de regresión lineal más \textbf{simple} es aquel definido para dibujar una línea a través de un grafo que muestra dependencia lineal entre ambas variables y su ecuación es\cite{Belyadi2021SupervisedLearning}:
+\begin{equation}
+    y=mx+b
+\end{equation}
+Donde \textit{m} representa a la pendiente de la recta, \textit{b} a la ordenada en el origen, \textit{y} es la variable dependiente (característica de salida) y \textit{x} la independiente (característica de entrada).
+
+Para modelos de regresión lineal múltiple, que es el que manejaremos en nuestro trabajo, usamos la ecuación siguiente\cite{Belyadi2021SupervisedLearning}: 
+\begin{equation}
+    y = m_{1} x_{1} + m_{2} x_{2} + ... + m_{n}x_{n} + b
+\end{equation}
+\subsubsection{Método de Mínimos Cuadrados}
+Para obtener los parámetros de la ecuación, usaremos el \textbf{método de mínimos cuadrados}, el cual se encarga de buscar la curva que mejor se ajusta a un conjunto de puntos minimizando la suma cuadrática de los residuos a los puntos de la curva\cite{WeissteinLeastFitting}.
+
+Operando \cite{WeissteinLeastFitting}:
+\begin{equation}
+    ss_{xx} = \sum_{i=1}^{n}(x_{i}-\bar{x})^2
+\end{equation}
+\begin{equation}
+        ss_{xy} = \sum_{i=1}^{n}(x_{i}-\bar{x})(y_{i}-\bar{y})
+\end{equation}
+De este modo, podemos estimar la \textit{pendiente} como:
+\begin{equation}
+    b = \frac{ss_{xy}}{ss_{xx}}
+\end{equation}
+Y la \textit{ordenada en el origen} en términos de b:
+\begin{equation}
+    a = \bar{y}-b\bar{x}
+\end{equation}
+
+\subsection{K-Nearest Neightbors}
+
+Se trata de una de las formas más simples de aplicar un algoritmo de aprendizaje supervisado, con utilidad para tareas tanto de \textbf{regresión} como de \textbf{clasificación}.
 
 \section{Referencias}
 
