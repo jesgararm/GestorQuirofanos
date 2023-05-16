@@ -10,7 +10,7 @@
 Desarrollo de herramienta de Inteligencia Computacional para la estimación de la duración de una intervención quirúrgica y posterior optimización de la planificación basada en una gestión de recursos eficiente y concurrente con las restricciones impuestas al modelo.
 
 ## Contenido
-A. Memoria del Trabajo de Fin de Grado en LaTeX, así como su compilación en PDF, incluyendo las imágenes, los anexos y la bibliografía.
+A. Memoria del Trabajo de Fin de Grado en LaTeX, así como su compilación en PDF, incluyendo las imágenes, los anexos y la bibliografía.//
 B. Datos en bruto, separados y preprocesados para el entrenamiento.
 C. Conjunto de Jupyter Notebooks que describen el proceso de procesado y análisis de datos.
 D. Conjunto de Jupyter Notebooks y funciones de Python que describen el proceso de Aprendizaje Supervisado para la predicción de la duración de las intervenciones quirúrgicas.
