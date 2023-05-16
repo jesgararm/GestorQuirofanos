@@ -103,15 +103,15 @@ class Heuristicas:
             actos_pendientes = self.ordenaPacientesLPTEDD()
         # Creamos una lista de quirófanos, cada uno con su día y tiempo de trabajo
         quirofanos = []
-        for i in range(self.n_quirofanos):
+        for i in range(self.getDias()):
             quirofanos.append([])
-            for j in range(self.n_dias):
-                quirofanos[i].append(Quirofano(i, j,self.getTiempo()))
+            for j in range(self.getQuirofanos()):
+                quirofanos[i].append(Quirofano(j, i, self.getTiempo()))
         # Creamos una matriz de tiempos de trabajo
-        tiempos = np.zeros((self.getQuirofanos(), self.getDias()))
+        tiempos = np.zeros((self.getDias(), self.getQuirofanos()))
         # Asignamos a cada posición el tiempo de trabajo de cada quirófano
-        for i in range(self.getQuirofanos()):
-            for j in range(self.getDias()):
+        for i in range(self.getDias()):
+            for j in range(self.getQuirofanos()):
                 tiempos[i][j] = quirofanos[i][j].getTiempoLibre()
         # Asignamos los actos quirúrgicos
         for acto in actos_pendientes:
