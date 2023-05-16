@@ -1,4 +1,4 @@
-# Gestor de Quirofanos
+# Gestor de Quirófanos
 ## Trabajo Fin de Grado - Ingeniería Informática
 ### Universidad de Burgos
 #### Autor: Jesús García Armario
