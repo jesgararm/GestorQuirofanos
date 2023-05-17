@@ -53,6 +53,46 @@ Y la \textit{ordenada en el origen} en términos de b:
 
 Se trata de una de las formas más simples de aplicar un algoritmo de aprendizaje supervisado, con utilidad para tareas tanto de \textbf{regresión} como de \textbf{clasificación}.
 
+Se considera un algoritmo \textit{no paramétrico} en tanto que no existen preconceptciones acerca de los datos subyacentes\cite{Belyadi2021SupervisedLearning}.
+
+La base de su funcionamiento es la estimación de proximidad mediante el cálculo de \textbf{distancias}, en especial la \textbf{distancia euclídea}\cite{Greenacre2009CorrespondenceAnalysis}:
+\begin{equation}
+    d(p,q) = \sqrt{(p-q)^2}
+\end{equation}
+
+Podemos describir el algoritmo en los siguientes pasos\cite{Almomany2022OptimizedStudy}: 
+\begin{enumerate}
+    \item Determinar el número de vecinos más cercanos, conocido como el parámetro \textit{K}.
+    \item Usar la función de \textbf{distancia} para calcular la distancia entre cada instancia del conjunto a predecir y todos los del entrenamiento.
+    \item Ordena la distancia de menor a mayor y elige tantos elementos del conjunto de entrenamiento como K.
+    \item Obtener la etiqueta o el valor numérico de los K-Vecinos.
+    \item Devolver la \textit{media} (regresión) o la \textit{moda} (clasificación).
+\end{enumerate}
+
+
+\subsection{Árbol de Decisión}
+
+Se trata de otro tipo de aprendizaje supervisado que, al igual que KNN, puede ser usado para ambos tipos de problema.
+
+Actualmente, consiste un una de las herramientas \textbf{más usadas} para la toma de decisiones\cite{Navada2011OverviewLearning} en todo el mundo.
+
+Para cumplir con esta tarea, se dibuja un árbol con diferentes \textit{ramas} y hojas, de forma que se incluyan \textit{todos los valores} de una situación particular\cite{Navada2011OverviewLearning}:
+
+\imagen{Arbol de decisiones}{Ejemplo de Árbol de Decisiones}{.8}
+
+Un árbol divide los datos en \textit{subárboles} de forma progresiva, desde la raíz, pasando por los nodos internos o de decisión y hasta llegar a los resultados, nodos hoja o \textbf{terminales}.
+
+Existen varios algoritmos para la construcción de estos árboles, algunos de los más conocidos son ID3, C4.5, C5.0 y CART.  
+De ellos, quizás el más famoso y del que derivan los demás, sea ID3, con un método de construcción \textbf{descendente y voraz} con atributos categóricos alcanzando la mayor \textit{ganancia de información}.
+
+Conviene hacer referencia al método CART, cuya implementación optimizada por la librería \textit{scikit-learn} es la que hemos empleado en el proyecto. Este método es compatible con árboles de clasificación y regresión, aceptando tanto atributos como variables de decisión numéricas, creando árboles binarios con la mayor ganancia de información en cada nodo.\cite{Belyadi2021SupervisedLearning}
+
+\subsubsection{Selección de Atributos}
+
+
+
+
+
 \section{Referencias}
 
 Las referencias se incluyen en el texto usando cite \cite{wiki:latex}. Para citar webs, artículos o libros \cite{koza92}.
