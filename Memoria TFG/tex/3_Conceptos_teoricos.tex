@@ -131,9 +131,48 @@ Generalmente, existen \textbf{dos técnicas} para combinar varios árboles en un
 \end{enumerate}
 
 
-\subsection{Perceptrón Multicapa}
+\subsection{Redes Neuronales Artificiales}
+
+Las \textbf{redes neuronales artificiales} son sistemas complejos basados en modelos matemáticos inspirados en la función, estructura y el procesamiento de la información del cerebro humano y el sistema nervioso central.\cite{Huang2022AutomaticNetworks}
+
+De esta forma, una red es concebido como un sistema capaz de \textit{aprender} a predecir salidas tras realizar numerosas iteraciones.
+
+Durante el proceso de aprendizaje, la salida de cada una de las neuronas será tomada como la entrada de la siguiente, tras pasar por una \textit{función umbral}. Para obtener la mejor \textit{precisión}, se aplica un algoritmo de entrenamiento con \textbf{propagación hacia detrás}.
+
+Este proceso de aprendizaje se ha convertido en una valiosa herramienta para encontrar relaciones lineales y no lineales \textit{complejas}, de forma similar a una \textbf{caja negra}, y con múltiples aplicaciones en ingeniería, biología, matemáticas y medicina\cite{Moayedi2020AApplications}.
+
+\subsubsection{Perceptrón}
+
+El concepto de perceptrón fue derivado del modelo descrito por McCulloch y Pitts \cite{McCulloh1943ANets}, los cuales simularon los principios de las células nerviosas en un modelo matemática, comprobando que una única neurona es \textbf{capaz de realizar funciones lógicas}.
+
+\begin{equation}
+\sum w_{i}x_{i} \ge b
+\end{equation}
+
+Este modelo consiste en \textit{dos capas}. La primera, conocida como \textbf{capa de entrada}, recibe los estímulos y los transmite hacia la última capa, conocida como \textbf{capa de salida}. En ella, todos los estímulos de entrada son multiplicados por sus pesos respectivos y sumados junto al \textit{sesgo}. Finalmente, la función de activación es llamada con estos parámetros 
+
+\imagen{perceptron.jpg}{Funcionamiento del Perceptrón. \cite{Huang2022AutomaticNetworks}}{.8}
+
+\subsubsection{Perceptrón Multicapa}
+
+Para una mejora en la resolución de \textit{problemas no lineales}, Hetch-Nielsen propuso una variante del perceptrón, añadiendo capas adicionales de neuronas entre la \textbf{entrada} y la \textbf{salida}\cite{Hecht-Nielsen1989Neurocomputing}.
+
+\imagen{MLP.jpg}{Perceptrón Multicapa \cite{Huang2022AutomaticNetworks}}{.8}
+
+En este modelo, diferenciamos dos componentes principales: \textit{neuronas} y \textit{conexiones}. Las neuronas serán las unidades de procesamiento, y cada conexión tendrá un peso y/o un sesgo correspondiente. Además, las capas ocultas tratarán de ser independientes del entorno, motivo por el cual reciben el nombre de \textit{capas ocultas}.
+
+Al igual que en el perceptrón, el entrenamiento se realiza mediante un proceso de \textbf{retropropagación}, realizando correcciones a los pesos de los nodos para minimizar el error de la salida, dado por\cite{Haykin1998NeuralFoundation}:
+\begin{equation}
+    \varepsilon (n) = \frac{1}{2}\sum_{j}e_{j}^2(n)
+\end{equation}
+Y usando un \textbf{descenso de gradiente} obtenemos el cambio en cada peso\cite{Haykin1998NeuralFoundation}:
+
+\begin{equation}
+    \Delta w_{ji}(n) = -\eta \frac{\partial \varepsilon (n)}{\partial v_{j}(n)}y_{i}(n)
+\end{equation}
 
 
+\newpage
 
-
+\section{Optimización en Planificación}
 
