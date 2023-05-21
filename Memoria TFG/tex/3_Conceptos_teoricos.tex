@@ -176,3 +176,119 @@ Y usando un \textbf{descenso de gradiente} obtenemos el cambio en cada peso\cite
 
 \section{Optimización en Planificación}
 
+El objetivo de nuestro proyecto será \textbf{minimizar} una función de coste para asignar $N$ casos quirúrgicos a un conjunto de \textit{quirófanos disponibles} considerando como \textbf{restricción} el tiempo disponible en cada sala.
+
+Este enfoque es similar al propuesto en \cite{Fei2008SolvingApproach}, donde se modela el problema según un criterio de \textbf{MIP}\footnote{\textbf{MIP}: Programación Lineal Entera Mixta.} y \textbf{planificación de máquinas en paralelo}.
+
+De forma preliminar a explicar el proceso de diseño e implementación de la solución, conviene reseñar algunos conceptos teóricos en referencia a los \textit{patrones} y \textit{metaheurísticas}  empleadas.
+
+\subsection{Programación Lineal Entera Mixta (MIP)}
+
+La programación \textbf{matemática}, en especial la que incluye restricciones basadas en enteros junto a otras (\textit{MILP}), es una de las más usadas para modelar problemas de planificación debido a su rigurosidad, flexibilidad y extensibilidad \cite{Floudas2005MixedApplications}, pudiendo ser usadas por procesos \textbf{simples} que incluyen una única etapa y unidad, hasta procesos complejos de varias etapas y objetivos.
+
+La naturaleza de los problemas de planificación es inherentemente \textbf{combinatoria}, dado el gran número de decisiones \textit{discretas} a tener en cuenta (localización, equipamiento, tiempo...), lo que incrementa el tiempo de resolución \textbf{exponencialmente} a medida que aumenta el tamaño del problema (\textit{NP-Completo}\cite{Garey1990ComputersNP-Completeness}).
+
+\subsubsection{Formulación Matemática}
+
+Para formular un \textbf{modelo matemático de planificación}, el mayor problema a resolver es \textit{cómo representar el tiempo}. 
+
+En concreto, contamos con dos horizontes: \textit{modelos continuos} y \textit{modelos discretos}:
+
+\imagen{tiempo}{Representación discreta y continua del tiempo. Fuente: \cite{Floudas2005MixedApplications}}{.8}
+
+Dado que dividiremos el tiempo quirúrgico disponible en \textbf{ventanas}, nos centraremos en formular el problema utilizando el \textbf{modelo discreto}.
+Según éste, las variables de decisión $W_{ijt}$ se introducen para representar que una tarea $i$ puede o no ser procesada en la unidad $j$ durante el intervalo de tiempo $t$:
+
+\begin{equation}
+    \sum_{i \epsilon I_{j}} \leq 1, \forall j \epsilon J, t \epsilon T
+\end{equation}
+
+Por otro lado, si una tarea comienza a ejecutarse en una unidad dentro de ese intervalo de tiempo, \textbf{ninguna otra} puede ejecutarse en la misma unidad hasta que ha sido completada \cite{Floudas2005MixedApplications}:
+
+\begin{equation}
+    \sum_{i'\epsilon I_{j}} \sum_{t' = t}^{t+\alpha_{ij}-1} W_{i'jt'} - 1 \leq M(1-W_{ijt}), \forall j \epsilon J, i \epsilon I_{j}, t \epsilon T
+\end{equation}
+
+
+\subsection{Heurísticas}
+
+Tal y como definió Coen \cite{Koen1984TowardMethod}: \textit{El rol de la ingeniería es: Haz lo que creas que representa la mejor práctica en el momento de la decisión. La definición del método de ingeniería depende de la heurística... Toda la ingeniería es heurística.}
+
+Dado a que el problema estudiado puede ser \textbf{similar} al paradigma de la mochila y es idéntico a la planificación paralela, hemos implementado \textit{dos heurísticas} modificando el enfoque de \cite{Lin2020AScheduling} y ajustándolo a nuestras restricciones.
+
+La primera de ellas se basa en el \textbf{mayor tiempo de procesado} (LPT\footnote{\textbf{LPT}: Longest Processing Time}) y la segunda en la relación con la \textbf{fecha de vencimiento más temprana} (ratio LPT/EDD\footnote{\textbf{EDD}: Earliest Due Date}).
+
+\begin{algorithm}
+\caption{Heurística LPT}\label{alg:lpt}
+\begin{algorithmic}
+\State $Q \gets $ Set de cirugías sin programar
+\State $f_{k}^{d} \gets $ Suma de los tiempos quirúrgicos que han sido programados en el quirófano $k$ el día $d$.
+\State $U \gets null$ 
+ \State Ordena los elementos de $Q$ por prioridad.
+ \State Ordena los elementos de $Q$ en orden creciente de duración.
+\State $d* \gets 1$
+\While{$d*\leq d$}
+\State $flag \gets True$
+        \While{$flag$}
+        \State $q \gets Q.pop$
+        \State $k \gets min f_{k.t+q.t}^{d=d*}$
+       \If{$Q.end$}
+       \State $flag \gets False$
+        \EndIf
+        \If{$k == null$ }
+        \State $Q.append \gets q$
+        \State $continue$
+        \EndIf
+        \State $U[d][k].append \gets q$
+        \
+        \EndWhile
+        \State $d* = d* + 1$
+\EndWhile
+\State \Return $U$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Heurística EDD}\label{alg:lpt/edd}
+\begin{algorithmic}
+\State $Q \gets $ Set de cirugías sin programar
+\State $f_{k}^{d} \gets $ Suma de los tiempos quirúrgicos que han sido programados en el quirófano $k$ el día $d$.
+\State $P \gets Q.prioridades$
+\State $U \gets null$ 
+ \State Ordena los elementos de $Q$ en orden \textbf{decreciente} de $t_{i}$/$p_{i}$
+\State Ejecutar el bucle $While$ de \ref{alg:lpt}.
+\State \Return $U$
+\end{algorithmic}
+\end{algorithm}
+
+
+\subsection{Algoritmo Genético}
+
+Un algoritmo genético es una \textbf{metaheurística} inspirada en los procesos naturales de selección, evolución y herencia. En ellos, se combina la \textit{supervivencia del más adaptado} sobre las estructuras, así como con un intercambio de información estructurado y aleatorizado, formando un \textbf{algoritmo de búsqueda} inspirado en las mecánicas de evolución \textit{humanas}.  \cite{Goldberg1989GeneticLearning}
+
+
+Tras un proceso de \textbf{codificación} de los individuos en \textit{cromosomas}, obtendremos un \textit{genotipo} generado, en principio, de forma aleatoria. Se aplicarán operadores de \textbf{selección}, \textbf{evaluación}, \textbf{cruce} y \textbf{mutación} a dicha población hasta que se satisfaga un \textit{criterio de parada}, devolviendo al mejor individuo como solución.
+
+Según los autores \cite{Lin2020AScheduling}\cite{Goldberg1989GeneticLearning}, el mayor desafío para resolver un problema con este enfoque será el diseño de los cromosomas y la función de evaluación.
+
+\begin{algorithm}
+\caption{Estructura AG}\label{alg:ag}
+\begin{algorithmic}
+\State $P \gets iniciaPoblación$
+\State $mejor \gets fitness(P)$
+\State $N = 0$
+\While{$N\leq ngen$}
+\State $padre1,padre2 \gets selección(P)$
+\If {$probcx \geq rand$}
+\State $hijo1,hijo2 \gets cruce(padre1,padre2)$
+\EndIf
+\If {$probmut \geq rand$}
+\State $ind \gets mutar(ind)$
+\EndIf
+\State $P \gets actualizaPoblación$
+\State $mejor \gets fitness(P)$
+\EndWhile
+\State \Return $mejor$
+\end{algorithmic}
+\end{algorithm}
+
