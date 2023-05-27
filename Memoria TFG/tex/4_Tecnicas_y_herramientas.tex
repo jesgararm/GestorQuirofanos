@@ -34,7 +34,63 @@ Por otra parte, siguiendo el catálogo de Fowler\cite{Fowler1999Refactoring:Code
 
 \subsection{Lenguajes Utilizados}
 
-Como lenguaje de \textbf{programación}, hemos usado Python\cite{VanRossum2009PythonManual}. Python es considerado por muchos como 
+Como lenguaje de \textbf{programación}, hemos usado Python\cite{VanRossum2009PythonManual}. Python es considerado por muchos como uno de los lenguajes más útiles para la programación orientada al \textit{machine learning} y \textit{ciencia de datos}. 
+
+Python es un lenguaje de programación \textbf{interpretado y orientado a objetos}, cuya sintaxis hace énfasis en la legibilidad y depuración del código, ofreciendo la potencia y flexibilidad de los lenguajes compilados con una curva de aprendizaje \textit{suave}.\cite{2021Scikit-LearnPython} 
+
+Además, podemos encontrar que varios manuales dedicados a estas materias\cite{VanderPlas2016PythonData} se enfocan directamente en la implementación de estos algoritmos usando este lenguaje, lo que sumado a su sencillez de aprendizaje, su carácter \textit{open source} y la existencia de múltiples librerías y entornos de desarrollo dedicados a cada una de las fases del proceso de \textbf{Ciencia de Datos}, han hecho que nos decantemos por su uso durante el desarrollo de este proyecto.
+
+La versión empleada para las pruebas y la ejecución en el equipo de desarrollo fue \textit{Python 3.9.13}, instalado a partir de la distribución \href{https://www.anaconda.com/}{Anaconda}, que es una distribución \textbf{libre y abierta} de los lenguajes R y Python enfocada principalmente a tareas de \textit{ciencia de datos} y \textit{aprendizaje automático}.
+
+\imagen{libraries}{Librerías más usadas en Data Science}{.8}
+
+Para la redacción de la \textbf{memoria}, empleamos \(\LaTeX\), dada su \textit{portabilidad} y la \textit{facilidad} para ajustarse a los requerimientos de entrega.
+
+
+\subsection{Entornos de Desarrollo Integrado (IDEs)}
+
+Para la redacción del código fuente e integración continua con el repositorio, se empleó el IDE \href{https://code.visualstudio.com/docs}{Visual Studio Code}, dado que contiene una gran variedad de \href{https://code.visualstudio.com/docs/languages/python}{plugins} que facilitan tanto la redacción como la ejecución de código Python.
+
+Por otro lado, para la redacción de la memoria en \(\LaTeX\), empleamos el IDE \href{https://www.overleaf.com}{Overleaf}, que se trata de una herramienta de publicación y redacción colaborativa \textbf{en línea}, enfocada a la edición y publicación de documentos científicos, de manera que la revisión de la memoria pudiese realizarse en \textit{tiempo real} por parte del autor y los tutores.
+Además, nos permite integrar el desarrollo con \textbf{nuestro repositorio}, así como \textit{enlazar la bibliografía} con un gestor bibliográfico. 
+
+Por último, se ha contado con el apoyo de \href{https://www.mendeley.com/reference-management/reference-manager}{Mendeley Reference Manager} para almacenar las referencias y artículos empleados como apoyo bibliográfico en nuestro trabajo, permitiéndose el acceso a sus recursos gracias a la licencia proporcionada a los estudiantes de la Universidad de Burgos (\textit{modalidad de acceso institucional}).
+
+\tablaSmall{Resumen de IDEs}{c|c}{IDEs}
+{ \textbf{Lenguaje}  &  \textbf{IDE} \\}{ 
+ Python & Visual Studio Code\\ 
+LaTeX & Overleaf \\
+ BibTeX & Mendeley Reference Manager\\}
+
+
+ \subsection{Librerías}
+
+ Una \textbf{librería} no es más que un conjunto de \textit{archivos de código} empleados para el desarrollo de software. En función de su finalidad, existen librerías para gran variedad de funcionalidades: cálculo matricial, manejo de ficheros, protocolos de comunicaciones, representación gráfica, algoritmia...
+
+ Tal y como hemos reseñado en apartados anteriores, uno de los aspectos más positivos de Python para este proyecto es la disposición de \textit{librerías específicas} para las labores de inteligencia computacional y análisis de datos. 
+
+ De entre todas las usadas, que se resumen en la tabla, conviene \textbf{destacar}: 
+
+ \begin{enumerate}
+     \item \textbf{Scikit-Learn}: Esta librería\cite{Pedregosa2011Scikit-learn:Python} es una de las gratuitas para Python. Cuenta con la implementación de varios algoritmos de clasificación, regresión, clustering y reducción de la dimensionalidad, convirtiéndose en una \textit{herramienta básica} para programar sistemas de modelado y análisis de datos.
+     \item \textbf{DEAP}: Se trata de un framework para realizar labores de computación evolutiva \cite{Fortin2012DEAP:Easy}, proveyendo a los desarrolladores del \textit{pegamento esencial} para construir algoritmos evolutivos para sistemas sofisticados.
+ \end{enumerate}
+
+ \tablaSmall{Librerías Python Empleadas}{c|c|c|c|c|c|c}{IDEs}
+{ \textbf{Librerías}  &  SK-Learn & Pandas & NumPy & Matplotlib & DEAP & Flask \\}{ 
+ Preprocesado &  & X &  X & X &  & \\
+Análisis de datos & X & X & X & X &  & \\
+ Representación de datos & X &  & X & X &  & \\
+ Entrenamiento de modelos & X &  & X &  &  & \\
+ Evaluación de modelos & X & X & X & X &  & \\
+ Optimización & &  & X &  & X & \\
+ Evaluación de optimización & X &  & X & X & X & \\
+ Métricas y Cálculo &  &  & X &  &  & \\
+ Integración API &  &  &  &  &  & X \\}
+
+ 
+
+
 
 
 

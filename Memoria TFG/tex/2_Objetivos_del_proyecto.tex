@@ -8,9 +8,9 @@ Podemos introducir algunos de los objetivos principales con los que debe contar 
 {\textbf{Listado de Objetivos Software}\\}{ 
  Predecir el tiempo estimado de un acto quirúrgico. \\ 
  Planificar quirófanos en función del tiempo predicho y los recursos disponibles. \\ 
- Introducir datos desde un interfaz de usuario. \\
- Registrar recursos desde un interfaz de usuario.\\
- Mostrar evolución y resultados en el interfaz. \\ 
+ Recibir datos relativos a pacientes. \\
+ Validar los datos.\\
+ Ofrecer una salida al cliente. \\ 
  } 
 
 Específicamente, podemos subdividir los objetivos en función de una de las tres áreas principales a implementar, tal y como podemos consultar en la siguiente figura:
@@ -53,18 +53,16 @@ Son los objetivos marcados para la elaboración de un algoritmo de optimización
  Exportar el modelo de optimización para su uso en la interfaz. \\
  } 
 
-\section{ Objetivos del Interfaz de Usuario}
+\section{ Objetivos de la API}
 
-Son aquellos que debe cumplir nuestro interfaz de usuario para satisfacer las especificaciones marcadas en el proyecto.
+Son aquellos que debe cumplir nuestra integración para satisfacer las especificaciones marcadas en el proyecto.
 
 \tablaSmall{Objetivos de la Interfaz de Usuario}{c}{ObjetivosInterfaz}
-{\textbf{Listado de Objetivos Interfaz}\\}{ 
+{\textbf{Listado de Objetivos API}\\}{ 
  Introducir listado de pacientes a partir de un fichero externo. \\
  Cargar modelo predictivo y calcular tiempos estimados. \\
- Mostrar datos procesados y tiempos calculados por pantalla. \\ 
  Introducir número de quirófanos, ventanas temporales y días a planificar. \\
  Cargar modelo de optimización y planificar según los datos.\\
- Mostrar resultados por pantalla en formato de tabla de tiempo. \\ 
- Permitir validar o recalcular la planificación. \\
- Permitir exportar la planificación validada a fichero externo. \\
+ Devolver planificación al usuario.\\
+ Devolver predicción temporal al usuario. \\
  } 
