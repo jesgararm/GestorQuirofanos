@@ -1,6 +1,7 @@
 import random
 import numpy as np
 
+
 # Clase que representa un acto quirúrgico.
 # Contiene el id del acto, la duración y el id del paciente.
 class ActoQuirurgico:
@@ -9,15 +10,20 @@ class ActoQuirurgico:
         self.duracion = duracion
         self.idPaciente = idPaciente
         self.prioridad = prioridad
+
     def getId(self):
         return self.id
+
     def getDuracion(self):
         return self.duracion
+
     def getIdPaciente(self):
         return self.idPaciente
+
     def getPrioridad(self):
         return self.prioridad
-    
+
+
 # Clase que representa un Quirófano
 # Contiene el id del quirófano, el día y el tiempo de trabajo.
 class Quirofano:
@@ -26,40 +32,54 @@ class Quirofano:
         self.dia = dia
         self.tiempo = tiempo
         self.pacientes = []
+
     def getId(self):
         return self.id
+
     def getDia(self):
         return self.dia
+
     def getTiempo(self):
         return self.tiempo
+
     def getActos(self):
         return self.pacientes
+
     def addActo(self, paciente):
         self.pacientes.append(paciente)
+
     def removeActo(self, paciente):
         self.pacientes.remove(paciente)
+
     def getTiempoOcupado(self):
         tiempo = 0
         for paciente in self.pacientes:
             tiempo += paciente.getDuracion()
         return tiempo
+
     def getTiempoLibre(self):
         return self.tiempo - self.getTiempoOcupado()
-    
+
+
 class Heuristicas:
     def __init__(self, actos_pendientes, n_quirofanos, n_dias, tiempo):
         self.actos_pendientes = actos_pendientes
         self.n_quirofanos = n_quirofanos
         self.n_dias = n_dias
         self.tiempo = tiempo
+
     def getActosPendientes(self):
         return self.actos_pendientes
+
     def getQuirofanos(self):
         return self.n_quirofanos
+
     def getDias(self):
         return self.n_dias
+
     def getTiempo(self):
         return self.tiempo
+
     def ordenaPacientesLPT(self):
         # Calculamos los deciles de la ponderación
         deciles = np.percentile([acto.getPrioridad() for acto in self.actos_pendientes], np.arange(0, 100, 10))
@@ -68,34 +88,36 @@ class Heuristicas:
         for i in range(len(deciles)):
             diccionario[i] = set()
         for acto in self.actos_pendientes:
-            for i in range(len(deciles)-1):
-                if acto.getPrioridad() >= deciles[i] and acto.getPrioridad() < deciles[i+1]:
+            for i in range(len(deciles) - 1):
+                if acto.getPrioridad() >= deciles[i] and acto.getPrioridad() < deciles[i + 1]:
                     diccionario[i].add(acto)
                     break
                 # Si estamos en el último decil, incluimos todos los pacientes que tengan una ponderación mayor o igual
                 # al último decil
-                if i == len(deciles)-2:
-                    diccionario[i+1].add(acto)
+                if i == len(deciles) - 2:
+                    diccionario[i + 1].add(acto)
                     break
         # Ordenamos los pacientes de cada decil por duración de mayor a menor
         for i in range(len(deciles)):
             diccionario[i] = sorted(diccionario[i], key=lambda acto: acto.getDuracion(), reverse=True)
         # Creamos una lista con los pacientes ordenados de mayor decil a menor
         actos_ordenados = []
-        for i in range(len(diccionario)-1, -1, -1):
+        for i in range(len(diccionario) - 1, -1, -1):
             actos_ordenados += diccionario[i]
         return actos_ordenados
-    
-    def protectedDivision(self,x, y):
+
+    def protectedDivision(self, x, y):
         if y == 0:
             return x
         return x / y
-    
+
     def ordenaPacientesLPTEDD(self):
-        actos_ordenados = sorted(self.actos_pendientes, key=lambda acto: self.protectedDivision(acto.getPrioridad(), acto.getDuracion()), reverse=True)
+        actos_ordenados = sorted(self.actos_pendientes,
+                                 key=lambda acto: self.protectedDivision(acto.getPrioridad(), acto.getDuracion()),
+                                 reverse=True)
         return actos_ordenados
-    
-    def ejecutaHeuristica(self, criterio = "LPT"):
+
+    def ejecutaHeuristica(self, criterio="LPT"):
         # Primero ordenamos los actos quirúrgicos por duración y prioridad
         if criterio == "LPT":
             actos_pendientes = self.ordenaPacientesLPT()
@@ -131,4 +153,3 @@ class Heuristicas:
             # Eliminamos el acto quirúrgico de la lista de actos pendientes
             actos_pendientes.remove(acto)
         return quirofanos, actos_pendientes
-
