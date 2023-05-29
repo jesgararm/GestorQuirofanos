@@ -33,6 +33,7 @@ Cirugía Oral y Maxilofacial & 3206 \\
  Otorrinolaringología & 2142\\
  Cirugía Torácica & 797\\}
 
+
  \subsection{Limpieza y Preparación de los Datos}
 
  Tras obtener los \textbf{listados} de la Base de Datos anteriormente mencionada, se realizó una labor de \textit{adecuación} de los mismos a nuestro entorno de trabajo.
@@ -48,6 +49,7 @@ Cirugía Oral y Maxilofacial & 3206 \\
 
 \imagen{postLimpieza}{Aspecto de los datos tras la limpieza y edición}{.9}
 
+
 \subsection{Análisis Preliminar}
 
  Una vez obtuvimos nuestro dataset listo para la realización de labores de \textbf{minería}, procedimos a efectuar un \textit{análisis preliminar}.
@@ -56,6 +58,24 @@ Cirugía Oral y Maxilofacial & 3206 \\
 
  \imagen{duracionMedia}{Media de duraciones de intervenciones por Especialidad}{.9}
 
- 
+ Por otro lado, efectuamos un estudio de la \textbf{correlación} entre algunas de las variables registradas, centrándonos en los valores devueltos por el \textit{coeficiente de correlación de Spearman}\footnote{El coeficiente de Spearman tiene una interpretación similar al de Pearson, relacionando la fuerza de asociación entre dos variables con un valor que oscila entre -1 y 1.} , dado que nos encontramos probablemente ante relaciones \textbf{no lineales}.\cite{Page1963OrderedRanks}. 
+ Tras esta evaluación, encontramos que los valores referentes al \textbf{tipo, código de intervención y prioridad} son aquellos que, a priori, se encuentran más relacionados con la \textbf{duración}.
+
+\imagen{correlacionSpearman}{Matriz de Correlación de Spearman}{.9}
+
+
+ \subsection{Preprocesamiento de Datos}
+
+ La mayor parte de los algoritmos de aprendizaje supervisado, especialmente aquellos que emplearemos en nuestro estudio, requieren contar con un conjunto de variables \textbf{numéricas} como conjunto de \textit{características}.
+
+ Las variables que, a priori, pudiesen generar mayor dificultad para su codificación ya han sido trasladadas desde la fuente \textbf{transformadas} (\textit{diagnósticos y procedimientos}) gracias al sistema CIE-9\footnote{CIE-9 es el acrónimo de Clasificación Internacional de las Enfermedades y Procedimientos, publicada por la OMS en 1977.} implantado por defecto en nuestro sistema de salud.
+
+ No obstante, hemos realizado los siguientes \textbf{ajustes} al resto de parámetros \textbf{no codificados}:
+
+ \begin{enumerate}
+     \item Para las variables \textbf{binarias}, se realizó una codificación a nivel de bit (0,1).
+     \item Para las variables \textbf{ordinales}, se asignó una escala \textit{creciente} en función de la categoría.
+     \item Para las variables \textbf{nominales}, usamos la técnica de \textit{One Hot Encoding}\footnote{Técnica que consiste en la división de una variable categórica en cada uno de sus posibles valores, realizando una asignación binaria en función del mismo a la instancia de entrenamiento.}, al tratarse de una de las técnicas más recomendadas para el manejo de variables categóricas en el entrenamiento de modelos de aprendizaje automático\cite{Potdar2017AClassifiers}.
+ \end{enumerate}
 
  
