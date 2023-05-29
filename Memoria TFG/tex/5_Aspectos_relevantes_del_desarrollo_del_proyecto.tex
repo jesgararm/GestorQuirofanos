@@ -1,7 +1,50 @@
 \capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
 
-Este apartado pretende recoger los aspectos más interesantes del desarrollo del proyecto, comentados por los autores del mismo.
-Debe incluir desde la exposición del ciclo de vida utilizado, hasta los detalles de mayor relevancia de las fases de análisis, diseño e implementación.
-Se busca que no sea una mera operación de copiar y pegar diagramas y extractos del código fuente, sino que realmente se justifiquen los caminos de solución que se han tomado, especialmente aquellos que no sean triviales.
-Puede ser el lugar más adecuado para documentar los aspectos más interesantes del diseño y de la implementación, con un mayor hincapié en aspectos tales como el tipo de arquitectura elegido, los índices de las tablas de la base de datos, normalización y desnormalización, distribución en ficheros3, reglas de negocio dentro de las bases de datos (EDVHV GH GDWRV DFWLYDV), aspectos de desarrollo relacionados con el WWW...
-Este apartado, debe convertirse en el resumen de la experiencia práctica del proyecto, y por sí mismo justifica que la memoria se convierta en un documento útil, fuente de referencia para los autores, los tutores y futuros alumnos.
+\section{Obtención y Preprocesamiento de Datos}
+
+\subsection{Fuente de Datos}
+
+Se obtuvieron datos relativos a intervenciones quirúrgicas realizadas en el \textbf{Hospital Universitario Virgen del Rocío} de Sevilla, comprendidas entre las fechas \textit{1 de Enero de 2016} y \textit{1 de Noviembre de 2022}.
+
+Los datos fueron recogidos desde la Intranet Hospitalaria, al pertenecer el autor de este proyecto al personal sanitario del mismo (\textit{Factultativo Especialista de Área UGC Cirugía Plástica y Grandes Quemados}) y contar con \textbf{autorización} para el uso de datos clínicos con fines académicos.
+
+Se obtuvieron datos relativos a las siguientes \textbf{especialidades quirúrgicas}:
+\begin{enumerate}
+    \item Cirugía Plástica y Reparadora.
+    \item Cirugía Oral y Maxilofacial
+    \item Neurocirugía.
+    \item Cirugía General y del Aparato Digestivo.
+    \item Cirugía Ortopédica y Traumatología.
+    \item Otorrinolaringología.
+    \item Cirugía Torácica
+\end{enumerate}
+
+En total, se consideraron \textbf{25492 individuos} tras la realización de labores de adecuación e integración de las fuentes de datos.
+
+\tablaSmall{Tamaño Muestral por Especialidades}{c|c}{n_espec}
+{ \textbf{Especialidad Quirúrgica}  &  \textbf{N} \\}{ 
+ Cirugía Plástica y Reparadora & 4761\\ 
+Cirugía Oral y Maxilofacial & 3206 \\
+ Neurocirugía & 1934\\
+ Cirugía General y del Aparato Digestivo & 3263\\
+ Cirugía Ortopédica y Traumatología & 9390\\
+ Otorrinolaringología & 2142\\
+ Cirugía Torácica & 797\\}
+
+ \subsection{Limpieza y Preparación de los Datos}
+
+ Tras obtener los \textbf{listados} de la Base de Datos anteriormente mencionada, se realizó una labor de \textit{adecuación} de los mismos a nuestro entorno de trabajo.
+
+ Con una sucesión de \textit{herramientas} de edición de \textit{DataFrames}\footnote{Un Dataframe es una estructura de datos bidimensional que permite destacar relaciones entre las distintas variables de una Serie de datos. }, proporcionadas por la librería Pandas, se realizó el proceso de \textbf{limpieza de los datos: }
+ \begin{enumerate}
+     \item Eliminación de caracteres innecesarios.
+     \item Extracción de variables.
+     \item Eliminación de datos personales.
+ \end{enumerate}
+
+ \imagen{previaPreprocesado}{Aspecto de la Base de Datos antes de la edición.}{.9}
+
+\imagen{postLimpieza}{Aspecto de los datos tras la limpieza y edición}{.9}
+
+\subsection{Preprocesado}
+ 
