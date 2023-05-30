@@ -11,8 +11,8 @@ def divideData(data):
     # X será el resto de columnas
     X = data.drop(['DURACIÓN'], axis=1)
     Y = data['DURACIÓN']
-    # Eliminamos las dos primeras columnas de X, que son los ID del paciente
-    X = X.drop(['Unnamed: 0', 'NHC'], axis=1)
+    # Eliminamos la primera columna de X, que son los ID del paciente
+    X = X.drop(['NHC'], axis=1)
     X = X.values
     Y = Y.values
     return X, Y
@@ -51,4 +51,15 @@ def etiquetarDatos(data):
     data.loc[(data['DURACIÓN'] >= 180) & (data['DURACIÓN'] < 240), 'DURACIÓN'] = 3
     data.loc[(data['DURACIÓN'] >= 240) & (data['DURACIÓN'] < 300), 'DURACIÓN'] = 4
     data.loc[data['DURACIÓN'] >= 300, 'DURACIÓN'] = 5
+    return data
+
+# Función que elimina los outliers de un dataframe
+def eliminarOutliers(data):
+    # Eliminamos los outliers de la columna DURACIÓN
+    # Limite inferior 1.5 veces por debajo del Q1
+    # Limite superior 1.5 veces por encima del Q3
+    Q1 = data['DURACIÓN'].quantile(0.25)
+    Q3 = data['DURACIÓN'].quantile(0.75)
+    IQR = Q3 - Q1
+    data = data[~((data['DURACIÓN'] < (Q1 - 1.5 * IQR)) | (data['DURACIÓN'] > (Q3 + 1.5 * IQR)))]
     return data
