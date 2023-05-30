@@ -78,4 +78,29 @@ Cirugía Oral y Maxilofacial & 3206 \\
      \item Para las variables \textbf{nominales}, usamos la técnica de \textit{One Hot Encoding}\footnote{Técnica que consiste en la división de una variable categórica en cada uno de sus posibles valores, realizando una asignación binaria en función del mismo a la instancia de entrenamiento.}, al tratarse de una de las técnicas más recomendadas para el manejo de variables categóricas en el entrenamiento de modelos de aprendizaje automático\cite{Potdar2017AClassifiers}.
  \end{enumerate}
 
+ \imagen{tiposDatos}{Salida de Tipos de Datos tras el Preprocesamiento}{.9}
+
+ El seguimiento y proceso tanto de los procesos de \textbf{codificación} y \textbf{procesado}, así como de exportación posterior, se encuentra detallado en los Jupyter Notebooks: \textit{.\\Datos\\PreprocesadoDatos.ipynb} y \textit{.\\Datos\\codificacionDatos.ipynb}.
+
+ La librería y las funciones empleadas con mayor han sido extraídas de Pandas\cite{McKinney2010DataPython}, en especial las incluidas en la clase \textit{\textbf{DataFrame}} (\textit{reindex, sort, replace, get\_dummies...})\cite{VanderPlas2016PythonData}.
+
+\subsubsection{Missing Values}
+
+No es raro encontrar variables con valores ausentes o inválidas en las instancias de un conjunto de entrenamiento.
+
+Existen varias estrategias\cite{Emmanuel2021ALearning} para lidiar con este problema durante la fase de procesamiento: \textit{imputación, interpolación, sustitución por la media, predicción, eliminación de instancias...}, optamos por la \textbf{eliminación} de instancias, dado que el carácter arbitrario de las labores de codificación y la \textit{escasez} de variables correladas dificultan la aplicación de métodos basados en \textit{sustitución o interpolación}. 
+
+
+ \subsection{Ampliación del Conjunto de Datos}
+
+ Tras explorar el \textit{dataset} obtenido y el número de variables resultante, tratamos de ampliar su contenido acudiendo a otras \textbf{fuentes de datos} dentro del propio sistema sanitario.
+
+ No obstante, a excepción de la especialidad de \textit{Cirugía Plástica y Reparadora}, fuimos incapaces de acceder a un mayor número de parámetros que añadir a nuestro modelo.
+
+ De forma paralela al desarrollo del modelo predictivo, decidimos entrenar también este nuevo conjunto reducido pues, si bien su aplicación se limitaría al ámbito de esa única especialidad, nos ofrece un buen punto de comparación a la hora de plantear mejoras de cara a estudios posteriores.
+
+ Así, tras aplicar las técnicas de preprocesado explicadas en el apartado anterior, resolvimos en \textbf{un nuevo conjunto}.
+
+ 
+
  
