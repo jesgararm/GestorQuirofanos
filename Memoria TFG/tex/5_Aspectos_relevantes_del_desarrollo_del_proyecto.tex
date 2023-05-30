@@ -108,5 +108,34 @@ Existen varias estrategias\cite{Emmanuel2021ALearning} para lidiar con este prob
 
 \section{Aprendizaje Supervisado}
 
+En este apartado se describe el procedimiento de exploración, análisis e implementación de diferentes modelos predictivos, basados en el paradigma de \textit{aprendizaje supervisado} con el objetivo de obtener la predicción más \textbf{fidedigna} posible, de forma que pudiese ser empleada como entrada del modelo de optimización posterior.
+
+
+\subsection{Regresión Lineal}
+
+Comenzamos aplicando un modelo simple de \textbf{regresión múltiple}, siguiendo las bases teóricas especificadas en apartados anteriores y basándonos en la implementación de la librería \textit{scikit-learn}\cite{2021Scikit-LearnPython}.
+
+Para el ajuste de los hiperparámetros, empleamos un modelo de validación cruzada de tipo \textit{GridSearch}\footnote{Técnica de validación cruzada incluida en scikit-learn, consistente en extraer los mejores valores y combinaciones introducidos en la cuadrícula de parámetros.}.
+
+Tras su ejecución con el \textbf{dataset principal}, calculamos las métricas de error, mostrando unos valores \textit{desproporcionados}, en torno a miles de minutos de error medio, muy diferentes de los 50-80 de RMSE otorgados por otros estudios\cite{ShahabiKargar2014PredictingSurgery}.
+
+\tablaSmall{Modelo de Regresión Lineal pre-eliminación de outliers}{c|c}{metRegLin}{\textbf{Métricas} & \textbf{Valor}\\}{
+MSE & 55694590.09\\
+RMSE & 7462.88\\
+}
+
+Esta situación nos hizo sospechar de la presencia de numerosos \textit{outliers} en nuestro conjunto de datos inicial. Por tanto, reajustamos nuestro modelo, haciendo uso del IQR\cite{Bonthu2021DetectingOutliers}, seleccionando aquellas instancias de entrenamiento con duración comprendida entre 1.5 veces por debajo y por encima de los cuartiles primero y tercero, respectivamente.
+
+\tablaSmall{Modelo de Regresión Lineal post-eliminación de outliers}{c|c}{metRegLin}{\textbf{Métricas} & \textbf{Valor}\\}{
+MSE & 3461.42\\
+RMSE & 58.83\\
+}
+
+Como podemos comprobar, la ejecución muestra unos valores mucho más coherentes y concordantes de la literatura, constituyendo un buen punto de partida para nuestro ensayo.
+
+\imagen{}{}{}
+
+De forma paralela
+
 
  
