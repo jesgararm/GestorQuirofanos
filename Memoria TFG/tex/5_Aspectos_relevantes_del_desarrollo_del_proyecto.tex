@@ -133,9 +133,23 @@ RMSE & 58.83\\
 
 Como podemos comprobar, la ejecución muestra unos valores mucho más coherentes y concordantes de la literatura, constituyendo un buen punto de partida para nuestro ensayo.
 
-\imagen{}{}{}
+\imagen{scatterLinearReg}{Conjunto de Validación LinearReg}{.9}
 
-De forma paralela
+De forma paralela, entrenamos el modelo con el dataset \textbf{ampliado}, disminuyendo el RMSE un 20\% e incrementando un 50\% el índice $R^{2}$.
+
+Tras el entrenamiento, se exportan ambos modelos para su explotación posterior.
+
+
+\subsection{Árbol de Regresión}
+
+Tras la ejecución del modelo lineal, pasamos a explorar el rendimiento de los árboles de regresión.
+De nuevo, los hiperparámetros se optimizaron con el método de validación cruzada en malla y se manejaron los valores límites haciendo uso del rango intercuartílico.
+
+Así, tras su ejecución, obtuvimos una \textbf{reducción de la raíz del error cuadrático medio} ligeramente superior al 20\%. No obstante, las métricas relativas a su explotación en el conjunto ampliado no ofrecieron mejoras superiores al 10\%.
+
+
+\subsection{K-Nearest Neightbors}
+
 
 
  
