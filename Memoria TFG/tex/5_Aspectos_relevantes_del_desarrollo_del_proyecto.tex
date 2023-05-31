@@ -119,17 +119,13 @@ Para el ajuste de los hiperparámetros, empleamos un modelo de validación cruza
 
 Tras su ejecución con el \textbf{dataset principal}, calculamos las métricas de error, mostrando unos valores \textit{desproporcionados}, en torno a miles de minutos de error medio, muy diferentes de los 50-80 de RMSE otorgados por otros estudios\cite{ShahabiKargar2014PredictingSurgery}.
 
-\tablaSmall{Modelo de Regresión Lineal pre-eliminación de outliers}{c|c}{metRegLin}{\textbf{Métricas} & \textbf{Valor}\\}{
-MSE & 55694590.09\\
-RMSE & 7462.88\\
+\tablaSmall{Errores en Modelo de Regresión Lineal}{c|c|c}{metRegLin}{\textbf{Métricas} & \textbf{Pre-Outliers} & \textbf{Post-Outliers}\\}{
+MSE & 55694590.09 & 3461.42\\
+RMSE & 7462.88 & 58.33\\
+R2 & 0.000000078 & 0.20\\
 }
 
 Esta situación nos hizo sospechar de la presencia de numerosos \textit{outliers} en nuestro conjunto de datos inicial. Por tanto, reajustamos nuestro modelo, haciendo uso del IQR\cite{Bonthu2021DetectingOutliers}, seleccionando aquellas instancias de entrenamiento con duración comprendida entre 1.5 veces por debajo y por encima de los cuartiles primero y tercero, respectivamente.
-
-\tablaSmall{Modelo de Regresión Lineal post-eliminación de outliers}{c|c}{metRegLin}{\textbf{Métricas} & \textbf{Valor}\\}{
-MSE & 3461.42\\
-RMSE & 58.83\\
-}
 
 Como podemos comprobar, la ejecución muestra unos valores mucho más coherentes y concordantes de la literatura, constituyendo un buen punto de partida para nuestro ensayo.
 
@@ -147,8 +143,10 @@ De nuevo, los hiperparámetros se optimizaron con el método de validación cruz
 
 Así, tras su ejecución, obtuvimos una \textbf{reducción de la raíz del error cuadrático medio} ligeramente superior al 20\%. No obstante, las métricas relativas a su explotación en el conjunto ampliado no ofrecieron mejoras superiores al 10\%.
 
+\imagen{ejemploRegressionTree}{Sección del Árbol de Regresión Construido}{.9}
 
 \subsection{K-Nearest Neightbors}
+
 
 
 
