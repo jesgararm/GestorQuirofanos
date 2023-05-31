@@ -1,5 +1,7 @@
 # Imports
 import pandas as pd
+import matplotlib.pyplot as plt
+
 # Función que devuelve un dataframe con los datos de un fichero excel
 def FileToDataframe(path):
     df = pd.read_excel(path)
@@ -63,3 +65,12 @@ def eliminarOutliers(data):
     IQR = Q3 - Q1
     data = data[~((data['DURACIÓN'] < (Q1 - 1.5 * IQR)) | (data['DURACIÓN'] > (Q3 + 1.5 * IQR)))]
     return data
+
+# Función que representa los datos de duración de intervención
+def representarDatos(y_pred,y):
+    # Representamos los resultados
+    plt.plot(y_pred, linestyle = 'dotted', color = 'red', label = 'Predicción')
+    x = [i for i in range(len(y_pred))]
+    plt.scatter(x, y, color = 'blue', label = 'Real')
+    plt.legend()
+    plt.show()
