@@ -1,68 +1,57 @@
-\capitulo{2}{Objetivos del proyecto}
+\capitulo{3}{Objetivos del proyecto}
+
+\section{Definición de Objetivos}
 
 El objetivo \textbf{principal} del proyecto consiste en la elaboración de un \textit{sistema de gestión de quirófanos} que permita al usuario la introducción de un set de pacientes listos para intervenir, junto a una planificación de los recursos disponibles, y genere \textbf{automáticamente} una propuesta de planificación en base a los tiempos estimados y los recursos disponibles.
-
-\subsection{Objetivos del Proyecto de Software}
-Podemos introducir algunos de los objetivos principales con los que debe contar nuestra herramienta.
-\tablaSmall{Objetivos del Proyecto de Software}{c}{ObjetivosSoftware}
-{\textbf{Listado de Objetivos Software}\\}{ 
- Predecir el tiempo estimado de un acto quirúrgico. \\ 
- Planificar quirófanos en función del tiempo predicho y los recursos disponibles. \\ 
- Recibir datos relativos a pacientes. \\
- Validar los datos.\\
- Ofrecer una salida al cliente. \\ 
- } 
 
 Específicamente, podemos subdividir los objetivos en función de una de las tres áreas principales a implementar, tal y como podemos consultar en la siguiente figura:
 
 \imagen{Memoria TFG/img/objetivosProyecto.png}{Subdivisión del Proyecto}{0.8}
 
-\newpage
+\renewcommand{\theenumii}{\roman{enumi}}
 
-\section{Objetivos para la Predicción de la Duración}
+\begin{enumerate}
+    \item \textbf{Objetivos del Proyecto de Software} 
+\begin{enumerate}
+        \item Predecir el tiempo estimado de un acto quirúrgico.
+        \item Planificar quirófanos en función del tiempo y las restricciones.
+        \item Recibir, almacenar y validar los datos.
+        \item Devolver una salida al cliente.
+    \end{enumerate}
+    \item \textbf{Objetivos para Predecir la Duración}
+\begin{enumerate}
+    \item Obtener una predicción del tiempo quirúrgico estimado en base a un conjunto de variables fijas.
+    \item Calcular la predicción en un tiempo de ejecución asumible por el usuario.
+    \item Obtener un error de predicción igual o inferior a los calculados en otros estudios y registrados en la literatura.
+    \item Integrable con la entrada del objetivo 3.
+\end{enumerate}
+\item \textbf{Objetivos para Optimizar la Planificación}
+        \begin{enumerate}
+            \item Generar un plan quirúrgico capaz de priorizar pacientes.
+            \item Obtener una planificación que no sobrepase el límite de tiempo establecido.
+            \item Crear una propuesta que minimice la aparición de huecos vacíos.
+            \item Generación de propuesta en tiempo asumible.
+            \item Integrable con la salida del objetivo 2.
+        \end{enumerate}
+        \item \textbf{Objetivos de la API}
+        \begin{enumerate}
+            \item Fácil de usar para los usuarios.
+            \item Informe al cliente de las transacciones y errores.
+            \item Capaz de guiar al usuario en caso de error y corregirlo.
+            \item Acceso y respuesta en tiempo razonable.
+            \item Ofrezca la opción de predecir, planificar o combinar ambas funciones.
+            \item Sea compatible con formatos estándares de entrada y salida de información: CSV, JSON...
+            \end{enumerate}
+            \end{enumerate}
 
-Hacen referencia a la labor de Machine Learning para la predicción de la duración de una intervención quirúrgica en base a los datos introducidos por el usuario de un set de pacientes y la labor de aprendizaje previa efectuada por nuestro modelo.
 
-Podemos consultar los objetivos en la tabla adjunta.
+\section{Consideraciones y Marco de Trabajo}
 
-\tablaSmall{Objetivos en Predicción de la Duración}{c}{ObjetivosDuracion}
-{\textbf{Listado de Objetivos Optimización}\\}{ 
-Obtener un dataset de pacientes intervenidos en un hospital. \\ 
- Preprocesar los datos de entrada y obtener variables. \\ 
- Analizar la distribución de los datos. \\
- Modelar como variable objetivo como regresión y/o clasificación.\\
- Identificar modelos predictivos que se ajusten a la entrada. \\ 
- Calcular medidas de error. \\
- Evaluar los resultados. \\
- Elegir y exportar el modelo en base al error. \\
- } 
+Una vez efectuada la definición \textbf{formal} de las metas que deseamos alcanzar durante el desarrollo del proyecto, esbozaremos la estructura de los pasos a seguir para lograr cumplir con los términos.
 
-\section{Objetivos para la Optimización en la Planificación}
+En definitiva, nos encontramos ante un proyecto cimentado sobre dos áreas principales: \textbf{aprendizaje automático} y \textbf{optimización}, las cuales conforman una capa extensa de \textit{backend}, tras los procesos intermedios de análisis, exploración y selección.
 
-Son los objetivos marcados para la elaboración de un algoritmo de optimización que gestione adecuadamente los recursos hospitalarios y asigne eficientemente los huecos de quirófano a los pacientes según su \textbf{prioridad} y las métricas de \textbf{rendimiento} elegidas.
+Sobre esta capa se implementará otra de servicios, \textit{frontend}, encargada de la interacción que los clientes y planteada a modo de API para poder ofrecer la \textbf{funcionalidad} requerida y su fácil adaptación al interfaz deseada.
 
-\tablaSmall{Objetivos en Optimización de la Planificación}{c}{ObjetivosPlanificacion}
-{\textbf{Listado de Objetivos Predicción}\\}{ 
- Recoger un set de pacientes/intervenciones, su duración y prioridad. \\ 
- Recoger un listado de salas de operaciones y tiempo disponibles. \\ 
- Identificar métricas de rendimiento a evaluar. \\
- Modelar el problema de programación lineal.\\
- Identificar metaheurísticas que resuelvan el problema modelado. \\ 
- Remodelar el problema en base a la metaheurística y evaluar. \\
- Analizar resultados y seleccionar la metaheurística. \\
- Exportar el modelo de optimización para su uso en la interfaz. \\
- } 
+\imagen{diagramaProyecto}{Marco de Trabajo del Proyecto}{.9}
 
-\section{ Objetivos de la API}
-
-Son aquellos que debe cumplir nuestra integración para satisfacer las especificaciones marcadas en el proyecto.
-
-\tablaSmall{Objetivos de la Interfaz de Usuario}{c}{ObjetivosInterfaz}
-{\textbf{Listado de Objetivos API}\\}{ 
- Introducir listado de pacientes a partir de un fichero externo. \\
- Cargar modelo predictivo y calcular tiempos estimados. \\
- Introducir número de quirófanos, ventanas temporales y días a planificar. \\
- Cargar modelo de optimización y planificar según los datos.\\
- Devolver planificación al usuario.\\
- Devolver predicción temporal al usuario. \\
- } 

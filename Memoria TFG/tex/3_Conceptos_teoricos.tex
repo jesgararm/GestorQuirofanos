@@ -1,4 +1,4 @@
-\capitulo{3}{Conceptos teóricos}
+\capitulo{4}{Conceptos teóricos}
 
 En el siguiente proyecto se hace uso de algunas técnicas de \textbf{aprendizaje automático} y \textbf{optimización} que conviene describir de cara a la mejor comprensión de los pasos seguidos hacia su resolución.
 
@@ -176,11 +176,49 @@ Y usando un \textbf{descenso de gradiente} obtenemos el cambio en cada peso\cite
 
 \section{Optimización en Planificación}
 
+
+\subsection{Métricas de Rendimiento}
+
+Antes de desarrollar cualquier medida que tenga como objetivo alcanzar una mejora de \textbf{rendimiento en la planificación quirúrgica (\textit{OR performance})}, debemos definir qué entendemos por rendimiento y, en su caso, \textit{cómo medirlo}. 
+
+Algunas de las más importantes son los referidos en  la tabla \ref{Métricas de Quirófano}.
+\begin{table}[]
+    \centering
+    \begin{tabular}{p{7cm}|p{7cm}}
+        \toprule
+            \textbf{Métrica}   &  \textbf{Descripción}  \\
+         \midrule
+              \textit{Hora de Comienzo}  &  Retraso o anticipo en el comienzo de la actividad quirúrgica. \\
+              \textit{Tiempo de Recambio }& Tiempo entre cada uno de los pacientes. \\
+              \textit{Uso del bloque} & Proporción del tiempo asignado que se dedica a la realización de la actividad. \\
+              \textit{Tasa de Cancelaciones} & Las suspensiones o cancelaciones suponen tiempo de actividad desaprovechado. \\
+       \bottomrule
+    \end{tabular}
+    \caption{Métricas de Quirófano}
+    \label{Métricas de Quirófano}
+\end{table}
+
+No obstante, las métricas usadas para cuantificar el rendimiento de las medidas de optimización en quirófano son muy diversas a lo largo de la literatura.
+Muchos artículos focalizan la eficiencia en aspectos meramente cualitativos, mientras que otros se centran en mejorar las métricas más objetivas, buscando la minimización del malgasto de recursos y la correcta gestión del tiempo. \cite{Schouten2023OperatingReview}.
+
+Además, debemos tener en consideración que, mientras que estas medidas de rendimiento personalizan la estructura del problema, también limitan su tamaño, pues cuanto mayor es el número de los criterios de evaluación, la estructura será de mayor tamaño y complicación \cite{Gur2018ApplicationOverview}. 
+
+En nuestro caso, optaremos por \textbf{maximizar} la tasa de utilización del sitio quirúrgico y \textbf{minimizar} los tiempos de espera, teniendo en cuenta las restricciones en cuanto a la ponderación de su prioridad, que definiremos formalmente en apartados posteriores de la memoria. 
+
+\tablaSmall{Eficiencia y Calidad}{c|c}{EficienciayCalidad}
+{ \textbf{Eficiencia}  &  \textbf{Calidad} \\}{ 
+Maximizar utilización y reducción de retrasos y esperas & Calidad en cuidados\\ 
+                                            & Seguridad del paciente\\ 
+                                            &  Bienhacer profesional.\\ } 
+
+Podemos resumir, por tanto, que un correcto rendimiento debe satisfacer requisitos de \textbf{eficiencia }y \textbf{calidad} \cite{Sandbaek2014ImpactEfficiency}.
+
 El objetivo de nuestro proyecto será \textbf{minimizar} una función de coste para asignar $N$ casos quirúrgicos a un conjunto de \textit{quirófanos disponibles} considerando como \textbf{restricción} el tiempo disponible en cada sala.
 
 Este enfoque es similar al propuesto en \cite{Fei2008SolvingApproach}, donde se modela el problema según un criterio de \textbf{MIP}\footnote{\textbf{MIP}: Programación Lineal Entera Mixta.} y \textbf{planificación de máquinas en paralelo}.
 
 De forma preliminar a explicar el proceso de diseño e implementación de la solución, conviene reseñar algunos conceptos teóricos en referencia a los \textit{patrones} y \textit{metaheurísticas}  empleadas.
+
 
 \subsection{Programación Lineal Entera Mixta (MIP)}
 

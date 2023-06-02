@@ -1,12 +1,10 @@
-\capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
+\capitulo{6}{Aspectos relevantes del desarrollo del proyecto}
 
 \section{Obtención y Preprocesamiento de Datos}
 
 \subsection{Fuente de Datos}
 
-Se obtuvieron datos relativos a intervenciones quirúrgicas realizadas en el \textbf{Hospital Universitario Virgen del Rocío} de Sevilla, comprendidas entre las fechas \textit{1 de Enero de 2016} y \textit{1 de Noviembre de 2022}.
-
-Los datos fueron recogidos desde la Intranet Hospitalaria, al pertenecer el autor de este proyecto al personal sanitario del mismo (\textit{Factultativo Especialista de Área UGC Cirugía Plástica y Grandes Quemados}) y contar con \textbf{autorización} para el uso de datos clínicos con fines académicos.
+Se obtuvieron datos relativos a intervenciones quirúrgicas realizadas en el \textbf{Hospital Universitario Virgen del Rocío} de Sevilla, comprendidas entre las fechas \textit{1 de Enero de 2016} y \textit{1 de Noviembre de 2022}, con adecuada anonimización de los datos que garanticen su uso en el ámbito universitario.
 
 Se obtuvieron datos relativos a las siguientes \textbf{especialidades quirúrgicas}:
 \begin{enumerate}
@@ -23,42 +21,22 @@ Se obtuvieron datos relativos a las siguientes \textbf{especialidades quirúrgic
 
 En total, se consideraron \textbf{25492 individuos} tras la realización de labores de adecuación e integración de las fuentes de datos.
 
-\tablaSmall{Tamaño Muestral por Especialidades}{c|c}{n_espec}
-{ \textbf{Especialidad Quirúrgica}  &  \textbf{N} \\}{ 
- Cirugía Plástica y Reparadora & 4761\\ 
-Cirugía Oral y Maxilofacial & 3206 \\
- Neurocirugía & 1934\\
- Cirugía General y del Aparato Digestivo & 3263\\
- Cirugía Ortopédica y Traumatología & 9390\\
- Otorrinolaringología & 2142\\
- Cirugía Torácica & 797\\}
+ \imagen{tiposDatos}{Variables del Conjunto de Datos Base}{.9}
+  \imagen{datosPlastica}{Variables del Conjunto de Datos Ampliado}{.9}
 
+ \subsection{Preparación y Estadísticos}
 
- \subsection{Limpieza y Preparación de los Datos}
-
- Tras obtener los \textbf{listados} de la Base de Datos anteriormente mencionada, se realizó una labor de \textit{adecuación} de los mismos a nuestro entorno de trabajo.
-
- Con una sucesión de \textit{herramientas} de edición de \textit{DataFrames}\footnote{Un Dataframe es una estructura de datos bidimensional que permite destacar relaciones entre las distintas variables de una Serie de datos. }, proporcionadas por la librería Pandas\cite{McKinney2010DataPython}, se realizó el proceso de \textbf{limpieza de los datos: }
- \begin{enumerate}
-     \item Eliminación de caracteres innecesarios.
-     \item Extracción de variables.
-     \item Eliminación de datos personales.
- \end{enumerate}
+ Tras obtener los \textbf{listados} de la Base de Datos anteriormente mencionada, se realizó una labor de \textit{adecuación} de los mismos a nuestro entorno de trabajo, \cite{McKinney2010DataPython}.
 
  \imagen{previaPreprocesado}{Aspecto de la Base de Datos antes de la edición.}{.9}
 
 \imagen{postLimpieza}{Aspecto de los datos tras la limpieza y edición}{.9}
 
-
-\subsection{Análisis Preliminar}
-
- Una vez obtuvimos nuestro dataset listo para la realización de labores de \textbf{minería}, procedimos a efectuar un \textit{análisis preliminar}.
-
- En él, encontramos que la \textit{media} de duración de cada intervención \textbf{no varía} de forma estadísticamente significativa en función de la especialidad, tras realizar un test de ANOVA\footnote{Análisis de la varianza. Test estadístico realizado para valorar si existen diferencias significativas en las medias de los valores entre varios grupos}.
+ Una vez obtuvimos nuestro dataset listo para la realización de labores de \textbf{minería}, procedimos a efectuar un \textit{análisis preliminar}, donde cabe destacar que la \textit{media} de duración de cada intervención \textbf{no varía} de forma estadísticamente significativa en función de la especialidad (\textit{ANOVA-Test}\footnote{Análisis de la varianza. Test estadístico realizado para valorar si existen diferencias significativas en las medias de los valores entre varios grupos}.)
 
  \imagen{duracionMedia}{Media de duraciones de intervenciones por Especialidad}{.9}
 
- Por otro lado, efectuamos un estudio de la \textbf{correlación} entre algunas de las variables registradas, centrándonos en los valores devueltos por el \textit{coeficiente de correlación de Spearman}\footnote{El coeficiente de Spearman tiene una interpretación similar al de Pearson, relacionando la fuerza de asociación entre dos variables con un valor que oscila entre -1 y 1.} , dado que nos encontramos probablemente ante relaciones \textbf{no lineales}.\cite{Page1963OrderedRanks}. 
+ Por otro lado, efectuamos un estudio de la \textbf{correlación} entre algunas de las variables registradas, centrándonos en los valores devueltos por el \textit{coeficiente de correlación de Spearman}\cite{Page1963OrderedRanks}. 
  Tras esta evaluación, encontramos que los valores referentes al \textbf{tipo, código de intervención y prioridad} son aquellos que, a priori, se encuentran más relacionados con la \textbf{duración}.
 
 \imagen{correlacionSpearman}{Matriz de Correlación de Spearman}{.9}
@@ -66,43 +44,17 @@ Cirugía Oral y Maxilofacial & 3206 \\
 
  \subsection{Preprocesamiento de Datos}
 
- La mayor parte de los algoritmos de aprendizaje supervisado, especialmente aquellos que emplearemos en nuestro estudio, requieren contar con un conjunto de variables \textbf{numéricas} como conjunto de \textit{características}.
-
- Las variables que, a priori, pudiesen generar mayor dificultad para su codificación ya han sido trasladadas desde la fuente \textbf{transformadas} (\textit{diagnósticos y procedimientos}) gracias al sistema CIE-9\footnote{CIE-9 es el acrónimo de Clasificación Internacional de las Enfermedades y Procedimientos, publicada por la OMS en 1977.} implantado por defecto en nuestro sistema de salud.
-
- No obstante, hemos realizado los siguientes \textbf{ajustes} al resto de parámetros \textbf{no codificados}:
-
+ La mayor parte de los algoritmos de aprendizaje supervisado, especialmente aquellos que emplearemos en nuestro estudio, requieren contar con un conjunto de variables \textbf{numéricas} como conjunto de \textit{características}:
+ 
  \begin{enumerate}
      \item Para las variables \textbf{binarias}, se realizó una codificación a nivel de bit (0,1).
      \item Para las variables \textbf{ordinales}, se asignó una escala \textit{creciente} en función de la categoría.
      \item Para las variables \textbf{nominales}, usamos la técnica de \textit{One Hot Encoding}\footnote{Técnica que consiste en la división de una variable categórica en cada uno de sus posibles valores, realizando una asignación binaria en función del mismo a la instancia de entrenamiento.}, al tratarse de una de las técnicas más recomendadas para el manejo de variables categóricas en el entrenamiento de modelos de aprendizaje automático\cite{Potdar2017AClassifiers}.
  \end{enumerate}
 
- \imagen{tiposDatos}{Salida de Tipos de Datos tras el Preprocesamiento}{.9}
-
  El seguimiento y proceso tanto de los procesos de \textbf{codificación} y \textbf{procesado}, así como de exportación posterior, se encuentra detallado en los Jupyter Notebooks: \textit{.\\Datos\\PreprocesadoDatos.ipynb} y \textit{.\\Datos\\codificacionDatos.ipynb}.
 
- La librería y las funciones empleadas con mayor han sido extraídas de Pandas\cite{McKinney2010DataPython}, en especial las incluidas en la clase \textit{\textbf{DataFrame}} (\textit{reindex, sort, replace, get\_dummies...})\cite{VanderPlas2016PythonData}.
-
-\subsubsection{Missing Values}
-
-No es raro encontrar variables con valores ausentes o inválidas en las instancias de un conjunto de entrenamiento.
-
-Existen varias estrategias\cite{Emmanuel2021ALearning} para lidiar con este problema durante la fase de procesamiento: \textit{imputación, interpolación, sustitución por la media, predicción, eliminación de instancias...}, optamos por la \textbf{eliminación} de instancias, dado que el carácter arbitrario de las labores de codificación y la \textit{escasez} de variables correladas dificultan la aplicación de métodos basados en \textit{sustitución o interpolación}. 
-
-
- \subsection{Ampliación del Conjunto de Datos}
-
- Tras explorar el \textit{dataset} obtenido y el número de variables resultante, tratamos de ampliar su contenido acudiendo a otras \textbf{fuentes de datos} dentro del propio sistema sanitario.
-
- No obstante, a excepción de la especialidad de \textit{Cirugía Plástica y Reparadora}, fuimos incapaces de acceder a un mayor número de parámetros que añadir a nuestro modelo.
-
- De forma paralela al desarrollo del modelo predictivo, decidimos entrenar también este nuevo conjunto reducido pues, si bien su aplicación se limitaría al ámbito de esa única especialidad, nos ofrece un buen punto de comparación a la hora de plantear mejoras de cara a estudios posteriores.
-
- Así, tras aplicar las técnicas de preprocesado explicadas en el apartado anterior, resolvimos en \textbf{un nuevo conjunto}.
-
- \imagen{datosPlastica}{Conjunto de Datos Ampliado: Cirugía Plástica}{.9}
-
+Por último, de entre todas las estrategias\cite{Emmanuel2021ALearning} existentes para lidiar con los valores \textbf{ausentes} durante la fase de procesamiento, optamos por la \textbf{eliminación} de instancias, dado que el carácter arbitrario de las labores de codificación y la \textit{escasez} de variables correladas dificultan la aplicación de métodos basados en \textit{sustitución o interpolación}. 
 
 \newpage
 
