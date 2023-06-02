@@ -22,7 +22,11 @@ Se obtuvieron datos relativos a las siguientes \textbf{especialidades quirúrgic
 En total, se consideraron \textbf{25492 individuos} tras la realización de labores de adecuación e integración de las fuentes de datos.
 
  \imagen{tiposDatos}{Variables del Conjunto de Datos Base}{.9}
+
+Por otro lado, contamos con otro dataset, de menor tamaño y limitado a una única especialidad (\textit{Cirugía Plástica y Reparadora}), que \textbf{amplía} el número de variables.
+ 
   \imagen{datosPlastica}{Variables del Conjunto de Datos Ampliado}{.9}
+
 
  \subsection{Preparación y Estadísticos}
 
@@ -58,56 +62,61 @@ Por último, de entre todas las estrategias\cite{Emmanuel2021ALearning} existent
 
 \newpage
 
-\section{Aprendizaje Supervisado}
+\section{Aprendizaje Supervisado: Predicción}
 
 En este apartado se describe el procedimiento de exploración, análisis e implementación de diferentes modelos predictivos, basados en el paradigma de \textit{aprendizaje supervisado} con el objetivo de obtener la predicción más \textbf{fidedigna} posible, de forma que pudiese ser empleada como entrada del modelo de optimización posterior.
 
+\subsection{Dificultades Iniciales}
 
-\subsection{Regresión Lineal}
+Tras comenzar la implementación de varios modelos con el \textbf{dataset principal}, observamos que las métricas de error devolcían unos valores \textit{desproporcionados}, en torno a miles de minutos de error medio, muy diferentes  otorgados por otros estudios\cite{ShahabiKargar2014PredictingSurgery}.
 
-Comenzamos aplicando un modelo simple de \textbf{regresión múltiple}, siguiendo las bases teóricas especificadas en apartados anteriores y basándonos en la implementación de la librería \textit{scikit-learn}\cite{2021Scikit-LearnPython}.
+Esta situación nos hizo sospechar de la presencia de numerosos \textit{outliers} en nuestro conjunto de datos inicial. 
 
-Para el ajuste de los hiperparámetros, empleamos un modelo de validación cruzada de tipo \textit{GridSearch}\footnote{Técnica de validación cruzada incluida en scikit-learn, consistente en extraer los mejores valores y combinaciones introducidos en la cuadrícula de parámetros.}.
-
-Tras su ejecución con el \textbf{dataset principal}, calculamos las métricas de error, mostrando unos valores \textit{desproporcionados}, en torno a miles de minutos de error medio, muy diferentes de los 50-80 de RMSE otorgados por otros estudios\cite{ShahabiKargar2014PredictingSurgery}.
-
-\tablaSmall{Errores en Modelo de Regresión Lineal}{c|c|c}{metRegLin}{\textbf{Métricas} & \textbf{Pre-Outliers} & \textbf{Post-Outliers}\\}{
-MSE & 55694590.09 & 3461.42\\
-RMSE & 7462.88 & 58.33\\
-R2 & 0.000000078 & 0.20\\
-}
-
-Esta situación nos hizo sospechar de la presencia de numerosos \textit{outliers} en nuestro conjunto de datos inicial. Por tanto, reajustamos nuestro modelo, haciendo uso del IQR\cite{Bonthu2021DetectingOutliers}, seleccionando aquellas instancias de entrenamiento con duración comprendida entre 1.5 veces por debajo y por encima de los cuartiles primero y tercero, respectivamente.
+Este problema fue solucionado haciendo uso del IQR\footnote{Técnica de selección de datos del conjunto de entrenamiento que escoge aquellas instancias con valores de la variable dependiente comprendidos entre 1.5 veces por debajo y por encima de los cuartiles primero y tercero, respectivamente.}\cite{Bonthu2021DetectingOutliers}.
 
 Como podemos comprobar, la ejecución muestra unos valores mucho más coherentes y concordantes de la literatura, constituyendo un buen punto de partida para nuestro ensayo.
 
-\imagen{scatterLinearReg}{Conjunto de Validación en Regresión Lineal}{.9}
+\subsection{Explotación de los Modelos}
 
-De forma paralela, entrenamos el modelo con el dataset \textbf{ampliado}, disminuyendo el RMSE un 20\% e incrementando un 50\% el índice $R^{2}$.
+Los modelos de aprendizaje han sido aplicados siguiendo las bases teóricas especificadas en apartados anteriores y basándonos en la implementación de la librería \textit{scikit-learn}\cite{2021Scikit-LearnPython}, ejecutándose en ambos conjuntos de datos.
 
-Tras el entrenamiento, se exportan ambos modelos para su explotación posterior.
+Para el ajuste de los hiperparámetros, empleamos un modelo de validación cruzada de tipo \textit{GridSearch}\footnote{Técnica de validación cruzada incluida en scikit-learn, consistente en extraer los mejores valores y combinaciones introducidos en la cuadrícula de parámetros.}.
 
+Comenzamos aplicando un modelo simple de \textbf{regresión múltiple}, donde encontramos diferencias entre ambos conjuntos,  disminuyendo el RMSE un 20\% e incrementando un 50\% el índice $R^{2}$.
 
-\subsection{Árbol de Regresión}
-
-Tras la ejecución del modelo lineal, pasamos a explorar el rendimiento de los árboles de regresión.
-De nuevo, los hiperparámetros se optimizaron con el método de validación cruzada en malla y se manejaron los valores límites haciendo uso del rango intercuartílico.
-
-Así, tras su ejecución, obtuvimos una \textbf{reducción de la raíz del error cuadrático medio} ligeramente superior al 20\%. No obstante, las métricas relativas a su explotación en el conjunto ampliado no ofrecieron mejoras superiores al 10\%.
+No obstante, tras aplicar un \textbf{árbol de regresion},  obtuvimos una \textit{reducción de la raíz del error cuadrático medio} ligeramente superior al 20\%, con escasas diferencias entre ambos datasets.
 
 \imagen{ejemploRegressionTree}{Sección del Árbol de Regresión Construido}{.9}
 
+La ejecución de KNN\footnote{K-Vecinos más cercanos, con K=14 y distancia de Manhattan (\(\sum_{i=1}^{n} |p_{i} - q_{i}|\))} y MLP\footnote{Perceptrón Multicapa} ofrecieron métricas de error son \textit{similares} a las otorgadas por el algoritmo de regresión lineal, con un tiempo de ejecución \textbf{sustancialmente mayor}.
 
-\subsection{K-Nearest Neightbors}
+Los resultados ofrecidos por el ensemble de \textbf{random forest} fueron muy similares a los devueltos por el árbol de regresión, tanto en métricas de error como en tiempo de ejecución sobre el conjunto de validación.
 
-Probamos con uno de los algoritmos de aprendizaje supervisado más simples, el cual, pese a ser usado mayoritariamente en problemas de clasificación, puede ser empleado para regresión empleando la \textit{media} en lugar de la \textit{moda} de los K vecinos más cercanos.
+Por último, tratamos de convertir el planteamiento del problema en uno de \textit{clasificación}, dividiendo la duración en intervalos, pero las medidas de validez (\textit{precisión, AUC...}) y la escasez de ejemplos en la literatura que empleasen este enfoque nos hicieron centrarnos en el enfoque inicial.
 
-Los hiperparámetros, en especial el valor de K o el tipo de distancia (\textit{en nuestra implementación, los mejores valores encontrados fueron la distancia de Manhattan\footnote{\(\sum_{i=1}^{n} |p_{i} - q_{i}|\)} y K= 14}).
 
-Sin embargo, las métricas de error son \textit{similares} a las otorgadas por el algoritmo de regresión lineal, con un tiempo de ejecución \textbf{sustancialmente mayor}.
+\subsection{Comparación y seleccion del modelo}
 
-\imagen{KNNPerf}{Rendimiento del modelo KNN}{.8}
+Tras el entrenamiento y validación de los algoritmos de aprendizaje, comparamos las métricas calculadas y seleccionamos aquel modelo que mejor se ajusta a los \textbf{objetivos} planteados en el proyecto.
 
+\tablaSmall{Comparativa de algoritmos ML}{c|c|c|c}{compModelos}{
+\textbf{\textit{Modelos}} & \textit{MSE} & \textit{RMSE} & \textit{MAE} \\
+}{
+\textbf{Regresión Lineal} & 3461.43 & 58.83 & 43.27\\
+\textbf{Árbol de Regresion} & 2143.10 & 46.29 & 33.48\\
+\textbf{KNN} & 3084.32 & 55.54 & 39.82\\
+\textbf{Random Forest} & 2364.55 & 48.63 & 34.75 \\
+\textbf{Perceptrón Multicapa} & 2804 & 52.96 & 40.46\\
+}
+
+En base a estos resultados\footnote{Para más detalles, consultar los Jupyter Notebooks incluidos en la carpeta 'Modelos' del respositorio.}, decidimos seleccionar el \textbf{árbol de regresión}, ya entrenado y guardado\footnote{Las librerías \textit{pickle} y \textit{joblib} permiten serializar y deserializar objetos.} para su uso como servicio por los clientes.
+
+
+\imagen{decTree}{Representación de rendimiento del árbol de regresión}{.9}
+
+\newpage
+
+\section{Optimización: Planificación y Gestión}
 
 
 
