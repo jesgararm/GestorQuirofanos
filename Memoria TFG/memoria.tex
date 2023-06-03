@@ -436,12 +436,17 @@ D. Raúl Marticorena Sánchez
 % Abstract en castellano
 \renewcommand*\abstractname{Resumen}
 \begin{abstract}
-
+\textbf{Introducción}: La planificación y gestión del tiempo quirúrgico constituye más del 60\% del esfuerzo económico de un hospital. A lo largo de la literatura se han propuesto múltiples enfoques para optimizar este problema, donde la estimación de la \textit{duración} de las intervenciones constituye uno de los desafíos más importantes en la actualidad.
+Proponemos en este trabajo una solución que aborde ambas perspectivas (predicción y optimización) aplicando algoritmos de inteligencia computacional e integrando la solución en una API para su reutilización.\\
+\textbf{Material y Método}: Se parte de un dataset de más de 24000 pacientes intervenidos entre 2016 y 2022. El lenguaje seleccionado para la implementación de los algoritmos ha sido Python, apoyado en librerías nativas y dedicadas (\textit{Scikit-learn}, \textit{Pandas} o \textit{DEAP} entre otras).
+Para desarrollar la API empleamos el framework \textit{Flask} y la integramos en un \textit{Docker} para su explotación.\\
+\textbf{Resultados}: Alcanzamos valores de RMSE en la línea de  los conseguidos por otros autores (40-50min). Conseguimos alcanzar la convergencia en la fase de optimización tras combinar un enfoque basado en heurísticas y algoritmos bio-inspirados.\\
+\textbf{Conclusiones y Discusión}: Hemos logrado ofrecer una solución útil y eficaz para la tarea de gestionar eficientemente los quirófanos. Sin embargo, existen restricciones y variables no exploradas provistas en la literatura que podrían mejorar el rendimiento de este proyecto de cara a desarrollos futuros. 
 \end{abstract}
 
 \renewcommand*\abstractname{Descriptores}
 \begin{abstract}
-Palabras separadas por comas que identifiquen el contenido del proyecto Ej: servidor web, buscador de vuelos, android \ldots
+Gestión hospitalaria, Planificación quirúrgica, Predicción de tiempos, Estimación de duración de intervenciones, Inteligencia Computacional, Aprendizaje Supervisado, Aprendizaje Máquina, Red neuronal, Árbol de regresión, Optimización, Metaheurísticas, Algoritmo Genético.
 \end{abstract}
 
 \clearpage
@@ -449,12 +454,18 @@ Palabras separadas por comas que identifiquen el contenido del proyecto Ej: serv
 % Abstract en inglés
 \renewcommand*\abstractname{Abstract}
 \begin{abstract}
-A \textbf{brief} presentation of the topic addressed in the project.
+\textbf{Introduction}: Surgery time and OR scheduling represent more than 60\% of the costs inside a hospital. Many solutions have been provided along specialized publications. 
+Besides, predicting surgery time durations has became the most challenging issue regarding this topic.
+We propose a solution within both perspectives (prediction and optimization) applying machine learning algorithms and developing our solution inside an API for further reutilization.\\
+\textbf{Material and Methods}:  We began composing a dataset containing data from 24000 patients who received surgery between 2016 and 2022. We chose Python to implement our algorithms, supported by native and dedicated (\textit{Scikit-learn}, \textit{Pandas}, \textit{DEAP.}..) libraries.
+Finally, we used \textit{Flask Framework} to build an API and encapsulate it insede a \textit{Docker}.\\
+\textbf{Results}: We achieved RMSE values similar to those reviewed inside the bibliography (40-50 minutes). During optimization stage, we managed to obtain convergence after developing a heuristic and bio-inspired approach.\\
+\textbf{Conclusiones y Discusión}: After our efforts, we managed to develop an useful and efficient approach. However, there are still many restrictions and attributes not reviewed in this project that may provide a powerful improvement after future explorations. 
 \end{abstract}
 
 \renewcommand*\abstractname{Keywords}
 \begin{abstract}
-keywords separated by commas.
+Health Management, Surgery Scheduling, Time prediction, Surgical time prediction, Artificial Intelligence, Supervised Learning, Machine Learning, Artificial Neural Network, Regression tree, Optimization, Metaheuristic, Genetic Algorithm.
 \end{abstract}
 
 \clearpage

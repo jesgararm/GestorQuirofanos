@@ -119,8 +119,62 @@ En base a estos resultados\footnote{Para más detalles, consultar los Jupyter No
 \section{Optimización: Planificación y Gestión}
 
 
+Una vez seleccionado y entrenado el algoritmo de predicción, pasamos a diseñar y evaluar diferentes alternativas para optimizar el sistema de planificación quirúrgica.
 
+Establecimos dos objetivos principales en este apartado:
+\begin{enumerate}
+    \item \textbf{Maximizar} la prioridad de los casos asignados a las salas de operaciones.
+    \item \textbf{Minimizar} la aparición de huecos libres.
+\end{enumerate}
 
+Modelamos el problema a través de la siguiente \textit{función de fitness}:
+\begin{equation}
+    min \sum_{i=1}^{N} \sum_{j=1}^{N}\frac{L_{ij}}{P_{ij}}
+\end{equation}
+Donde $L$ representa los huecos libres en el quirófano $i$ el día $j$ y $P$ la suma de prioridades de los casos asignados, debiendo cumplirse que:
+\begin{equation}
+    L_{i}\geq 0
+\end{equation}
 
+Tal y como pudimos comprobar en la sección \ref{heur}, se adaptaron en primer lugar dos heurísticas\cite{Lin2020AScheduling}. 
+En el enfoque original, se consideraba una fecha límite para priorizar los casos en dos grupos, ordenándolos por tiempo en una cola. Nosotros dividimos los valores de prioridad en deciles y, una vez allí, reordenamos por tiempo antes de incluirlos en la cola.
 
+Posteriormente, codificamos un \textbf{algoritmo genético}, siguiendo una disposición cromosómica \textit{vectorial}, usando separadores para diferenciar quirófanos y días y generando individuos \textbf{válidos} para la población inicial.
+A la función de \textit{evaluación} se le añadió una comprobación de \textit{validez} y \textit{distancia} \cite{CoelloCoello2002TheoreticalArt}.
+
+Para la \textit{selección}, empleamos el \textbf{torneo con elitismo}, como mecanismo de \textit{cruce}, adaptamos el concepto de \textbf{cruce ordenado en dos puntos} al diseño de nuestro individuo\cite{Lin2020AScheduling} y para la mutación el \textbf{intercambio en un punto}.
+
+ Cabe destacar que introducimos en la población dos individuos generados a partir de las heurísticas anteriores, con el objetivo de \textbf{acelerar} la convergencia.
+
+ Por último, probamos una implementación del algoritmo \textit{PSO}\footnote{Optimización de enjambre de partículas:  Algoritmo bio-inspirado iterativo, evocando el comportamiento de las partículas en la naturaleza.}, aunque sus valores de validez \textbf{no alcanzaron }las cotas mínimas de desempeño, probablemente por una inadaptación de nuestro modelaje a la metaheurística.
+
+ \tablaSmall{Resultados con N=100, 3 Quirófanos y 5 días}{c|c|c}{compOpti}{ \textbf{Modelos} & \textbf{Fitness} & \textbf{Tiempo}\\}{
+ \textit{LPT} & 0,0043 & 0,001s\\
+ \textit{LPT/EDD} & 0,0049 & 0,001s\\
+ \textit{Genético Random} & 0,00252 & 20.52s\\
+ \textit{Genético + Heurísticas} & 0,00203& 17,52s\\
+ }
+
+ Como podemos comprobar, el algoritmo que mejor responde a nuestros objetivos, siguiendo un \textbf{tiempo de ejecución razonable} se basa en la combinación de las heurísticas con el enfoque genético, motivo por el cual ha sido el \textbf{seleccionado} para el desarrollo del producto.
+
+ \imagen{fitnessGen}{Evolución de la función de evaluación en el modelo seleccionado}{.9}
+
+ \newpage
+
+ \section{Integración y Despliegue}
+
+ Una vez explorados y seleccionados los algoritmos base para la consecución de los \textbf{objetivos} planteados en nuestro trabajo, decidimos integrar el desarrollo en una API.
+
+ Para su desarrollo, empleamos el framework \textit{Flask}\cite{Grinberg2018FlaskPython} para Python, encapsulando los siguientes \textbf{servicios} para los clientes:
  
+ \begin{enumerate}
+     \item Recepción y validación de listados en formato CSV o JSON.
+     \item Predicción de duración prevista de intervenciones.
+     \item Planificación quirúrgica en base al número de quirófanos y días introducidos por el usuario.
+     \item Entrega de resultados en formato JSON.
+ \end{enumerate}
+
+Uno de los principales problemas más frecuentes para el despliegue de herramientas de \textit{Machine Learning} o cualquier otro tipo de solución computacional consiste en adaptar los equipos/servidores de los clientes al entorno empleado para su desarrollo (\textit{lenguajes, librerías, OS...}). 
+
+Como solución a este paradigma, una vez desarrollada y lista para su explotación, planteamos para su \textbf{despliegue} recurrir a un \textit{Docker}\cite{Merkel2014Docker:Deployment} que contenga tanto los recursos del sistema operativo como los lenguajes y librerías necesarios para poder proveer del servicio desarrollado, bien de forma local o remota, garantizando su adecuada \textbf{portabilidad} y \textbf{usabilidad}.
+
