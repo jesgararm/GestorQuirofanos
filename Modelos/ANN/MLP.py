@@ -15,12 +15,12 @@ class MLP:
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         # Creamos la matriz de búsqueda de parámetros
         self.param_grid = {
-        'hidden_layer_sizes': [(150,100,50), (120,80,40), (100,50,30)],
+        'hidden_layer_sizes': [(150,100,50), (120,80,40)],
         'max_iter': [50, 100],
-        'activation': ['tanh', 'relu','logistic'],
-        'solver': ['sgd', 'adam'],
+        'activation': ['relu','logistic'],
+        'solver': ['adam'],
         'alpha': [0.0001, 0.05],
-        'learning_rate': ['constant','adaptive'],
+        'learning_rate': ['adaptive'],
         'beta_1': [0.9, 0.99],
         'beta_2': [0.999, 0.9999],
         'epsilon': [1e-08, 1e-07]}
