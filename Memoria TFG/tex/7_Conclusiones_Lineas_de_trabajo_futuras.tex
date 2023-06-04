@@ -1,4 +1,26 @@
 \capitulo{7}{Conclusiones y Líneas de trabajo futuras}
 
-Todo proyecto debe incluir las conclusiones que se derivan de su desarrollo. Éstas pueden ser de diferente índole, dependiendo de la tipología del proyecto, pero normalmente van a estar presentes un conjunto de conclusiones relacionadas con los resultados del proyecto y un conjunto de conclusiones técnicas. 
-Además, resulta muy útil realizar un informe crítico indicando cómo se puede mejorar el proyecto, o cómo se puede continuar trabajando en la línea del proyecto realizado. 
+En este trabajo hemos tratado de ofrecer una herramienta a los gestores sanitarios para mejorar su desempeño en la planificación de pacientes en listas de espera quirúrgicas.
+
+Para ello, hemos modelado un sistema de \textbf{predicción} y otro de \textbf{optimización}, basados en Inteligencia Computacional, así como integrado conocimientos de diversas ramas de la Ingeniería, adquiridos a lo largo de la titulación a través de las distintas asignaturas, además de recopilar nueva información específica y necesaria para la ejecución del proyecto.
+
+Tras revisar los \textit{resultados} y compararlos con otros estudios similares en la bibliografía, podemos concluir que:
+
+\begin{itemize}
+    \item Los modelos de aprendizaje basados en \textit{árboles} parecen ser los más adecuados para abordar el problema de predecir la duración de una determinada intervención quirúrgica, en base a las variables consideradas.
+    \item Las medidas de error obtenidas \textbf{disminuyen} al incrementar el número de variables, aunque los valores devueltos constituyen un modelo \textit{válido} y en \textit{consonancia} con lo esperable tras revisar la literatura.
+    \item La aplicación de un algoritmo genético ofrece resultados \textbf{muy buenos} y en \textbf{tiempo asumible}, comportándose mucho mejor tras la combinación con heurísticas contrastadas y empleando \textit{restricciones blandas} que faciliten la evolución estocástica hacia la convergencia.
+    \item La API desarrollada cumple con los objetivos planteados al principio del proyecto y los mecanismos de \textit{integración} permiten su uso y distribución de forma fácil y asumible para los clientes.
+\end{itemize}
+
+Por otra parte, existen gran número de factores que no han sido explotados en el desarrollo del proyecto y sirven como piedra angular para posibles implementaciones futuras:
+
+\begin{itemize}
+    \item Integración continua con SGBD hospitalarias y consultas automatizadas para obtener las variables de interés.
+    \item Ampliación del \textit{dataset} de entrenamiento, incluyendo factores subjetivos que pudiesen influir en la predicción (\textit{código del facultativo}, \textit{duración prevista}...).
+    \item Desarrollo de un modelo de predicción, ajustado a cada especialidad, para predecir los intervalos "\textit{vacíos}" entre cada caso quirúrgico (\textit{limpieza}, \textit{preparación}...).
+    \item Integración en sistemas de gestión hospitalaria de RRHH para disponer del personal necesario en cada sala de operaciones que garantice el rendimiento óptimo propuesto por el algoritmo.
+    \item Optimización paralela y secuencial, considerando el \textit{circuito completo} de estancia hospitalaria, los recursos disponibles y los costes asociados.
+\end{itemize}
+
+En definitiva, hemos desarrollado una \textbf{utilidad} que cumple con los objetivos propuestos al inicio del trabajo, siendo capaz de ofrecer un amplio abanico de posibilidades sobre las que trabajar hasta obtener un sistema completo, robusto y fiable que pueda ser introducido en el futuro dentro de nuestro Sistema Sanitario.
