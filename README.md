@@ -1,4 +1,4 @@
-# Gestor de Quirófanos
+# <img src="logo.png" alt="Logo Gestor de Quirófanos" style="height: 300px; width:400px;"/>
 ## Trabajo Fin de Grado - Ingeniería Informática
 ### Universidad de Burgos
 #### Autor: Jesús García Armario
