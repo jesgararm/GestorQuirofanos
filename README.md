@@ -7,7 +7,7 @@
 
 
 ## Definición
-Desarrollo de herramienta de Inteligencia Computacional para la estimación de la duración de una intervención quirúrgica y posterior optimización de la planificación basada en una gestión de recursos eficiente y concurrente con las restricciones impuestas al modelo.
+API basada en Inteligencia Computacional para la estimación de la duración de una intervención quirúrgica y posterior optimización de la planificación basada en una gestión de recursos eficiente y concurrente con las restricciones impuestas al modelo.
 
 ## Contenido
 - Memoria del Trabajo de Fin de Grado en LaTeX, así como su compilación en PDF, incluyendo las imágenes, los anexos y la bibliografía.
@@ -15,3 +15,4 @@ Desarrollo de herramienta de Inteligencia Computacional para la estimación de l
 - Conjunto de Jupyter Notebooks que describen el proceso de procesado y análisis de datos.
 - Conjunto de Jupyter Notebooks y funciones de Python que describen el proceso de Aprendizaje Supervisado para la predicción de la duración de las intervenciones quirúrgicas.
 - Conjunto de Jupyter Notebooks y funciones en Python que describen el proceso de Optimización para la planificación quirúrgica en base a la maximización de la prioridad y la minimización del tiempo desaprovechado.
+- API generada en Flask y modelo de clases de diseño tras obtener el resultado de la investigación.
