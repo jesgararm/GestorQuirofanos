@@ -87,10 +87,10 @@ def distance(individual,tiempos,actos_pendientes):
     dist = 0
     tiempo_quirofano = 0
     for elemento in individual:
-        if elemento == 'A' or elemento == 'B':
+        if tipoElemento(elemento) == 'separador':
             tiempo_quirofano = 0
             continue
-        if elemento == 'V':
+        if tipoElemento(elemento) == 'hueco':
             tiempo_quirofano += 0
             continue
         tiempo_quirofano += actos_pendientes[elemento].getDuracion()
@@ -98,37 +98,31 @@ def distance(individual,tiempos,actos_pendientes):
             dist += 1
     return dist
 
+def tipoElemento(elemento):
+    if elemento == 'A' or elemento == 'B':
+        return 'separador'
+    if elemento == 'V':
+        return 'hueco'
+    else:
+        return 'acto'
 def cruce(ind1, ind2):
     # Obtenemos una copia de los padres
     hijo1 = ind1.copy()
     hijo2 = ind2.copy()
-    padre1 = ind1.copy()
-    padre2 = ind2.copy()
     # Eliminamos los separadores de los padres
     padre1 = [i for i in ind1 if i!='A' and i!='B']
     padre2 = [i for i in ind2 if i!='A' and i!='B']
     # Selecccionamos dos puntos de cruces aleatorios
-    punto1 = random.randint(0, len(ind1)-1)
-    while ind1[punto1] == 'A' and ind1[punto1] == 'B':
-        punto1 = random.randint(0, len(ind1)-1)
-    punto2 = random.randint(0, len(ind1)-1)
-    while ind1[punto2] == 'A' and ind1[punto2] == 'B' and punto2 == punto1:
-        punto2 = random.randint(0, len(ind1)-1)
-    punto3 = random.randint(0, len(ind2)-1)
-    while ind2[punto3] == 'A' and ind2[punto3] == 'B':
-        punto3 = random.randint(0, len(ind2)-1)
-    punto4 = random.randint(0, len(ind2)-1)
-    while ind2[punto4] == 'A' and ind2[punto4] == 'B' and punto4 == punto3:
-        punto4 = random.randint(0, len(ind2)-1)
+    punto1, punto2, punto3, punto4 = selCruce(ind1, ind2)
     # Añadimos los genes del padre 2 al hijo 1 hasta la región de cruce
-    if punto1>punto2:
-        punto = punto1
-        punto1 = punto2
-        punto2 = punto
-    if punto3>punto4:
-        punto = punto3
-        punto3 = punto4
-        punto4 = punto
+    punto1, punto2, punto3, punto4 = ordenaPuntos(punto1, punto2, punto3, punto4)
+    reordenaHijo(hijo1, padre2, punto1, punto2)
+    # Añadimos los genes del padre 1 al hijo 2 hasta la región de cruce
+    reordenaHijo(hijo2, padre1, punto3, punto4)
+    return hijo1, hijo2
+
+
+def reordenaHijo(hijo1, padre2, punto1, punto2):
     for i in range(len(hijo1)):
         if i < punto1 or i > punto2:
             if hijo1[i] == 'A' or hijo1[i] == 'B':
@@ -136,15 +130,36 @@ def cruce(ind1, ind2):
             elif len(padre2) == 0:
                 break
             hijo1[i] = padre2.pop(0)
-    # Añadimos los genes del padre 1 al hijo 2 hasta la región de cruce
-    for i in range(len(hijo2)):
-        if i < punto3 or i > punto4:
-            if hijo2[i] == 'A' or hijo2[i] == 'B':
-                continue
-            elif len(padre1) == 0:
-                break
-            hijo2[i] = padre1.pop(0)
-    return hijo1, hijo2
+
+
+def ordenaPuntos(punto1, punto2, punto3, punto4):
+    if punto1 > punto2:
+        punto = punto1
+        punto1 = punto2
+        punto2 = punto
+    if punto3 > punto4:
+        punto = punto3
+        punto3 = punto4
+        punto4 = punto
+    return punto1, punto2, punto3, punto4
+
+
+def selCruce(ind1, ind2):
+    punto1 = random.randint(0, len(ind1) - 1)
+    while ind1[punto1] == 'A' and ind1[punto1] == 'B':
+        punto1 = random.randint(0, len(ind1) - 1)
+    punto2 = random.randint(0, len(ind1) - 1)
+    while ind1[punto2] == 'A' and ind1[punto2] == 'B' and punto2 == punto1:
+        punto2 = random.randint(0, len(ind1) - 1)
+    punto3 = random.randint(0, len(ind2) - 1)
+    while ind2[punto3] == 'A' and ind2[punto3] == 'B':
+        punto3 = random.randint(0, len(ind2) - 1)
+    punto4 = random.randint(0, len(ind2) - 1)
+    while ind2[punto4] == 'A' and ind2[punto4] == 'B' and punto4 == punto3:
+        punto4 = random.randint(0, len(ind2) - 1)
+    return punto1, punto2, punto3, punto4
+
+
 def mutacion(individual):
     # Calculamos los índices posibles de intercambio
     indices = [i for i in range(len(individual)) if individual[i] != 'A' and individual[i] != 'B']
