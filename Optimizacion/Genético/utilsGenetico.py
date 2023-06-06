@@ -3,7 +3,7 @@ import pandas as pd
 from deap import base, creator, tools, algorithms
 import sys
 sys.path.append('../')
-from Heuristicas.Utils import Quirofano, ActoQuirurgico, Heuristicas
+from Optimizacion.Heuristicas.Utils import Quirofano, ActoQuirurgico, Heuristicas
 import random
 import math
 # Definimos un cromosoma como una lista de tamaño N
@@ -168,3 +168,16 @@ def mutacion(individual):
     # Intercambiamos los valores
     individual[indices[0]], individual[indices[1]] = individual[indices[1]], individual[indices[0]]
     return individual
+
+# Función que traduce el fenotipo de la heurística a un cromosoma
+def fenotipoACromosoma(fenotipo):
+    dias = len(fenotipo)
+    quirofanos = len(fenotipo[0])
+    cromosoma = []
+    for i in range(dias):
+        for j in range(quirofanos):
+            for acto in fenotipo[i][j].getActos():
+                cromosoma.append(acto.getId())
+            cromosoma.append('A')
+        cromosoma.append('B')
+    return cromosoma
