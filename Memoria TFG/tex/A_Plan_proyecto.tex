@@ -2,12 +2,206 @@
 
 \section{Introducción}
 
+Dentro de las etapas que configuran un proyecto, la \textbf{planificación} constituye un elemento esencial. Durante esta fase, realizaremos una estimación de los costes relativos a su ejecución: \textit{económicos directos e indirectos}, \textit{temporales}... etc.
+
+Dividiremos este plan en dos apartados:
+\begin{enumerate}
+    \item \textbf{Planificación Temporal}: Trataremos de conformar un cronograma donde esbocemos las restricciones temporales, tanto para cada uno de los apartados del proyecto, como asignando fechas \textit{inicio} y \textit{finalización} estimadas.
+
+    \item \textbf{Estudio de Viabilidad:} Estimación y previsión de \textit{restricciones} y \textit{costes} a los que puede enfrentarse el desarrollo de nuestro trabajo. A su vez, distinguimos:
+\begin{enumerate}
+        \item \textit{Viabilidad Económica}: Encargada de la previsión de costes y beneficios del desarrollo.
+
+        \item \textit{Viabilidad Legal}: Realiza un análisis del contexto legal del desarrollo del trabajo, generalmente las licencias o la LOPD\footnote{Ley Orgánica de Protección de Datos}.
+    \end{enumerate}
+\end{enumerate}
+
 \section{Planificación temporal}
+
+Tal y como indicamos en la memoria, la metodología de gestión de proyectos empleada para el desarrollo ha sido \textbf{ágil}, \textit{inspirada en Scrum}\cite{SaezHurtado2021ComoUtilizarla}.
+
+Existen, sin embargo, algunas consideraciones que deben ser tenidas en cuenta:
+\begin{itemize}
+    \item Desarrollo \textbf{incremental} con \textit{sprints}, reuniones de revisión y lanzamiento de una \textit{versión}.
+    \item Empleo de respositorio \textit{git} como apoyo al desarrollo.
+    \item Duración prevista de cada \textit{sprint} limitada a un mes.
+    \item Planificación y revisión del \textit{sprint} anterior durante la reunión (alumno desarrollador y tutores).
+    \item Confección de un \textit{product backlog} de tareas pendientes, en colaboración con los tutores, y asignación al \textit{sprint backlog}.
+    \item Priorización de tareas al estilo \textit{kanban}.
+\end{itemize}
+
+Cabe destacar que los \textit{Sprints} fueron definidos en el apartado \textit{Milestones} de \textit{GitHub} y las tareas como \textit{issues} del mismo.
+Por otro lado, en base a los \textit{Story Points}, se clasificó cada una de las tareas en función de su \textbf{complejidad y duración estimada.}
+
+\subsection{Sprints}
+
+Procedemos a desglosar el contenido de cada una de las \textbf{iteraciones}:
+
+\subsubsection{Sprint 0: 15 de Diciembre de 2022 a 15 de Enero de 2023}
+
+Comenzó con la reunión inicial donde se plantearon las bases del proyecto.
+
+En esta fase se plantearon las siguientes metas:
+\begin{itemize}
+    \item Redacción de la propuesta de proyecto, firma y entrega en repositorio Moodle para validación.
+    \item Estimación de variables necesarias para los modelos.
+    \item Reunión de documentación previa relacionada.
+    \item Esbozo de planificación temporal.
+\end{itemize}
+
+\subsubsection{Sprint 1: 15 de Enero de 2023 a 15 de Febrero de 2023}
+
+Tras la reunión que marcó el final de la iteración anterior, conseguimos formalizar nuestra asignación del trabajo de fin de grado según la propuesta y se alcanzaron los propósitos marcados.
+
+Allí definimos las bases del siguiente Sprint:
+
+\begin{itemize}
+    \item Creación del repositorio y asignación de colaboradores.
+    \item Importación de datos, selección y preprocesado.
+    \item Análisis estadístico inicial.
+\end{itemize}
+
+\subsubsection{Sprint 2: 15 de Febrero de 2023 a 15 de Marzo de 2023}
+
+Tras validar los hitos del sprint previo, se promulgaron los objetivos del siguiente:
+
+\begin{itemize}
+    \item Inicio de redacción de memoria del proyecto.
+    \item Exploración de modelos predictivos.
+    \item Análisis y documentación de resultados.
+    \item Selección del modelo a explotar.
+\end{itemize}
+
+\subsubsection{Sprint 3: 15 de Marzo de 2023 a 15 de Abril de 2023}
+
+En la reunión, comprobamos los resultados de los diferentes modelos de aprendizaje supervisado y escogimos el definitivo.
+Se validaron, por tanto, los pasos realizados en la iteración previa, planteando los siguientes:
+
+\begin{itemize}
+    \item Continuar redacción de memoria del proyecto.
+    \item Exploración de modelos de optimización.
+    \item Implementación de modelos y análisis.
+    \item Selección del algoritmo a explotar.
+\end{itemize}
+
+\subsubsection{Sprint 4: 15 de Abril de 2023 a 15 de Mayo de 2023}
+
+Tras finalizar esta iteración, valoramos en la reunión los resultados y la manera de integrarlos en un producto para el cliente.
+Se decidió, como hito importante, que el entregable final fuese una API, planteando los siguientes objetivos:
+
+\begin{itemize}
+    \item Refactorizar clases y modelos.
+    \item Familiarizarse con el diseño de API con un framework de Python.
+    \item Implementar API siguiendo los objetivos y requerimientos.
+    \item Pruebas de Integración y Sistema.
+    \item Finalizar memoria. 
+    \item Comenzar anexos.
+\end{itemize}
+
+\subsubsection{Sprint 5: 15 de Mayo de 2023 a 12 de Junio de 2023}
+
+En la última reunión se comprobaron y detallaron especificaciones del último entregable:
+
+\begin{itemize}
+    \item Corrección de memoria. Finalizar anexos.
+    \item Confección de presentaciones teóricas y grabación de vídeos.
+    \item Integrar API en Docker para exportación.
+    \item Preparar entrega y depositarla.
+\end{itemize}
+
+\newpage
 
 \section{Estudio de viabilidad}
 
 \subsection{Viabilidad económica}
 
+Repasaremos una aproximación a los \textbf{costes} y \textbf{beneficios} esperados si el proyecto hubiese sido desarrollado por un ente empresarial.
+
+\subsubsection{Estudio de Costes}
+
+Podemos considerar tres apartados principales en este estudio:
+\textbf{Personal, Equipamiento y Otros}. 
+
+En el primer apartado, consideraremos los costes de una empresa para contratar a un desarrollador a tiempo completo, tomando como referencia el salario anual, prorrateado a 5 meses:
+
+\tablaSmallSinColores{Costes de Personal}{c|c|c}{cost:Pers}{
+\textbf{Concepto} & \textbf{Coste Anual} & \textbf{Prorrateo (5 meses)}\\
+}{
+\textit{Salario Bruto} & 24.000€ & 10.000€\\
+\textit{Retención IRPF} & 3.252€ & 1.355€\\
+\textit{Seguridad Social} & 1.524€ & 635€\\
+\textit{Salario Neto} & 19.224€ & 8.010€\\ 
+}
+
+Hemos aplicado un \textit{13,55\%} de retención sobre la nómina IRPF, considerando ausencia de deducciones tributarias.
+
+Siguiendo la estela del análisis de costes, pasamos a analizar los empleados en el equipamiento (\textit{hardware, licencias software}) para el desarrollo de esta herramienta:
+
+\tablaSmallSinColores{Costes de Equipamiento}{c|c|c}{cost:Equip}{
+\textbf{Concepto} & \textbf{Coste Total} & \textbf{Coste Amortizado}\\
+}{
+\textit{Ordenador Portátil} & 1.330€ & 110,83€\\
+\textit{Licencia MS Windows 10} & 279€ & 58,125€\\
+\textit{Suscripción Overleaf} & 10€ & 50€\\
+\textit{Suscripción Internet} & 43€ & 215€\\ 
+}
+
+Por último, pasamos a realizar una estimación de aquellos \textbf{costes} que no encajan en ninguna de las otras categorías anteriores:
+
+\tablaSmallSinColores{Costes Extra}{c|c|c}{cost:Extra}{
+\textbf{Concepto} & \textbf{Coste Total} & \textbf{Coste Amortizado}\\
+}{
+\textit{Consumo Eléctrico} & 300€ & 99,99€\\
+\textit{Espacio de Trabajo} & 4.000€ & 1333,33€\\
+\textit{Material de Oficina} & 10€ & 8€\\
+}
+
+
+Por último, se calculan los costes totales en base a los amortizados:
+
+\tablaSmallSinColores{Costes Totales}{c|c}{cost:Tot}{
+\textbf{Concepto} & \textbf{Coste}\\
+}{
+\textit{Costes de Personal} & 10.000€\\
+\textit{Coste de Equipamiento} & 433,95€\\
+\textit{Coste Extra} & 1.441,32€\\
+\textit{\textbf{TOTAL}} & 11.875,27€\\
+}
+
+\subsubsection{Análisis de Beneficios}
+
+El presente proyecto no ha sido concebido para su monetización, sino que se ofrece como un servicio \textit{gratuito} a los gestores hospitalarios y a la comunidad científica y universitaria para explorarlo, analizarlo y adaptarlo a sus requerimientos.
+
+\newpage
+
 \subsection{Viabilidad legal}
 
+Podemos considerar dos enfoques principales en esta materia:
+\begin{enumerate}
+    \item Manejo de bases de datos sanitarias.
+    \item Licencias
+\end{enumerate}
 
+La Ley General de Sanidad establece, en su artículo 18, que una de las actuaciones del sistema de salud es la promoción de la investigación científica en el campo de la salud\cite{GarridoElustondo2012InvestigacionPrimaria}.
+
+No obstante, todos los pacientes tienen derecho a que se preserve sus datos personales y obliga a la confidencialidad. La LOPD establece que sólo los facultativos que tienen acceso directo al tratamiento o diagnóstico del paciente pueden tener acceso a sus datos sanitarios.
+
+Esto podría dificultar el acceso a datos sanitarios para investigación, no obstante, si estos datos están \textbf{anonimizados}, el tratamiento de la información estaría fuera de los requerimientos establecidos por la LOPD y, en este supuesto, se establece que los datos \textit{anónimos} y los registros \textit{anonimizados} pueden ser utilizados y cedidos SIN el consentimiento informado de los sujetos\cite{GarridoElustondo2012InvestigacionPrimaria}.
+
+En nuestro proyecto, hemos hecho uso de datos \textbf{anonimizados} y \textbf{codificados}, tanto en su extracción como su posterior procesamiento y análisis posterior, por lo que podemos afirmar que nos encontramos dentro del marco \textit{ético} y \textit{legal} acerca del tratamiento de datos personales.
+
+Por otro lado, el empleo de Software implica el acceso y uso de herramientas registradas, especialmente librerías:
+
+\tablaSmallSinColores{Librerías y Licencias}{c|c}{lib:lic}{
+\textbf{Producto} & \textbf{Licencia}\\
+}{
+\textit{Python} & OSI-Open Source\\
+Pandas & BSD 3-Clause \\
+Numpy & BSD \\
+Scikit-Learn & BSD 3-Clause\\
+Flask & BSD 3-Clause \\
+}
+
+Como podemos comprobar, nos encontramos ante una licencia BSD 3-clause, la cual es una \textit{permisiva}, permitiendo a los desarrolladores modificar el software con toda la libertad que dispongan siempre que se incluya en él el copyright y la nota de licencia.
+
+Por tanto, podemos afirmar que nuestro proyecto no dispone de \textbf{conflictos legales} que puedan interferir en la viabilidad del trabajo.
