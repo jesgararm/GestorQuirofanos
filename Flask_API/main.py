@@ -1,6 +1,6 @@
 # Imports
-from flask import Flask, request, abort, jsonify, send_from_directory
-from flask_restful import Resource, Api
+from flask import Flask
+from flask_restful import Api
 import os
 import sys
 from predictions.Predict import Predict
