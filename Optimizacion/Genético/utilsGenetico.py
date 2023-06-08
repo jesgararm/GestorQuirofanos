@@ -145,19 +145,25 @@ def ordenaPuntos(punto1, punto2, punto3, punto4):
 
 
 def selCruce(ind1, ind2):
-    punto1 = random.randint(0, len(ind1) - 1)
-    while ind1[punto1] == 'A' and ind1[punto1] == 'B':
-        punto1 = random.randint(0, len(ind1) - 1)
-    punto2 = random.randint(0, len(ind1) - 1)
-    while ind1[punto2] == 'A' and ind1[punto2] == 'B' and punto2 == punto1:
-        punto2 = random.randint(0, len(ind1) - 1)
-    punto3 = random.randint(0, len(ind2) - 1)
-    while ind2[punto3] == 'A' and ind2[punto3] == 'B':
-        punto3 = random.randint(0, len(ind2) - 1)
-    punto4 = random.randint(0, len(ind2) - 1)
-    while ind2[punto4] == 'A' and ind2[punto4] == 'B' and punto4 == punto3:
-        punto4 = random.randint(0, len(ind2) - 1)
+    punto1 = selPunto(ind1)
+    punto2 = selDosPuntos(ind1, punto1)
+    punto3 = selPunto(ind2)
+    punto4 = selDosPuntos(ind2, punto3)
     return punto1, punto2, punto3, punto4
+
+
+def selDosPuntos(ind, punto1):
+    punto2 = random.randint(0, len(ind) - 1)
+    while ind[punto2] == 'A' and ind[punto2] == 'B' and punto2 == punto1:
+        punto2 = random.randint(0, len(ind) - 1)
+    return punto2
+
+
+def selPunto(ind):
+    punto = random.randint(0, len(ind) - 1)
+    while ind[punto] == 'A' and ind[punto] == 'B':
+        punto = random.randint(0, len(ind) - 1)
+    return punto
 
 
 def mutacion(individual):
