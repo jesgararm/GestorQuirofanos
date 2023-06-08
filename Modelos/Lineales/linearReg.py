@@ -67,18 +67,6 @@ class LinearReg:
         return self.cross_val_pred
     def getPredictions(self):
         return self.y_pred
-    def getTest(self):
-        return self.y_test
-    def getTrain(self):
-        return self.y_train
-    def getTestX(self):
-        return self.X_test
-    def getTrainX(self):
-        return self.X_train
-    def getCoef(self):
-        return self.model.coef_
-    def getIntercept(self):
-        return self.model.intercept_
     def getScore(self):
         '''
         Devuelve el coeficiente de determinación R^2 de la predicción.
