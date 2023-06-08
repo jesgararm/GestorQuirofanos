@@ -41,17 +41,6 @@ class RandomForest:
     def getPrediction(self, X):
         return self.model.predict(X)
     # Método que dibuja el gráfico de predicción
-    def drawPerformance(self):
-        plt.figure()
-        plt.scatter(np.arange(self.y_test.shape[0]), self.y_test, s=20, edgecolor="black", c="darkorange", label="Real")
-        plt.plot(np.arange(self.y_test.shape[0]), self.y_pred, color="cornflowerblue", label="Predicted", linewidth=2)
-        plt.ylim(0, 400)
-        plt.yticks(np.arange(0, 400, 20))
-        plt.xlabel("data")
-        plt.ylabel("target")
-        plt.title("Random Forest Regression")
-        plt.legend()
-        plt.show()
     # Método que guarda el modelo
     def exportModel(self, path):
         joblib.dump(self.model, path)

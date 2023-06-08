@@ -46,17 +46,6 @@ class SVM:
     # Método que devuelve el modelo
     def get_model(self):
         return self.model
-    def drawPerformance(self):
-        plt.figure()
-        plt.scatter(np.arange(self.y_test.shape[0]), self.y_test, s=20, edgecolor="black", c="darkorange", label="Real")
-        plt.plot(np.arange(self.y_test.shape[0]), self.y_pred, color="cornflowerblue", label="Predicted", linewidth=2)
-        plt.ylim(0, 400)
-        plt.yticks(np.arange(0, 400, 20))
-        plt.xlabel("data")
-        plt.ylabel("target")
-        plt.title("Support Vector Regression")
-        plt.legend()
-        plt.show()
     def export_model(self, path):
         joblib.dump(self.model, path)
     def import_model(self, path):
