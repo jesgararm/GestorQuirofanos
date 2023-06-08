@@ -1,5 +1,5 @@
 import pandas as pd
-from deap import base, creator, tools, algorithms
+from deap import base, creator, tools
 import numpy as np
 import sys
 sys.path.append('../')
@@ -56,17 +56,10 @@ class Genetico():
     def iniciaToolbox(self):
         creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
         creator.create("Individual", list, fitness=creator.FitnessMin)
-        self.iniciaPoblacion()
-        self.iniciaOperadores()
-
-    # Configura los parámetros de la población
-    def iniciaPoblacion(self):
         self.toolbox.register("cromosoma", cromosomaAleatorio, tiempos=self.tiempos, quirofanos=self.n_quirofanos,
-                              dias=self.n_dias, actos_pendientes = self.actos_pendientes)
+                              dias=self.n_dias, actos_pendientes=self.actos_pendientes)
         self.toolbox.register("individual", tools.initIterate, creator.Individual, self.toolbox.cromosoma)
         self.toolbox.register("population", tools.initRepeat, list, self.toolbox.individual)
-
-    def iniciaOperadores(self):
         self.toolbox.register("evaluate", evaluar, tiempos=self.tiempos, quirofanos=self.n_quirofanos, dias=self.n_dias,
                               actos_pendientes=self.actos_pendientes)
         self.toolbox.register("mate", cruce)
