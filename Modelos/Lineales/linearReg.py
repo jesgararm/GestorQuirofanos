@@ -1,5 +1,6 @@
 # Imports
 import numpy as np
+from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
@@ -7,7 +8,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import cross_val_predict
 # Clase que implementa el modelo de regresión lineal
 class LinearReg:
-    def __init__(self, data, fit_intercept,copy_X, target,n_jobs, test_size, random_state):
+    def __init__(self, data,target):
         '''
         Constructor de la clase
         :param data: Datos de entrada
@@ -26,16 +27,23 @@ class LinearReg:
         '''
         self.data = data
         self.target = target
-        self.test_size = test_size
-        self.random_state = random_state
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.data, self.target, test_size = self.test_size, random_state = self.random_state)
-        self.model = LinearRegression(fit_intercept=fit_intercept, copy_X=copy_X,n_jobs=n_jobs)
-        self.model.fit(self.X_train, self.y_train)
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.data, self.target, test_size = 0.2, random_state = 42)
+        # Definimos los parámetros que queremos probar
+        parameters = {'fit_intercept': [True, False], 'copy_X': [True, False],
+                      'n_jobs': [None, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+        # Creamos el objeto GridSearchCV
+        reg = GridSearchCV(LinearRegression(), parameters, cv=5)
+        # Entrenamos el modelo
+        reg.fit(self.X_train, self.y_train)
+        self.model = reg.best_estimator_
         self.y_pred = self.model.predict(self.X_test) # type: ignore
+        self.calculateMetrics()
+
+    def calculateMetrics(self):
         self.mse = mean_squared_error(self.y_test, self.y_pred)
         self.r2 = r2_score(self.y_test, self.y_pred)
-        self.cross_val = cross_val_score(self.model, self.data, self.target, cv = 10)
-        self.cross_val_pred = cross_val_predict(self.model, self.data, self.target, cv = 10)
+        self.cross_val = cross_val_score(self.model, self.data, self.target, cv=10)
+        self.cross_val_pred = cross_val_predict(self.model, self.data, self.target, cv=10)
         self.cross_val_mse = mean_squared_error(self.target, self.cross_val_pred)
         self.cross_val_r2 = r2_score(self.target, self.cross_val_pred)
         self.cross_val_rmse = np.sqrt(self.cross_val_mse)
