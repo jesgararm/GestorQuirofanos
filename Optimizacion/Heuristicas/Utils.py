@@ -1,7 +1,4 @@
-import random
 import numpy as np
-
-
 # Clase que representa un acto quirúrgico.
 # Contiene el id del acto, la duración y el id del paciente.
 class ActoQuirurgico:
