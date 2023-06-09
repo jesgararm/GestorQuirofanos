@@ -1,12 +1,10 @@
-from flask import Flask, render_template
+from flask import render_template, Blueprint
+main = Blueprint('main', __name__)
 
-app = Flask(__name__)
-
-
-@app.route('/')
-def index():  # put application's code here
+@main.route('/')
+def index():
     return render_template('index.html')
 
-
-if __name__ == '__main__':
-    app.run()
+@main.route('/profile')
+def profile():
+    return render_template('profile.html')
