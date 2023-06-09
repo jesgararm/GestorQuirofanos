@@ -3,6 +3,11 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_mysqldb import MySQL
 from config import config
 
+# Models
+from models.ModelUser import ModelUser
+
+# Entities
+from models.entities.User import User
 # Se crea la aplicación
 app = Flask(__name__)
 db = MySQL(app)
@@ -13,8 +18,7 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        print(request.form['inputEmail'])
-        print(request.form['inputPassword'])
+        user = User(request.form['inputEmail'], request.form['inputPassword'])
         return render_template('auth/login.html')
     else:
         return render_template('auth/login.html')
