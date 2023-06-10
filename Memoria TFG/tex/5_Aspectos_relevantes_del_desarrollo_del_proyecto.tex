@@ -27,6 +27,16 @@ Por otro lado, contamos con otro dataset, de menor tamaño y limitado a una úni
  
   \imagen{datosPlastica}{Variables del Conjunto de Datos Ampliado}{.9}
 
+Conviene destacar la \textit{relevancia} y el \textit{desafío} que supone trabajar con \textbf{datos reales} a la hora de implementar modelos predictivos.
+Algunas de las características que han sido tomadas en consideración a lo largo del trabajo han sido:
+
+\begin{itemize}
+    \item Presencia de atributos \textit{missing} o inválidos (valores nulos, incongruencia de tipos...).
+    \item Imprecisión de los \textit{instrumentos de medida} (errores humanos en la recogida de datos, registros inapropiados...) que generan valores atípicos (\textbf{outliers}).
+    \item Baja \textit{validez interna} (valores de \textbf{error} sobre el conjunto de prueba más elevados) compensada por una elevada \textit{validez interna} (métricas \textbf{estables} en extrapolación poblacional).
+    \item 
+\end{itemize}
+
 
  \subsection{Preparación y Estadísticos}
 
@@ -99,7 +109,7 @@ Por último, tratamos de convertir el planteamiento del problema en uno de \text
 
 Tras el entrenamiento y validación de los algoritmos de aprendizaje, comparamos las métricas calculadas y seleccionamos aquel modelo que mejor se ajusta a los \textbf{objetivos} planteados en el proyecto.
 
-\tablaSmall{Comparativa de algoritmos ML}{c|c|c|c}{compModelos}{
+\tablaSmallSinColores{Comparativa de algoritmos ML}{c|c|c|c}{compModelos}{
 \textbf{\textit{Modelos}} & \textit{MSE} & \textit{RMSE} & \textit{MAE} \\
 }{
 \textbf{Regresión Lineal} & 3461.43 & 58.83 & 43.27\\
@@ -148,7 +158,7 @@ Para la \textit{selección}, empleamos el \textbf{torneo con elitismo}, como mec
 
  Por último, probamos una implementación del algoritmo \textit{PSO}\footnote{Optimización de enjambre de partículas:  Algoritmo bio-inspirado iterativo, evocando el comportamiento de las partículas en la naturaleza.}, aunque sus valores de validez \textbf{no alcanzaron }las cotas mínimas de desempeño, probablemente por una inadaptación de nuestro modelaje a la metaheurística.
 
- \tablaSmall{Resultados con N=100, 3 Quirófanos y 5 días}{c|c|c}{compOpti}{ \textbf{Modelos} & \textbf{Fitness} & \textbf{Tiempo}\\}{
+ \tablaSmallSinColores{Resultados con N=100, 3 Quirófanos y 5 días}{c|c|c}{compOpti}{ \textbf{Modelos} & \textbf{Fitness} & \textbf{Tiempo}\\}{
  \textit{LPT} & 0,0043 & 0,001s\\
  \textit{LPT/EDD} & 0,0049 & 0,001s\\
  \textit{Genético Random} & 0,00252 & 20.52s\\
