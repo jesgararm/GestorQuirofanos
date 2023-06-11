@@ -5,9 +5,8 @@ import os
 import sys
 from predictions.Predict import Predict
 from scheduling.Schedule import Schedule
-sys.path.append('../')
 
-UPLOAD_FOLDER = 'Flask_API/uploads'
+UPLOAD_FOLDER = 'uploads'
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)

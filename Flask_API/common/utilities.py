@@ -1,12 +1,10 @@
 # Funciones comunes a ambas API
 import pandas as pd
 import joblib
-from sklearn.tree import DecisionTreeRegressor
-from Preprocesado.Codificacion import codificaEstandar
 def makePred(df):
     df, df_pred = extractDF(df)
     # Cargamos el modelo
-    model = joblib.load('Flask_API/predictions/regressionTree.pkl')
+    model = joblib.load('predictions/regressionTree.pkl')
     # Comprobamos que el dataframe tiene las columnas correctas
     parametros = model.feature_importances_
     if len(df_pred.columns) != len(parametros):
@@ -16,6 +14,7 @@ def makePred(df):
     # Devolvemos la predicción
     df['DURACIÓN'] = pred
     return True, df
+
 def extractDF(df:pd.DataFrame) -> pd.DataFrame:
     # Eliminamos la columna que no se usa
     df_pred = df.drop(['NHC'], axis=1)
@@ -29,3 +28,14 @@ def extractDF(df:pd.DataFrame) -> pd.DataFrame:
         [0, 1])
     df_pred = codificaEstandar(df_pred)
     return df, df_pred
+
+def codificaEstandar(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Codifica los datos de entrada en un formato estandarizado
+    """
+    # Establecemos la columna TIPO como int64
+    df['TIPO'] = df['TIPO'].astype('int64')
+    # Usamos One Hot Enconding para codificar la columna ESPECIALIDAD
+    df['ESPECIALIDAD'] = df['ESPECIALIDAD'].astype('category')
+    df = pd.get_dummies(df, columns=['ESPECIALIDAD'])
+    return df

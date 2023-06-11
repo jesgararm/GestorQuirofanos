@@ -3,9 +3,7 @@
 import pandas as pd
 from flask import request, jsonify
 from flask_restful import Resource
-import sys
-sys.path.append('../../')
-import Flask_API.common.utilities as utils
+import common.utilities as utils
 class Predict(Resource):
     def get(self):
         # Requerimos los parámetros

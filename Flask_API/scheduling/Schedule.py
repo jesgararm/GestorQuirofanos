@@ -3,10 +3,8 @@
 import pandas as pd
 from flask import request, jsonify, Flask
 from flask_restful import Resource
-import sys
-sys.path.append('../../')
-from Optimizacion.Genético.Genetico import Genetico
-import Flask_API.common.utilities as utils
+from .Optimizacion.Genético.Genetico import Genetico
+import common.utilities as utils
 
 class Schedule(Resource):
     # Definimos el método get
