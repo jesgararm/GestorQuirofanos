@@ -2,7 +2,97 @@
 
 \section{Introducción}
 
-Una muestra de cómo podría ser una tabla de casos de uso:
+La redacción del catálogo de requisitos ha sido elaborada siguiendo las recomendaciones propuestas en el estándar \textit{IEEE 830-1998}\cite{1998IEEESpecifications}, y su propósito es \textbf{doble}: servir de contrato entre clientes y desarrolladores, así como documento base para el posterior análisis del sistema en desarrollo.
+
+Según este estándar, toda especificiación de requisitos debe cumplir con las siguientes \textbf{características}:
+
+\begin{itemize}
+    \item \textbf{Correcta}: Una especificación de requisitos es correcta si, y sólo si, todos y cada uno de los requerimientos que contiene \textit{deben} estar presentes en nuestro proyecto de software.
+    \item \textbf{Sin ambigüedades:} Si sólo existe una única interpretación para cada uno de los requisitos descritos. Si un término puede tener más de un significado, debería incluirse un glosario que especifique la acepción a la que hacemos referencia en nuestro catálogo.
+    \item \textbf{Completa:} Contiene todos los requerimientos, junto a la definición de sus referencias.
+    \item \textbf{Consistente:} Se refiere a la \textit{consistencia interna}, de tal modo que si un requerimiento no cumple con otro de mayor nivel de especificación (\textit{requerimientos del sistema, por ejemplo}), entonces no será correcto.
+    \item \textbf{Verificable:} Si existe un proceso finito y costo-efectivo capaz de chequear que todos los requerimientos se cumplen.
+    \item \textbf{Modificable:} Será modificable si su estructura y estilo admiten cambios en su contenido de forma fácil, completa y consistente sin afectar a la estructura y el estilo subyacentes.
+    \item \textbf{Trazable:} Si el origen de cada requisito especificado es \textit{claro} y facilita que sea referenciado en desarrollos futuros.
+
+\end{itemize}
+
+
+
+\section{Objetivos generales}
+
+Este trabajo se ha realizado persiguiendo el cumplimiento de los siguientes \textbf{objetivos:}
+
+\begin{itemize}
+    \item Se desea desarrollar un \textit{sistema software} que permita a los usuarios la planificación de intervenciones quirúrgicas.
+    \item Se desea que el sistema sea capaz de \textit{predecir} la duración de una intervención quirúrgica.
+    \item Se desea que el sistema \textit{optimice} la planificación en base a la prioridad, la duración y las restricciones temporales descritas por los usuarios.
+    \item Se desea \textit{encapsular} el sistema en una API para dar libertad a los clientes en el desarrollo de su interfaz.
+    \item Se desea \textit{implementar} una aplicación web que ejemplifique el funcionamiento del sistema e integre: API, GUI y gestión de usuarios.
+\end{itemize}
+
+
+\section{Catalogo de requisitos}
+
+En este apartado, desglosaremos los \textbf{requerimientos funcionales y no funcionales} en base al estándar\cite{1998IEEESpecifications} y los \textbf{objetivos} descritos en este capítulo.
+
+\subsection{Requisitos Funcionales}
+
+\begin{itemize}
+    \item \textbf{RF-1 Predicción de tiempo quirúrgico:} El sistema debe ser capaz de predecir la duración de una intervención quirúrgica.
+    \begin{itemize}
+        \item \textbf{RF-1.1 Introducir datos}: La aplicación debe ser capaz de recibir un listado de datos de pacientes.
+        \begin{itemize}
+            \item \textbf{RF-1.1.1 Validar datos}: El sistema debe proporcionar \textit{feedback} de validez de los datos introducidos al usuario.
+\end{itemize}
+\item \textbf{RF-1.2 Predecir duración:} Si los datos son válidos, el sistema debe predecir la duración del listado de intervenciones entregado.
+\item \textbf{RF-1.3 Devolver resultados:} El sistema debe permitir al usuario obtener el listado introducido junto a la duración.
+\item \textbf{RF-1.4 Exportar resultados:} El sistema debe permitir al usuario obtener el listado en un formato \textit{estandarizable}.
+    \end{itemize}
+    \item \textbf{RF-2 Planificación de intervenciones quirúrgicas:} El sistema debe ser capaz de planificar de forma \textit{óptima o subóptima} un conjunto de intervenciones de entre un \textit{set de posibles}, en una colección de quirófanos y en un número de días determinados.
+    \begin{itemize}
+        \item \textbf{RF-2.1 Recoger datos:} La aplicación debe ser capaz de recoger un listado de datos relativos a pacientes.
+        \begin{itemize}
+            \item \textbf{RF-2.1.1 Validar datos:} El sistema proporcionará \textit{feedback} relativo a los datos recogidos.
+            \item \textbf{RF-2.1.2 Clasificar datos:} El sistema diferenciará las categorías: "con" y "sin" duración.
+        \end{itemize}
+        \item \textbf{RF-2.2 Obtener duración:} El sistema deberá obtener o predecir (\textit{RF1}) la duración de cada una de los casos propuestos.
+        \item \textbf{RF-2.3 Obtener días y quirófanos:} El sistema debe permitir al usuario introducir un número de salas quirúrgicas y de días para establecer el horizonte temporal de la planificación.
+        \item \textbf{RF-2.4 Devolver resultados:} El sistema ofrecerá una planificación propuesta al usuario.
+        \item \textbf{RF-2.5 Exportar resultados:} El sistema debe permitir la exportación de resultados en un formato \textit{estándar.} 
+    \end{itemize}
+    \item \textbf{RF-3 Gestión de Usuarios:} La aplicación debe ser capaz de gestionar usuarios.
+    \begin{itemize}
+        \item \textbf{RF-3.1 Establecer roles de usuario:} El sistema debe diferenciar entre dos roles: administrador y usuario.
+        \begin{itemize}
+            \item \textbf{RF-3.1.1 Gestionar permisos de usuario:} El sistema debe \textit{limitar} el acceso a las funcionalidades en función del \textit{rol} de usuario.
+        \end{itemize}
+        \item \textbf{RF-3.2 Gestionar cuentas de usuario:} El sistema debe permitir que el administrador realice funciones de \textit{creación, modificación y eliminación} de cuentas de usuario.
+    \end{itemize}
+    \item \textbf{RF-4 Gestionar planificaciones:} El sistema debe permitir que los usuarios realicen labores de gestión de sus planificaciones quirúrgicas.
+    \begin{itemize}
+        \item \textbf{RF-4.1 Listar planificaciones:} El usuario visualiza un listado con todas las planificaciones que ha realizado.
+        \item \textbf{RF-4.2 Visualizar planificaciones:} El usuario accede a una vista de la planificación realizada, tras su selección.
+        \item \textbf{RF-4.3 Eliminar planificaciones:} El usuario puede eliminar del listado las planificaciones que desee del sistema de almacenamiento persistente.
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{Requisitos No Funcionales}
+
+En este apartado, nos centraremos en aquellos apartados que reflejan las características \textit{no funcionales}, tales como la \textit{usabilidad, flexibilidad o rendimiento} que debemos esperar de este proyecto.\cite{Chung2009OnEngineering}
+
+\begin{itemize}
+    \item \textbf{RNF-1 Rendimiento:} Nuestro sistema debe poseer unos tiempos de cálculo y carga aceptables para un navegador web y un servidor sin capacidad de cómputo extra contratada.
+    \item \textbf{RNF-2 Escalabilidad:} Nuestra aplicación debe permitir la adición de nuevas funciones de forma fácil y transparente para el desarrollador.
+    \item \textbf{RNF-3 Seguridad:} Los datos privados y sensibles, como \textit{contraseñas} deben ser gestionadas de la forma adecuada.
+    \item \textbf{RNF-4 Disponibilidad:} Nuestro sistema debe estar disponible para su uso para todo navegador compatible con HTTP 5 y conexión a \textit{internet}.
+    \item \textbf{RNF-5 Usabilidad:} El interfaz será \textit{user friendly}, intuitivo para los usuarios y dotado de un modelo de aprendizaje sencillo acerca de las funcionalidades ofrecidas.
+    \item \textbf{RNF-6 Mantenibilidad:} El patrón de desarrollo debe permitir su fácil mantenimiento posterior.
+\end{itemize}
+
+
+\section{Especificación de requisitos}
 
 % Caso de Uso 1 -> Consultar Experimentos.
 \begin{table}[p]
@@ -30,11 +120,4 @@ Una muestra de cómo podría ser una tabla de casos de uso:
 	\end{tabularx}
 	\caption{CU-1 Nombre del caso de uso.}
 \end{table}
-
-\section{Objetivos generales}
-
-\section{Catalogo de requisitos}
-
-\section{Especificación de requisitos}
-
 
