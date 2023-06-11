@@ -6,9 +6,11 @@ from src.models.ModelUser import ModelUser
 from src.models.entities.user import User
 from src import db, login_manager
 
+
 @login_manager.user_loader
 def load_user(id):
     return ModelUser.get_by_id(db, id)
+
 
 # Método para cerrar sesión
 @pub.route("/logout")
@@ -16,6 +18,7 @@ def load_user(id):
 def logout():
     logout_user()
     return redirect(url_for("auth.login"))
+
 
 # Método de login de usuario
 @pub.route("/login", methods=["GET", "POST"])
@@ -27,6 +30,10 @@ def login():
         if logged_user != None:
             if logged_user.password:
                 login_user(logged_user)
+                print(logged_user.admin)
+                if logged_user.admin:
+                    print("admin")
+                    return redirect(url_for("admin.home_admin"))
                 return redirect(url_for("public.home"))
             else:
                 flash("Contraseña incorrecta")

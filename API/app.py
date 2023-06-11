@@ -2,7 +2,6 @@
 from flask import Flask
 from flask_restful import Api
 import os
-import sys
 from predictions.Predict import Predict
 from scheduling.Schedule import Schedule
 

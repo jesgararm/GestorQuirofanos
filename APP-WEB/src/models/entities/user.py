@@ -4,11 +4,12 @@ from flask_login import UserMixin
 
 # Entidad de Usuario para Login.
 class User(UserMixin):
-    def __init__(self, id, email, password, name=""):
+    def __init__(self, id, email, password, name="", admin=False):
         self.id = id
         self.email = email
         self.password = password
         self.name = name
+        self.admin = admin
 
     def __str__(self):
         return f"User: {self.name} {self.email} {self.password}"

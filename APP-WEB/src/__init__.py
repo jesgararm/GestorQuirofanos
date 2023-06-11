@@ -24,4 +24,6 @@ def create_app():
     app.register_blueprint(public_blueprint)
     from .auth import auth_blueP as auth_blueprint
     app.register_blueprint(auth_blueprint)
+    from .admin import adminBP as admin_blueprint
+    app.register_blueprint(admin_blueprint)
     return app
