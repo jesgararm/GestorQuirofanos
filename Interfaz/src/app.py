@@ -13,10 +13,12 @@ from models.entities.user import User
 app = Flask(__name__)
 db = MySQL(app)
 
+
 # Método de inicio de la aplicación
 @app.route("/")
 def index():
     return redirect(url_for("login"))
+
 
 # Método de login de usuario
 @app.route("/login", methods=["GET", "POST"])
@@ -30,6 +32,7 @@ def login():
                 return redirect(url_for("home"))
             else:
                 flash("Contraseña incorrecta")
+                return render_template("auth/login.html")
         else:
             # Si no existe, se muestra un mensaje de error
             flash("Usuario no encontrado")
@@ -37,12 +40,14 @@ def login():
     else:
         return render_template("auth/login.html")
 
+
 # Método para el Home de un usuario
 @app.route("/home")
 def home():
     return render_template("home.html")
+
+
 if __name__ == "__main__":
     # Se configura la aplicación
-    app.config.from_object(config['development'])
-    print(db.app.config)
+    app.config.from_object(config["development"])
     app.run()
