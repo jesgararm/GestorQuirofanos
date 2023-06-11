@@ -20,6 +20,7 @@
     {% endwith %}
     <!-- Formulario de entrada para el login -->
     <h1 class="h3 mb-3 font-weight-normal">Inicia Sesion</h1>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <label for="inputEmail" class="sr-only">Correo Electronico</label>
     <input type="email" class="form-control" name="inputEmail" placeholder="Email address" required autofocus>
     <label for="inputPassword" class="sr-only">Contraseña</label>
