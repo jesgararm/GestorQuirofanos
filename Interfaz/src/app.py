@@ -1,5 +1,5 @@
 # Imports necesarios
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 from config import config
 
@@ -7,7 +7,8 @@ from config import config
 from models.ModelUser import ModelUser
 
 # Entities
-from models.entities.User import User
+from models.entities.user import User
+
 # Se crea la aplicación
 app = Flask(__name__)
 db = MySQL(app)
@@ -19,7 +20,12 @@ def index():
 def login():
     if request.method == 'POST':
         user = User(request.form['inputEmail'], request.form['inputPassword'])
-        return render_template('auth/login.html')
+        logged_user = ModelUser.login(db, user)
+        if logged_user != None:
+            pass
+        else:
+            flash('Usuario no encontrado')
+            return render_template('auth/login.html')
     else:
         return render_template('auth/login.html')
 

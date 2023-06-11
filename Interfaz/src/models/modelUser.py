@@ -1,4 +1,4 @@
-from .entities.user import User
+from models.entities.user import User
 class ModelUser():
     @classmethod
     def login(self, db, user):
