@@ -43,5 +43,6 @@ def home():
     return render_template("home.html")
 if __name__ == "__main__":
     # Se configura la aplicación
-    app.config.from_object(config["development"])
+    app.config.from_object(config['development'])
+    print(db.app.config)
     app.run()
