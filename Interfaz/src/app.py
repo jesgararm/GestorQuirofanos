@@ -2,6 +2,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 from config import config
+from flask_login import (
+    LoginManager,
+    login_user,
+    logout_user,
+    login_required,
+    current_user,
+)
 
 # Models
 from models.ModelUser import ModelUser
@@ -12,6 +19,13 @@ from models.entities.user import User
 # Se crea la aplicación
 app = Flask(__name__)
 db = MySQL(app)
+login_manager = LoginManager(app)
+
+
+# Manejo de sesiones
+@login_manager.user_loader
+def load_user(id):
+    return ModelUser.get_user(db, id)
 
 
 # Método de inicio de la aplicación
@@ -25,10 +39,11 @@ def index():
 def login():
     if request.method == "POST":
         # Comprobamos si el usuario existe
-        user = User(request.form["inputEmail"], request.form["inputPassword"])
+        user = User(0, request.form["inputEmail"], request.form["inputPassword"])
         logged_user = ModelUser.login(db, user)
         if logged_user != None:
             if logged_user.password:
+                login_user(logged_user)
                 return redirect(url_for("home"))
             else:
                 flash("Contraseña incorrecta")
