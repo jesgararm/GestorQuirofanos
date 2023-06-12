@@ -1,6 +1,4 @@
 from .entities.user import User
-
-
 class ModelUser:
     @classmethod
     def login(self, db, user):
@@ -38,3 +36,12 @@ class ModelUser:
                 return None
         except Exception as e:
             raise e
+    @classmethod
+    def add_user(self, db, user):
+        sql = "INSERT INTO user(email,password,name,admin) VALUES('{}','{}','{}','{}')".format(user.email, User.generar_password(user.password), user.name, user.admin)
+        try:
+            cursor = db.connection.cursor()
+            cursor.execute(sql)
+        except Exception as e:
+            raise e
+        

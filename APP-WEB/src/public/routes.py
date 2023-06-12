@@ -1,7 +1,7 @@
 # Imports necesarios
 from src.public import pub
 from flask import render_template, redirect, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 # Método de inicio de la aplicación
 @pub.route("/")
@@ -12,6 +12,8 @@ def index():
 @pub.route("/home")
 @login_required
 def home():
+    if current_user.admin:
+        return redirect(url_for("admin.home_admin"))
     return render_template("home.html")
 
 # Definimos una vista para manejar los errores 401

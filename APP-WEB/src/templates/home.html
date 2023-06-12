@@ -1,8 +1,50 @@
 {% extends './base.html' %}
-{% block title %}Home{% endblock %}
+{% block title %}Login de Usuario{% endblock %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sticky-footer-navbar.css') }}">
+{% endblock %}
 {% block body %}
-<h1>Bienvenido, {{current_user.name}}</h1>
-<div class="nav"></div>
-<!--Logout-->
-<a class = "btn btn-secondary" href="{{url_for('auth.logout')}}">Logout</a>
+<body class="d-flex flex-column h-100">
+    
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{{url_for('admin.home_admin')}}">Gestor Quirófanos</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              {% block admin %}
+              {% endblock %}
+              <li class="nav-item">
+                <a class="nav-link active" href="#" tabindex="-1">Predicciones</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#" tabindex="-1">Planificaciones</a>
+              </li>
+            </ul>
+            <ul class="nav nav-pills">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{current_user.name}}</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Perfil</a></li>
+                      <li><a class="dropdown-item" href="{{url_for('auth.logout')}}">Cerrar Sesión</a></li>
+                    </ul>
+                  </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    {% block content %}
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+      <div class="container">
+        <h1 class="mt-5">Panel de Control: Usuario</h1>
+        <p class="lead"><p>Bienvenido {{current_user.name}}</p>
+      </div>
+    </main>
+    {% endblock %}
 {% endblock %}
