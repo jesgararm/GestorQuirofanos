@@ -4,11 +4,22 @@ from flask_login import UserMixin
 
 # Entidad de Usuario para Login.
 class User(UserMixin):
-    def __init__(self, id, email, password, name="", admin=False):
+    def __init__(
+        self,
+        id,
+        email,
+        password,
+        created_at=None,
+        updated_at=None,
+        name="",
+        admin=False,
+    ):
         self.id = id
         self.email = email
         self.password = password
         self.name = name
+        self.created_at = created_at
+        self.updated_at = updated_at
         self.admin = admin
 
     def __str__(self):

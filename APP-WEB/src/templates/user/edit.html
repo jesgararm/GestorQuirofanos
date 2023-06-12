@@ -1,0 +1,25 @@
+{% extends './user/profile.html' %}
+{% block titulo %}
+Editar Perfil
+{% endblock %}
+{% block extra_content %}
+{% with mensajes = get_flashed_messages() %}
+        {% if mensajes %}
+        <br>
+            {% for mensaje in mensajes %}
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                  <strong>{{ mensaje }}</strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+<form method="POST">
+    {{form.hidden_tag()}}
+    {{form.email.label}}<br>
+    {{form.email}}<br>
+    {{form.name.label}}<br>
+    {{form.name}}<br>
+    {{form.submit()}}
+  </form>
+{% endblock %}

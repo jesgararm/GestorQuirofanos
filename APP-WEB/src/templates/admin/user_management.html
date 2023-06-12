@@ -4,29 +4,57 @@
 <main class="flex-shrink-0">
   <div class="container">
     <h1 class="mt-5">Gestión de Usuarios</h1>
-  </div>
-  {% with mensajes = get_flashed_messages() %}
+    <br>
+    <a class="btn btn-outline-success btn-lg" href="{{url_for('admin.add_user')}}" >Añadir Usuario</a>
+    <br>
+    <!-- Recorremos los usuarios de users -->
+        <!-- Creamos una tabla -->
+        {% with mensajes = get_flashed_messages() %}
         {% if mensajes %}
         <br>
-            {% for mensaje in mensajes %}
-                <div class="alert alert-primary alert-dismissible" role="alert">
-                  <strong>{{ mensaje }}</strong>
-                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endfor %}
+        {% for mensaje in mensajes %}
+        <div class="alert alert-primary alert-dismissible" role="alert">
+            <strong>{{ mensaje }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
         {% endif %}
-    {% endwith %}
-  <form method="POST">
-    {{form.hidden_tag()}}
-    {{form.email.label}}
-    {{form.email}}
-    {{form.password.label}}
-    {{form.password}}
-    {{form.name.label}}
-    {{form.name}}
-    {{form.admin.label}}
-    {{form.admin}}
-    {{form.submit()}}
-  </form>
-</main>
+        {% endwith %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Email</th>
+              <th scope="col">Creación</th>
+              <th scope="col">Última Actualización</th>
+              <th scope="col">Admin</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+    {% for user in users %}
+        <tr>
+          <!-- Mostramos los datos de cada usuario -->
+          <th scope="row"></th>
+          <td>{{user.name}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.created_at}}</td>
+          <td>{{user.updated_at}}</td>
+          {% if user.admin %}
+              <td>Sí</td>
+          {% else %}
+              <td>No</td>
+          {% endif %}
+          <td>
+            <!-- Creamos un botón para editar el usuario -->
+            <a href="{{url_for('admin.edit_user', id=user.id)}}" class="btn btn-primary">Editar</a>
+            <!-- Creamos un botón para eliminar el usuario -->
+            <a href="{{url_for('admin.delete_user', id=user.id)}}" class="btn btn-danger">Eliminar</a>
+          </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  </div>
 {% endblock %}
