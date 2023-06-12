@@ -41,8 +41,11 @@ def user_management():
         print(admin)
         user = User(0,email, password, name, admin)
         # Actualizamos el usuario
-        ModelUser.add_user(db, user)
-        flash("Usuario creado correctamente")
+        add = ModelUser.add_user(db, user)
+        if add:
+            flash("Usuario creado correctamente")
+        else:
+            flash("El usuario ya existe")
         # Redireccionamos a la página de gestión de usuarios
         return redirect(url_for("admin.user_management"))
     return render_template("admin/user_management.html", form = form)

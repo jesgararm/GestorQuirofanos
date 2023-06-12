@@ -40,10 +40,19 @@ class ModelUser:
     def add_user(self, db, user):
         sql = "INSERT INTO user(email,password,name,admin) VALUES('{}','{}','{}','{}')".format(user.email, User.generar_password(user.password), user.name, user.admin)
         try:
+            # Comprobamos si el usuario existe
             cursor = db.connection.cursor()
-            cursor.execute(sql)
-            db.connection.commit()
-            cursor.close()
+            cursor.execute("SELECT * FROM user WHERE email = '{}'".format(user.email))
+            row = cursor.fetchone()
+            if row == None:
+                cursor.execute(sql)
+                db.connection.commit()
+                cursor.close()
+                return True
+            else:
+                db.connection.rollback()
+                cursor.close()
+                return False      
         except Exception as e:
             raise e
         
