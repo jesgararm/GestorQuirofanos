@@ -42,6 +42,8 @@ class ModelUser:
         try:
             cursor = db.connection.cursor()
             cursor.execute(sql)
+            db.connection.commit()
+            cursor.close()
         except Exception as e:
             raise e
         

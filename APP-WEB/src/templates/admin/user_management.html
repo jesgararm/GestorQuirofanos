@@ -5,5 +5,28 @@
   <div class="container">
     <h1 class="mt-5">Gestión de Usuarios</h1>
   </div>
+  {% with mensajes = get_flashed_messages() %}
+        {% if mensajes %}
+        <br>
+            {% for mensaje in mensajes %}
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                  <strong>{{ mensaje }}</strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+  <form method="POST">
+    {{form.hidden_tag()}}
+    {{form.email.label}}
+    {{form.email}}
+    {{form.password.label}}
+    {{form.password}}
+    {{form.name.label}}
+    {{form.name}}
+    {{form.admin.label}}
+    {{form.admin}}
+    {{form.submit()}}
+  </form>
 </main>
 {% endblock %}
