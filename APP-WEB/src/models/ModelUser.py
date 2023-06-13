@@ -102,17 +102,16 @@ class ModelUser:
             rows = cursor.fetchall()
             users = []
             for row in rows:
-                users.append(
-                    User(
-                        id=row[0],
-                        email=row[1],
-                        password=None,
-                        name=row[2],
-                        created_at=row[3],
-                        updated_at=row[4],
-                        admin=row[5],
-                    )
+                user = User(
+                    id=row[0],
+                    email=row[1],
+                    password=None,
+                    name=row[2],
+                    created_at=row[3],
+                    updated_at=row[4],
+                    admin=row[5]
                 )
+                users.append(user)
             return users
         except Exception as e:
             raise e

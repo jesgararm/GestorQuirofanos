@@ -41,9 +41,9 @@ def add_user():
         password = request.form["password"]
         name = request.form["name"]
         # Comprobamos si se ha marcado la casilla de admin
-        admin = False
+        admin = 0
         if "admin" in request.form:
-            admin = True
+            admin = 1
         # Creamos el usuario
         print(admin)
         user = User(0, email=email, password=password, name=name, admin=admin)
@@ -89,7 +89,7 @@ def edit_user(id):
         if email and email != "":
             user.email = email
         if admin != False:
-            user.admin = admin
+            user.admin = 1
         ModelUser.update_user(db, user)
         flash("Usuario actualizado correctamente")
     else:
