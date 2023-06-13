@@ -24,5 +24,5 @@ api.add_resource(Schedule, '/schedule')
 if __name__ == '__main__':
     # Run the app
     print("Running Flask API")
-    app.run(debug=True)
+    app.run(host="0.0.0.0",port=4000,debug=True)
 

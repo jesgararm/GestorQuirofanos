@@ -4,7 +4,6 @@ import numpy as np
 from scheduling.Optimizacion.Heuristicas.Utils import ActoQuirurgico, Heuristicas
 import random
 import math
-import matplotlib.pyplot as plt
 from .utilsGenetico import cromosomaAleatorio, evaluar, cruce, mutacion, fenotipoACromosoma
 
 class Genetico():
@@ -176,8 +175,8 @@ class Genetico():
             if random.random() < probabilidad_mutacion:
                 self.toolbox.mutate(hijo)
                 del hijo.fitness.values
-
-    def representaAlgoritmoGenetico(self, logbook):
+    '''
+        def representaAlgoritmoGenetico(self, logbook):
         # Representamos el logbook
         gen = logbook.select("gen")
         fit_mins = logbook.select("min")
@@ -198,3 +197,4 @@ class Genetico():
         labs = [l.get_label() for l in lns]
         ax1.legend(lns, labs, loc="center right")
         plt.show()
+    '''

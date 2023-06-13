@@ -4,7 +4,7 @@ import joblib
 def makePred(df):
     df, df_pred = extractDF(df)
     # Cargamos el modelo
-    model = joblib.load('predictions/regressionTree.pkl')
+    model = joblib.load('regressionTree.pkl')
     # Comprobamos que el dataframe tiene las columnas correctas
     parametros = model.feature_importances_
     if len(df_pred.columns) != len(parametros):
