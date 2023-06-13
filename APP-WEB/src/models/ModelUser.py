@@ -73,8 +73,8 @@ class ModelUser:
 
     @classmethod
     def update_user(self, db, user):
-        sql = "UPDATE user SET email='{}',name='{}' WHERE id='{}'".format(
-            user.email, user.name, user.id
+        sql = "UPDATE user SET email='{}',name='{}', admin='{}' WHERE id='{}'".format(
+            user.email, user.name, user.admin, user.id
         )
         try:
             # Comprobamos si el usuario existe

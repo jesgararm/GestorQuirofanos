@@ -33,26 +33,60 @@
             </tr>
           </thead>
           <tbody>
-    {% for user in users %}
+    {% for usuario in users %}
         <tr>
           <!-- Mostramos los datos de cada usuario -->
           <th scope="row"></th>
-          <td>{{user.name}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.created_at}}</td>
-          <td>{{user.updated_at}}</td>
-          {% if user.admin %}
+          <td>{{usuario.name}}</td>
+          <td>{{usuario.email}}</td>
+          <td>{{usuario.created_at}}</td>
+          <td>{{usuario.updated_at}}</td>
+          {% if usuario.admin %}
               <td>Sí</td>
           {% else %}
               <td>No</td>
           {% endif %}
           <td>
             <!-- Creamos un botón para editar el usuario -->
-            <a href="{{url_for('admin.edit_user', id=user.id)}}" class="btn btn-primary">Editar</a>
+            <button class="btn btn-primary" id="btn-edit{{usuario.id}}" data-bs-toggle="modal" data-bs-target="#modal{{usuario.id}}">Editar </button>
             <!-- Creamos un botón para eliminar el usuario -->
-            <a href="{{url_for('admin.delete_user', id=user.id)}}" class="btn btn-danger">Eliminar</a>
+            <a href="{{url_for('admin.delete_user', id=usuario.id)}}" class="btn btn-danger">Eliminar</a>
           </td>
         </tr>
+
+        <!-- Creamos un modal para editar el usuario -->
+        <div class="modal fade" id="modal{{usuario.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+            <form action="{{url_for('admin.edit_user', id=usuario.id)}}" method="POST">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="name" name="name" value="{{usuario.name}}">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" value="{{usuario.email}}">
+                </div>
+                <div class="mb-3">
+                  <label for="admin" class="form-label">Administrador</label>
+                  <input type="checkbox" class="custom-control-input" id="admin" name = "admin">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <!-- Añadimos el CSRF token -->
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                
+              </div>
+            </form>
+            </div>
+          </div>
     {% endfor %}
   </tbody>
 </table>

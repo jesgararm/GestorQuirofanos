@@ -6,7 +6,7 @@ from src import db
 from src.models.ModelUser import ModelUser
 from src.models.entities.user import User
 from src.forms.createUser import CreateUser
-
+from src.forms.updateUser import UpdateUser
 
 # Método para el Home de un usuario
 @pub.route("/home_admin")
@@ -57,6 +57,7 @@ def add_user():
         return redirect(url_for("admin.add_user"))
     return render_template("admin/add_user.html", form=form)
 
+# Para eliminar a un usuario
 @pub.route("/delete_user/<int:id>")
 @login_required
 def delete_user(id):
@@ -69,7 +70,29 @@ def delete_user(id):
         flash("Error al borrar el usuario")
     return redirect(url_for("admin.user_management"))
 
-@pub.route("/edit_user/<int:id>")
+# Para modificar a un usuario.
+@pub.route("/edit_user/<int:id>", methods=["POST"])
 @login_required
 def edit_user(id):
-    pass
+    admin = current_user.admin
+    if not admin:
+        return redirect(url_for("public.home"))
+
+    name = request.form["name"]
+    email = request.form["email"]
+    admin = request.form.get("admin") != None
+
+    user = ModelUser.get_by_id(db, id)
+    if user:
+        if name and name != "":
+            user.name = name
+        if email and email != "":
+            user.email = email
+        if admin != False:
+            user.admin = admin
+        ModelUser.update_user(db, user)
+        flash("Usuario actualizado correctamente")
+    else:
+        flash("Error al actualizar el usuario")
+    return redirect(url_for("admin.user_management"))
+        
