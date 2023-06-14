@@ -29,3 +29,23 @@ class Schedule(Resource):
         # Ejecutamos el algoritmo
         poblacion, logbook,hof = genetico.realiza_evolucion(heur=True)
         return jsonify(hof[0])
+    
+    def cromosomaAFenotipo(self, cromosoma, actos):
+        # Obtenemos los actos quirúrgicos, con su id
+        # Recorremos el cromosoma
+        devolver = {}
+        contador_dias = 1
+        dia = "Dia " + str(contador_dias)
+        devolver[dia] = {}
+        contador_quirofanos = 1
+        item = cromosoma.pop(0)
+        while cromosoma:
+            if item == "A":
+                contador_quirofanos += 1
+                continue
+            if item == "B":
+                contador_dias += 1
+                dia = "Dia " + str(contador_dias)
+                devolver[dia] = {}
+                continue
+            paciente = actos[item].getIdPaciente()

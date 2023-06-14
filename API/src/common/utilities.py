@@ -1,10 +1,14 @@
 # Funciones comunes a ambas API
 import pandas as pd
 import joblib
+import os
 def makePred(df):
     df, df_pred = extractDF(df)
     # Cargamos el modelo
-    model = joblib.load('regressionTree.pkl')
+    ruta = os.path.dirname(os.path.abspath(__file__))
+    # Añadimos el nombre del modelo
+    ruta = os.path.join(ruta, 'regressionTree.pkl')
+    model = joblib.load(ruta)
     # Comprobamos que el dataframe tiene las columnas correctas
     parametros = model.feature_importances_
     if len(df_pred.columns) != len(parametros):
