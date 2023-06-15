@@ -1,6 +1,7 @@
 # Imports
 from flask import Flask
 from flask_restful import Api
+from flask_cors import CORS
 import os
 from predictions.Predict import Predict
 from scheduling.Schedule import Schedule
@@ -18,6 +19,7 @@ for filename in os.listdir(UPLOAD_FOLDER):
 # Create Flask app
 app = Flask(__name__)
 api = Api(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 # Añadimos Predict como recurso
 api.add_resource(Predict, '/predict')
 api.add_resource(Schedule, '/schedule')
