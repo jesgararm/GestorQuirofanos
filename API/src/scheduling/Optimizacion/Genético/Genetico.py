@@ -175,6 +175,9 @@ class Genetico():
             if random.random() < probabilidad_mutacion:
                 self.toolbox.mutate(hijo)
                 del hijo.fitness.values
+    
+    def getActosPendientes(self) -> list:
+        return self.actos_pendientes
     '''
         def representaAlgoritmoGenetico(self, logbook):
         # Representamos el logbook
