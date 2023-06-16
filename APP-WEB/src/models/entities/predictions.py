@@ -1,5 +1,5 @@
 # Clase que representa la entidad Predicciones de la base de datos.
-class Predicciones():
+class Prediccion():
     
     def __init__(self, id, id_user, date, predictions):
         self.id = id
@@ -8,4 +8,4 @@ class Predicciones():
         self.predicciones = predictions
     
     def __str__(self):
-        return f"Predicciones: {self.id} {self.id_user} {self.fecha} {self.predicciones}"
+        return f"Prediccion: {self.id} {self.id_user} {self.fecha} {self.predicciones}"

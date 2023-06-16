@@ -55,7 +55,7 @@ def predictions():
     # Obtenemos las predicciones
     flag, predictions = ModelPredictions.getPredictions(db, user)
     if flag:
-        return render_template("user/predictions.html", pred = predictions)
+        return render_template("user/predictions.html", pred = predictions, flag=True)
     flash("No hay predicciones para este usuario")
     return render_template("user/predictions.html")
 
@@ -79,9 +79,29 @@ def upload():
             flash("Predicciones realizadas correctamente")
             # Eliminamos el archivo para ahorrar espacio
             os.remove(ruta)
-            df = pd.read_json(json.dumps(predicciones.json()))
-            return render_template("user/predictions.html", data = df, pred = True)
+            ModelPredictions.addPrediction(current_user, json.dumps(predicciones.json()),db)
     return redirect(url_for("public.predictions"))
+
+@pub.route("/prediction/<id>")
+@login_required
+def prediction(id):
+    flag, prediction = ModelPredictions.get_prediction_by_id(db, id)
+    if flag:
+        df = pd.read_json(prediction.predicciones)
+        return render_template("user/showPred.html", data = df)
+    flash("No existe la predicción")
+    return render_template("user/predictions.html")
+
+@pub.route("/deletePred/<id>")
+@login_required
+def deletePred(id):
+    flag, prediction = ModelPredictions.get_prediction_by_id(db, id)
+    if flag:
+        ModelPredictions.deletePrediction(prediction, db)
+        flash("Predicción eliminada correctamente")
+        return redirect(url_for("public.predictions"))
+    flash("No existe la predicción")
+    return render_template("user/predictions.html")
 
 # Definimos una vista para manejar los errores 401
 @pub.errorhandler(401)

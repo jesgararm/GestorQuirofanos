@@ -25,39 +25,65 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-      <!-- Creamos un formulario para subir un fichero -->
-      <form method="POST" action="{{url_for('public.upload')}}" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="file">Fichero de datos</label>
-            <input type="file" class="form-control-file" id="file" name="file" required>
-            <!-- Incluimos el csrf token -->
+    <br>
+     <!-- Creamos un botón para añadir una predicción -->
+     <button class="btn btn-primary" id="btn-addPred{{current_user.id}}" data-bs-toggle="modal" data-bs-target="#modal{{current_user.id}}">Añadir Predicción </button>
+     <!-- Creamos un modal para editar el usuario -->
+     <div class="modal fade" id="modal{{current_user.id}}" tabindex="-1" aria-labelledby="subirPrediccion" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form method="POST" action="{{url_for('public.upload')}}" enctype="multipart/form-data">
+            <div class="modal-header">
+              <h5 class="modal-title" id="subirPrediccion">Añadir Predicción</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="file">Fichero de datos</label>
+              <input type="file" class="form-control-file" id="file" name="file" required>
+          </div>
+          </div>
+          <div class="modal-footer">
+            <!-- Añadimos el CSRF token -->
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Predecir</button>
+            
+          </div>
+        </form>
         </div>
-        <button type="submit" class="btn btn-primary">Predecir</button>
-      </form>
-      {% if pred %}
-    <!-- Creamos una tabla -->
-    <table id="jds-example" class="table">
+      </div>
+      </div>
+    </button>     
+    {% block extra_content %}
+    {% if flag %}
+    <br>
+    <h2>Tabla de predicciones</h2>
+    <br>
+    <table class="table table-striped">
       <thead>
-          <tr>
-              {% for col in data.columns %}
-              <th scope="col"> {{ col }}</th>
-                  {% endfor %}
-          </tr>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Creación</th>
+          <th scope="col">Acciones</th>
+        </tr>
       </thead>
       <tbody>
-              {% for key, value in data.iterrows() %}
-          <tr>
-                  {% for k in value %}
-              <td scope="row">{{ k }}</td>
-                  {% endfor %}
-          </tr>
-              {% endfor %}
-      </tbody>
-  </table>
+    {% for prediction in pred %}
+    <tr>
+      <!-- Mostramos los datos de cada usuario -->
+      <th scope="row">{{prediction.id}}</th>
+      <td>{{prediction.fecha}}</td>
+      <td>
+        <!-- Creamos un botón para ver la predicción -->
+        <a href="{{url_for('public.prediction', id=prediction.id)}}" class="btn btn-outline-success">Ver</a>
+        <a href="{{url_for('public.deletePred', id=prediction.id)}}" class="btn btn-outline-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% endfor %}
     {% endif %}
+    {% endblock %}
     </div>
     <!-- Comprobamos si existe el fichero de predicciones -->
-    
   </main>
 {% endblock %}
