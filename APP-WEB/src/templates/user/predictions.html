@@ -1,0 +1,63 @@
+{% if current_user.admin %}
+{% extends './admin/home_admin.html' %}
+{% else %}
+{% extends './home.html' %}
+{% endif %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+   <style>
+      table, th, td { border: 1px solid black; border-collapse: collapse; }
+      td, th {padding: 10px;}
+   </style>
+{% block title %}Predicciones{% endblock %}
+{% block content %}
+<main class="flex-shrink-0">
+    <div class="container">
+      <h1 class="mt-5">Panel de Predicciones</h1>
+      <p class="lead"><p>Bienvenido {{current_user.name}}</p>
+      {% with mensajes = get_flashed_messages() %}
+        {% if mensajes %}
+        <br>
+            {% for mensaje in mensajes %}
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                  <strong>{{ mensaje }}</strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+      <!-- Creamos un formulario para subir un fichero -->
+      <form method="POST" action="{{url_for('public.upload')}}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">Fichero de datos</label>
+            <input type="file" class="form-control-file" id="file" name="file" required>
+            <!-- Incluimos el csrf token -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Predecir</button>
+      </form>
+      {% if pred %}
+    <!-- Creamos una tabla -->
+    <table id="jds-example" class="table">
+      <thead>
+          <tr>
+              {% for col in data.columns %}
+              <th scope="col"> {{ col }}</th>
+                  {% endfor %}
+          </tr>
+      </thead>
+      <tbody>
+              {% for key, value in data.iterrows() %}
+          <tr>
+                  {% for k in value %}
+              <td scope="row">{{ k }}</td>
+                  {% endfor %}
+          </tr>
+              {% endfor %}
+      </tbody>
+  </table>
+    {% endif %}
+    </div>
+    <!-- Comprobamos si existe el fichero de predicciones -->
+    
+  </main>
+{% endblock %}

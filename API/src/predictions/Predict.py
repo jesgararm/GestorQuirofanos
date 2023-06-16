@@ -18,5 +18,9 @@ class Predict(Resource):
         valido, df = utils.makePred(df)
         if not valido:
             return {"message": "Wrong columns"}, 400
+        # Seleccionamos NHC, PONDERACIÓN, ESPECIALIDAD Y DURACIÓN
+        df = df[['NHC', 'PONDERACIÓN', 'ESPECIALIDAD', 'DURACIÓN']]
+        # Renombramos NHC a ID
+        df = df.rename(columns={'NHC': 'ID'})
         return jsonify(df.to_dict(orient='records'))
 
