@@ -9,6 +9,7 @@ from flask_login import login_required, current_user
 from src.forms.updateUser import UpdateUser
 from src.models.ModelUser import ModelUser
 from src.models.ModelPredictions import ModelPredictions
+from src.models.ModelScheduling import ModelScheduling
 from src import db
 # Método de inicio de la aplicación
 @pub.route("/")
@@ -58,6 +59,50 @@ def predictions():
         return render_template("user/predictions.html", pred = predictions, flag=True)
     flash("No hay predicciones para este usuario")
     return render_template("user/predictions.html")
+@pub.route("/scheduling")
+@login_required
+def scheduling():
+    user = current_user
+    # Obtenemos las planificaciones
+    flag, schedulings = ModelScheduling.getSchedulings(db, user)
+    if flag:
+        return render_template("user/scheduling.html", sched = schedulings, flag=True)
+    flash("No hay planificaciones para este usuario")
+    return render_template("user/scheduling.html")
+
+@pub.route("/uploadScheduling", methods = ["POST"])
+@login_required
+def uploadScheduling():
+    if request.method == "POST":
+        if request.files:
+            file = request.files["file"]
+            if file.filename == "":
+                flash("No se seleccionó ningún archivo")
+                return redirect(url_for("public.scheduling"))
+            if not file.filename.endswith(".csv"):
+                flash("El archivo debe ser de tipo .csv")
+                return redirect(url_for("public.scheduling"))
+            file.save("src/static/uploads/" + file.filename)
+            ruta = "src/static/uploads/" + file.filename
+            # Llamamos a la API
+            url = "http://localhost:7000/schedule"
+            planificacion = requests.get(url, files={"file": open(ruta, "rb")})
+            flash("Planificación realizada correctamente")
+            # Eliminamos el archivo para ahorrar espacio
+            os.remove(ruta)
+            ModelScheduling.addSchedule(current_user, json.dumps(planificacion.json()),db)
+    return redirect(url_for("public.scheduling"))
+
+@pub.route("/deleteScheduling/<id>")
+@login_required
+def deleteScheduling(id):
+    flag, schedule = ModelScheduling.get_schedule_by_id(db, id)
+    if flag:
+        ModelScheduling.deleteSchedule(schedule, db)
+        flash("Planificación eliminada correctamente")
+        return redirect(url_for("public.scheduling"))
+    flash("No existe la planificación")
+    return render_template("user/scheduling.html")
 
 @pub.route("/upload", methods = ["POST"])
 @login_required 

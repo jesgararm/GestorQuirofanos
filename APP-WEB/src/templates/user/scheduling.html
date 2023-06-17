@@ -1,0 +1,60 @@
+{% extends './user/predictions.html' %}
+{% block index %}<h1 class="mt-5">Panel de Planificaciones</h1>{% endblock %}
+{% block modal %}
+<!-- Creamos un botón para añadir una planificación -->
+<button class="btn btn-primary" id="btn-addPlan{{current_user.id}}" data-bs-toggle="modal" data-bs-target="#modal{{current_user.id}}">Añadir Planificación </button>
+<!-- Creamos un modal -->
+<div class="modal fade" id="modal{{current_user.id}}" tabindex="-1" aria-labelledby="subirPlanificacion" aria-hidden="true">
+ <div class="modal-dialog">
+   <div class="modal-content">
+     <form method="POST" action="{{url_for('public.uploadScheduling')}}" enctype="multipart/form-data">
+       <div class="modal-header">
+         <h5 class="modal-title" id="subirPlanificacion">Añadir Planificacion</h5>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+     <div class="modal-body">
+       <div class="form-group">
+         <label for="file">Fichero de datos</label>
+         <input type="file" class="form-control-file" id="file" name="file" required>
+     </div>
+     </div>
+     <div class="modal-footer">
+       <!-- Añadimos el CSRF token -->
+       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+       <button type="submit" class="btn btn-primary">Planificar</button>
+       
+     </div>
+   </form>
+   </div>
+ </div>
+ </div>
+</button>
+{% endblock %}  
+{% block extra_content %}
+    {% if flag %}
+    <br>
+    <h2>Tabla de Planificaciones</h2>
+    <br>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Creación</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for planificacion in sched %}
+    <tr>
+      <!-- Mostramos los datos de cada planificacion -->
+      <th scope="row">{{planificacion.id}}</th>
+      <td>{{planificacion.fecha}}</td>
+      <td>
+        <!-- Creamos un botón para ver la predicción -->
+        <a href="{{url_for('public.deleteScheduling', id=planificacion.id)}}" class="btn btn-outline-danger">Eliminar</a>
+      </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+    {% endblock %}

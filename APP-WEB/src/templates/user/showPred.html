@@ -1,5 +1,7 @@
 {% extends './user/predictions.html' %}
 {% block extra_content %}
+<!-- Añadimos un botón para volver -->
+<a href="{{ url_for('public.predictions')}}" class="btn btn-outline-secondary">Volver</a>
 <!-- Creamos una tabla -->
 <table id="jds-example" class="table">
   <thead>

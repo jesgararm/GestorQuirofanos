@@ -12,7 +12,7 @@
 {% block content %}
 <main class="flex-shrink-0">
     <div class="container">
-      <h1 class="mt-5">Panel de Predicciones</h1>
+      {% block index %}<h1 class="mt-5">Panel de Predicciones</h1>{% endblock %}
       <p class="lead"><p>Bienvenido {{current_user.name}}</p>
       {% with mensajes = get_flashed_messages() %}
         {% if mensajes %}
@@ -26,6 +26,7 @@
         {% endif %}
     {% endwith %}
     <br>
+    {% block modal %}
      <!-- Creamos un botón para añadir una predicción -->
      <button class="btn btn-primary" id="btn-addPred{{current_user.id}}" data-bs-toggle="modal" data-bs-target="#modal{{current_user.id}}">Añadir Predicción </button>
      <!-- Creamos un modal para editar el usuario -->
@@ -54,7 +55,8 @@
         </div>
       </div>
       </div>
-    </button>     
+    </button>
+    {% endblock %}     
     {% block extra_content %}
     {% if flag %}
     <br>
@@ -84,6 +86,5 @@
     {% endif %}
     {% endblock %}
     </div>
-    <!-- Comprobamos si existe el fichero de predicciones -->
   </main>
 {% endblock %}

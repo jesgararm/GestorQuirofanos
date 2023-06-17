@@ -67,6 +67,8 @@ class Genetico():
     def iniciaActos(self, actos):
         # Nos quedamos sólo con el NHC, Ponderación y duración
         print(actos.head())
+        if 'DURACION' in actos.columns:
+            actos = actos.rename(columns={'DURACION': 'DURACIÓN'})
         df = actos[['NHC', 'PONDERACIÓN', 'DURACIÓN']]
         df['PONDERACIÓN'] = df['PONDERACIÓN'].astype(int)
         df['DURACIÓN'] = df['DURACIÓN'].astype(float)

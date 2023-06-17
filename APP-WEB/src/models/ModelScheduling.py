@@ -1,10 +1,9 @@
-from .entities.predictions import Prediccion
-from .entities.user import User
+from .entities.scheduling import Planificacion
 
-class ModelPredictions():
+class ModelScheduling():
     @classmethod
-    def addPrediction(self, user, prediction, db):
-        sql = "INSERT INTO prediccion (id_user, prediccion) VALUES ('{}', '{}')".format(user.id, prediction)
+    def addSchedule(self, user, planificacion, db):
+        sql = "INSERT INTO planificacion (id_user, planificacion) VALUES ('{}', '{}')".format(user.id, planificacion)
         try:
             cursor = db.connection.cursor()
             cursor.execute(sql)
@@ -14,8 +13,8 @@ class ModelPredictions():
             raise e
     
     @classmethod
-    def getPredictions(self, db, user):
-        sql = "SELECT ID,id_user,fecha,prediccion FROM prediccion WHERE id_user = {0}".format(user.id)
+    def getSchedulings(self, db, user):
+        sql = "SELECT ID,id_user,fecha,planificacion FROM planificacion WHERE id_user = {0}".format(user.id)
         try:
             cursor = db.connection.cursor()
             cursor.execute(sql)
@@ -23,18 +22,18 @@ class ModelPredictions():
             if row == None:
                 return False,None
             else:
-                predicciones = []
-                predicciones.append(Prediccion(row[0], row[1], row[2], row[3]))
+                planificaciones = []
+                planificaciones.append(Planificacion(row[0], row[1], row[2], row[3]))
                 rows = cursor.fetchall()
                 for row in rows:
-                    predicciones.append(Prediccion(row[0], row[1], row[2], row[3]))
-                return True, predicciones
+                    planificaciones.append(Planificacion(row[0], row[1], row[2], row[3]))
+                return True, planificaciones
         except Exception as e:
             raise e
     
     @classmethod
-    def get_prediction_by_id(self,db,id):
-        sql = "SELECT ID,id_user,fecha,prediccion FROM prediccion WHERE id = {0}".format(id)
+    def get_schedule_by_id(self,db,id):
+        sql = "SELECT ID,id_user,fecha,planificacion FROM planificacion WHERE id = {0}".format(id)
         try:
             cursor = db.connection.cursor()
             cursor.execute(sql)
@@ -42,12 +41,12 @@ class ModelPredictions():
             if row == None:
                 return False,None
             else:
-                return True, Prediccion(row[0], row[1], row[2], row[3])
+                return True, Planificacion(row[0], row[1], row[2], row[3])
         except Exception as e:
             raise e
     @classmethod
-    def deletePrediction(self, prediction, db):
-        sql = "DELETE FROM prediccion WHERE id = {}".format(prediction.id)
+    def deleteSchedule(self, planificacion, db):
+        sql = "DELETE FROM planificacion WHERE id = {}".format(planificacion.id)
         try:
             cursor = db.connection.cursor()
             cursor.execute(sql)

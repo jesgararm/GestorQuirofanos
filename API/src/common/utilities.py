@@ -2,6 +2,7 @@
 import pandas as pd
 import joblib
 import os
+import unicodedata
 def makePred(df):
     df, df_pred = extractDF(df)
     # Cargamos el modelo

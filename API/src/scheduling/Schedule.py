@@ -23,7 +23,7 @@ class Schedule(Resource):
         # Leemos el fichero
         actos = pd.read_csv(file)
         # Comprobamos si tiene la columna DURACIÓN
-        if 'DURACIÓN' not in actos.columns:
+        if 'DURACIÓN' or 'DURACION' not in actos.columns:
             _,actos = utils.makePred(actos)
         # Iniciamos el algoritmo
         genetico = Genetico(actos, n_quirofanos, n_dias, ventana)
