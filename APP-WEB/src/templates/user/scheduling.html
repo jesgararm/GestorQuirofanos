@@ -52,6 +52,7 @@
       <td>{{planificacion.fecha}}</td>
       <td>
         <!-- Creamos un botón para ver la predicción -->
+        <a href="{{url_for('public.showScheduling', id=planificacion.id)}}" class="btn btn-outline-primary">Ver</a>
         <a href="{{url_for('public.deleteScheduling', id=planificacion.id)}}" class="btn btn-outline-danger">Eliminar</a>
       </td>
     </tr>

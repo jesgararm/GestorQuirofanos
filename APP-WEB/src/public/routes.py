@@ -93,6 +93,17 @@ def uploadScheduling():
             ModelScheduling.addSchedule(current_user, json.dumps(planificacion.json()),db)
     return redirect(url_for("public.scheduling"))
 
+@pub.route("/showScheduling/<id>")
+@login_required
+def showScheduling(id):
+    flag, schedule = ModelScheduling.get_schedule_by_id(db, id)
+    if flag:
+        df = pd.read_json(schedule.planificacion)
+        print(df.index)
+        return render_template("user/showScheduling.html", data = df)
+    flash("No existe la planificación")
+    return render_template("user/scheduling.html")
+
 @pub.route("/deleteScheduling/<id>")
 @login_required
 def deleteScheduling(id):

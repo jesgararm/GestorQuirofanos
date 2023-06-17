@@ -1,0 +1,24 @@
+{% extends './user/scheduling.html' %}
+{% block extra_content %}
+<!-- Añadimos un botón para volver -->
+<a href="{{ url_for('public.scheduling')}}" class="btn btn-outline-secondary">Volver</a>
+<!-- Creamos una tabla -->
+<table id="jds-example" class="table">
+  <thead>
+      <tr>
+          {% for col in data.columns %}
+          <th scope="col"> {{ col }}</th>
+              {% endfor %}
+      </tr>
+  </thead>
+  <tbody>
+          {% for key, value in data.iterrows() %}
+      <tr>
+              {% for k in value %}
+          <td scope="row">{{ k }}</td>
+              {% endfor %}
+      </tr>
+          {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
