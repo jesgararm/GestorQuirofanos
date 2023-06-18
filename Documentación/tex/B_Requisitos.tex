@@ -100,30 +100,138 @@ Presentamos en este apartado el \textbf{diagrama de casos de uso}:
 
 Y comenzamos a especificar cada uno de ellos:
 
-% Caso de Uso 1 -> Consultar Experimentos.
+% Caso de Uso 1 -> Gestión de Usuarios.
 \begin{table}[p]
 	\centering
 	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
 		\toprule
-		\textbf{CU-1}    & \textbf{Ejemplo de caso de uso}\\
+		\textbf{CU-1}    & \textbf{Gestión de Usuarios}\\
 		\toprule
 		\textbf{Versión}              & 1.0    \\
-		\textbf{Autor}                & Alumno \\
-		\textbf{Requisitos asociados} & RF-xx, RF-xx \\
-		\textbf{Descripción}          & La descripción del CU \\
-		\textbf{Precondición}         & Precondiciones (podría haber más de una) \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-3 \\
+		\textbf{Descripción}          & Engloba las acciones de creación, modificación, identificación y eliminación de usuarios. \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+  & Existe un usuario con rol de administrador.\\
 		\textbf{Acciones}             &
 		\begin{enumerate}
 			\def\labelenumi{\arabic{enumi}.}
 			\tightlist
-			\item Pasos del CU
-			\item Pasos del CU (añadir tantos como sean necesarios)
+			\item Identificación del usuario.
+			\item Visualización de perfil.
+   \item Opción a editar perfil.
+   \item Panel de gestión de usuarios (administrador)
+   \begin{enumerate}
+       \item Añadir usuarios.
+       \item Modificar usuarios.
+       \item Eliminar usuarios.
+   \end{enumerate}
+   \item Opción a cerrar sesión.
 		\end{enumerate}\\
-		\textbf{Postcondición}        & Postcondiciones (podría haber más de una) \\
-		\textbf{Excepciones}          & Excepciones \\
-		\textbf{Importancia}          & Alta o Media o Baja... \\
+		\textbf{Postcondición}        &  Mensaje de bienvenida al usuario. \\
+  & Mensajes de \textit{feedback} ante las acciones.\\
+		\textbf{Excepciones}          & Usuario inexistente (mensaje de error).\\
+  & Contraseña incorrecta (mensaje de error).\\
+  & Privilegios insuficientes (redirección).\\
+		\textbf{Importancia}          & Alta \\
 		\bottomrule
 	\end{tabularx}
-	\caption{CU-1 Nombre del caso de uso.}
+	\caption{CU-1 Gestión de Usuarios.}
 \end{table}
 
+% Caso de Uso 2 -> Creación de Usuarios.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-2}    & \textbf{Creación de Usuarios}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-3.1; RF-3.2 \\
+		\textbf{Descripción}          & Se encarga de la acción de crear un usuario. \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+  & Existe un usuario con rol de administrador.\\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Identificación del usuario.
+   \item Panel de gestión de usuarios (administrador)
+   \item Botón de creación de usuario.
+   \item Se rellenan datos de usuario.
+
+  \item 		Confirmación y creación de usuario.\end{enumerate}\\
+		\textbf{Postcondición}        &  Mensaje de creación satisfactoria. \\
+  & Actualización de la base de datos.\\
+		\textbf{Excepciones}          & Campos de usuario no introducidos(mensaje de error).\\
+  & Privilegios insuficientes (redirección).\\
+		\textbf{Importancia}          & Media \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-2 Creación de Usuarios.}
+ \end{table}
+
+ % Caso de Uso 3 -> Eliminación de Usuarios.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-3}    & \textbf{Eliminación de Usuarios}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-3.2 \\
+		\textbf{Descripción}          & Se encarga de la acción de eliminar un usuario. \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+  & Existe un usuario con rol de administrador.\\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Identificación del usuario.
+   \item Panel de gestión de usuarios (administrador)
+   \item Se muestra listado de usuarios activos.
+   \item Botón de eliminar usuario.
+\end{enumerate}\\
+		\textbf{Postcondición}        &  Mensaje de eliminación satisfactoria. \\
+  & Actualización de la base de datos.\\
+		\textbf{Excepciones}          & Base de datos no accesible (mensaje de error)\\
+		\textbf{Importancia}          & Baja \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-3 Eliminación de Usuarios.}
+ \end{table}
+  % Caso de Uso 4 -> Modificación de Usuarios.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-4}    & \textbf{Modificación de Usuarios}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-3.2 \\
+		\textbf{Descripción}          & Se encarga de la acción de modificar un usuario. \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Identificación del usuario.
+   \item Perfil de usuario.
+   \item Se muestran las características del perfil.
+   \item Botón de modificar usuario.
+   \item Formulario de cambio de características.
+\end{enumerate}\\
+		\textbf{Postcondición}        &  Mensaje de modificación satisfactoria. \\
+  & Actualización de la base de datos.\\
+		\textbf{Excepciones}          & Base de datos no accesible (mensaje de error)\\
+  & Campos incorrectos (mensaje de error)\\
+		\textbf{Importancia}          & Baja \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-4 Modificación de Usuarios.}
+ \end{table}
+
+ 
