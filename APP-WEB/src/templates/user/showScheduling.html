@@ -2,23 +2,40 @@
 {% block extra_content %}
 <!-- Añadimos un botón para volver -->
 <a href="{{ url_for('public.scheduling')}}" class="btn btn-outline-secondary">Volver</a>
-<!-- Creamos una tabla -->
-<table id="jds-example" class="table">
-  <thead>
-      <tr>
-          {% for col in data.columns %}
-          <th scope="col"> {{ col }}</th>
-              {% endfor %}
-      </tr>
-  </thead>
-  <tbody>
-          {% for key, value in data.iterrows() %}
-      <tr>
-              {% for k in value %}
-          <td scope="row">{{ k }}</td>
-              {% endfor %}
-      </tr>
-          {% endfor %}
-  </tbody>
-</table>
+<div class="container py-9 py-lg-11 position-relative z-index-1">
+    <div class="row">
+            <div class="col-lg-5 mb-5 mb-lg-0">
+                <h5 class="mb-4 text-info aos-init aos-animate" data-aos="fade-up">Planificaciones</h5>
+                <!-- Recorremos los valores de las columnas de sched -->
+                <div class="nav nav-pills flex-column aos-init aos-animate" id="myTab" role="tablist" data-aos="fade-up">
+                {% for col in data.columns %}
+                    <button class="nav-link px-4 text-start" id="{{col}}-tab" data-bs-toggle="tab" data-bs-target="#{{col}}" type="button" role="tab" aria-controls="{{col}}" aria-selected="true">
+                        <span class="d-block fs-5 fw-bold">{{col}}</span>
+                    </button>
+                {% endfor %}
+            </div>
+            </div>
+            <div class="col-lg-7 col-xl-6">
+                <div data-aos="fade-up" class="tab-content aos-init aos-animate" id="myTabContent">
+            {% for col in data.columns %}
+                    <div class="tab-pane fade" id="{{col}}" role="tabpanel" aria-labelledby="{{col}}-tab">
+                        <ul class="pt-4 list-unstyled mb-0">
+                            <li class="d-flex flex-column flex-md-row py-4">
+                                <span class="flex-shrink-0 width-13x me-md-4 d-block mb-3 mb-md-0 small text-muted">9:00
+                                    AM - 10:00 AM</span>
+                                <div class="flex-grow-1 ps-4 border-start border-3">
+                                    <h4>Registration and Coffee</h4>
+                                    <p class="mb-0">
+                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                        officia deserunt mollit anim id est laborum.
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+</div>
 {% endblock %}

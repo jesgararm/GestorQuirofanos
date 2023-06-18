@@ -17,6 +17,13 @@
          <label for="file">Fichero de datos</label>
          <input type="file" class="form-control-file" id="file" name="file" required>
      </div>
+     {{ forms.hidden_tag() }}
+    {{forms.n_quirofanos.label}}
+    {{forms.n_quirofanos}}
+    {{forms.n_dias.label}}
+    {{forms.n_dias}}
+    {{forms.ventana.label}}
+    {{forms.ventana}}
      </div>
      <div class="modal-footer">
        <!-- Añadimos el CSRF token -->

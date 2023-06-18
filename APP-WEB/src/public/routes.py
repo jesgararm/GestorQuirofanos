@@ -7,6 +7,7 @@ import json
 import os
 from flask_login import login_required, current_user
 from src.forms.updateUser import UpdateUser
+from src.forms.scheduleParams import ScheduleParams
 from src.models.ModelUser import ModelUser
 from src.models.ModelPredictions import ModelPredictions
 from src.models.ModelScheduling import ModelScheduling
@@ -65,10 +66,11 @@ def scheduling():
     user = current_user
     # Obtenemos las planificaciones
     flag, schedulings = ModelScheduling.getSchedulings(db, user)
+    forms = ScheduleParams()
     if flag:
-        return render_template("user/scheduling.html", sched = schedulings, flag=True)
+        return render_template("user/scheduling.html", sched = schedulings, flag=True, forms = forms)
     flash("No hay planificaciones para este usuario")
-    return render_template("user/scheduling.html")
+    return render_template("user/scheduling.html", forms = forms)
 
 @pub.route("/uploadScheduling", methods = ["POST"])
 @login_required
@@ -84,9 +86,10 @@ def uploadScheduling():
                 return redirect(url_for("public.scheduling"))
             file.save("src/static/uploads/" + file.filename)
             ruta = "src/static/uploads/" + file.filename
+            params = {"n_quirofanos":request.form["n_quirofanos"], "n_dias":request.form["n_dias"], "ventana":request.form["ventana"]}
             # Llamamos a la API
             url = "http://localhost:7000/schedule"
-            planificacion = requests.get(url, files={"file": open(ruta, "rb")})
+            planificacion = requests.get(url, files={"file": open(ruta, "rb")}, params=params)
             flash("Planificación realizada correctamente")
             # Eliminamos el archivo para ahorrar espacio
             os.remove(ruta)
@@ -96,13 +99,14 @@ def uploadScheduling():
 @pub.route("/showScheduling/<id>")
 @login_required
 def showScheduling(id):
+    forms = ScheduleParams()
     flag, schedule = ModelScheduling.get_schedule_by_id(db, id)
     if flag:
         df = pd.read_json(schedule.planificacion)
         print(df.index)
-        return render_template("user/showScheduling.html", data = df)
+        return render_template("user/showScheduling.html", data = df, forms =forms)
     flash("No existe la planificación")
-    return render_template("user/scheduling.html")
+    return render_template("user/scheduling.html", forms = forms)
 
 @pub.route("/deleteScheduling/<id>")
 @login_required
