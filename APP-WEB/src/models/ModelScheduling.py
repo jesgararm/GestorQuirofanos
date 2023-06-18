@@ -2,8 +2,8 @@ from .entities.scheduling import Planificacion
 
 class ModelScheduling():
     @classmethod
-    def addSchedule(self, user, planificacion, db):
-        sql = "INSERT INTO planificacion (id_user, planificacion) VALUES ('{}', '{}')".format(user.id, planificacion)
+    def addSchedule(self, user, planificacion, db, ventana):
+        sql = "INSERT INTO planificacion (id_user, planificacion,ventana) VALUES ('{}', '{}','{}')".format(user.id, planificacion,ventana)
         try:
             cursor = db.connection.cursor()
             cursor.execute(sql)
@@ -14,7 +14,7 @@ class ModelScheduling():
     
     @classmethod
     def getSchedulings(self, db, user):
-        sql = "SELECT ID,id_user,fecha,planificacion FROM planificacion WHERE id_user = {0}".format(user.id)
+        sql = "SELECT ID,id_user,fecha,planificacion,ventana FROM planificacion WHERE id_user = {0}".format(user.id)
         try:
             cursor = db.connection.cursor()
             cursor.execute(sql)
@@ -23,17 +23,17 @@ class ModelScheduling():
                 return False,None
             else:
                 planificaciones = []
-                planificaciones.append(Planificacion(row[0], row[1], row[2], row[3]))
+                planificaciones.append(Planificacion(row[0], row[1], row[2], row[3],row[4]))
                 rows = cursor.fetchall()
                 for row in rows:
-                    planificaciones.append(Planificacion(row[0], row[1], row[2], row[3]))
+                    planificaciones.append(Planificacion(row[0], row[1], row[2], row[3],row[4]))
                 return True, planificaciones
         except Exception as e:
             raise e
     
     @classmethod
     def get_schedule_by_id(self,db,id):
-        sql = "SELECT ID,id_user,fecha,planificacion FROM planificacion WHERE id = {0}".format(id)
+        sql = "SELECT ID,id_user,fecha,planificacion,ventana FROM planificacion WHERE id = {0}".format(id)
         try:
             cursor = db.connection.cursor()
             cursor.execute(sql)
@@ -41,7 +41,7 @@ class ModelScheduling():
             if row == None:
                 return False,None
             else:
-                return True, Planificacion(row[0], row[1], row[2], row[3])
+                return True, Planificacion(row[0], row[1], row[2], row[3],row[4])
         except Exception as e:
             raise e
     @classmethod

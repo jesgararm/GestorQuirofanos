@@ -93,7 +93,7 @@ def uploadScheduling():
             flash("Planificación realizada correctamente")
             # Eliminamos el archivo para ahorrar espacio
             os.remove(ruta)
-            ModelScheduling.addSchedule(current_user, json.dumps(planificacion.json()),db)
+            ModelScheduling.addSchedule(current_user, json.dumps(planificacion.json()),db, params.get("ventana"))
     return redirect(url_for("public.scheduling"))
 
 @pub.route("/showScheduling/<id>")
@@ -104,7 +104,7 @@ def showScheduling(id):
     if flag:
         df = pd.read_json(schedule.planificacion)
         print(df.index)
-        return render_template("user/showScheduling.html", data = df, forms =forms)
+        return render_template("user/showScheduling.html.jinja", data = df, forms =forms, dias = df.columns.to_list(), quirofanos = df.index.to_list(), ventana = schedule.ventana)
     flash("No existe la planificación")
     return render_template("user/scheduling.html", forms = forms)
 

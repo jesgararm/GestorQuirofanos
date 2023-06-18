@@ -1,0 +1,175 @@
+{% extends './user/scheduling.html' %}
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/schedule.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/timeline.css') }}">
+{% endblock %}
+{% block title %}Planificaciones{% endblock %}
+{% block extra_content %}
+<!-- Añadimos un botón para volver -->
+<a href="{{ url_for('public.scheduling')}}" class="btn btn-outline-secondary">Volver</a>
+<div class="container py-9 py-lg-11 position-relative z-index-1">
+    <div class="row">
+        <div class="col-lg-5 mb-5 mb-lg-0">
+            <h5 class="mb-4 text-info aos-init aos-animate" data-aos="fade-up">Planificación Quirúrgica</h5>
+            <div class="nav nav-pills flex-column aos-init aos-animate" id="myTab" role="tablist" data-aos="fade-up">
+                {% set primerDia = dias.pop(0) %}
+                <button class="nav-link px-4 text-start mb-3 active" id="day1-tab" data-bs-toggle="tab"
+                    data-bs-target="#day1" type="button" role="tab" aria-controls="day1" aria-selected="true">
+                    <span class="d-block fs-5 fw-bold">{{primerDia}}</span>
+                </button>
+                {% for diaActual in dias %}
+                {% set i=loop.index + 2 %}
+                <button class="nav-link px-4 text-start" id="day{{i}}-tab" data-bs-toggle="tab"
+                    data-bs-target="#day{{i}}" type="button" role="tab" aria-controls="day{{i}}" aria-selected="false"
+                    tabindex="-1">
+                    <span class="d-block fs-5 fw-bold">{{diaActual}}</span>
+                </button>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-lg-7 col-xl-6">
+            <div data-aos="fade-up" class="tab-content aos-init aos-animate" id="myTabContent">
+                <div class="tab-pane fade active show" id="day1" role="tabpanel" aria-labelledby="day1-tab">
+                    <ul class="pt-4 list-unstyled mb-0">
+                        {%for quir in quirofanos%}
+                        <li class="d-flex flex-column flex-md-row py-4">
+                            <span
+                                class="flex-shrink-0 width-13x me-md-4 d-block mb-3 mb-md-0 small text-muted">{{quir}}</span>
+                            <div class="flex-grow-1 ps-4 border-start border-3">
+                                <h4>Parte Quirúrgico</h4>
+                                <section class="time-line-box">
+                                    <div class="swiper-container text-center">
+                                        <div class="swiper-wrapper">
+                                            <!-- Iniciamos las horas a las 08:00AM -->
+                                            {% for intervencion in data[primerDia][quir] %}
+                                            <div class="swiper-slide">
+                                                <!-- Creamos un modal para cada intervención -->
+                                                <button class="btn btn-success btn-sm" id="btn-show{{intervencion[0]}}"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modal{{intervencion[0]}}">{{intervencion[0]}}
+                                                </button>
+                                                <br>
+                                            </div>
+                                            <!-- Creamos el modal -->
+                                            <!-- Creamos un modal para editar el usuario -->
+                                            <div class="modal fade" id="modal{{intervencion[0]}}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Datos de
+                                                                Intervención</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="mb-2">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Paciente:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name" value="{{intervencion[0]}}"
+                                                                    disabled>
+                                                            </div>
+                                                            <div class="mb-2">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Duración:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="message-text"
+                                                                    value="{{intervencion[1]*ventana}} minutos"
+                                                                    disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <!-- Añadimos el final -->
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Cerrar</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {%endfor%}
+                                        </div>
+                                        <div class="swiper-pagination"></div>
+                                    </div>
+                                </section>
+                                </p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% for diaActual in dias %}
+                {% set i=loop.index + 2 %}
+                <div class="tab-pane fade" id="day{{i}}" role="tabpanel" aria-labelledby="day{{i}}-tab">
+                    <ul class="pt-4 list-unstyled mb-0">
+                        {%for quir in quirofanos%}
+                        <li class="d-flex flex-column flex-md-row py-4">
+                            <span
+                                class="flex-shrink-0 width-13x me-md-4 d-block mb-3 mb-md-0 small text-muted">{{quir}}</span>
+                            <div class="flex-grow-1 ps-4 border-start border-3">
+                                <h4>Parte Quirúrgico</h4>
+                                <section class="time-line-box">
+                                    <div class="swiper-container text-center">
+                                        <div class="swiper-wrapper">
+                                            {% for intervencion in data[diaActual][quir] %}
+                                            <div class="swiper-slide">
+                                                <!-- Creamos un modal para cada intervención -->
+                                                <button class="btn btn-success btn-sm" id="btn-show{{intervencion[0]}}"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modal{{intervencion[0]}}">{{intervencion[0]}}
+                                                </button>
+                                                <br>
+                                            </div>
+                                            <!-- Creamos el modal -->
+                                            <!-- Creamos un modal para editar el usuario -->
+                                            <div class="modal fade" id="modal{{intervencion[0]}}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Datos de
+                                                                Intervención</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="mb-2">
+                                                                <label for="recipient-name"
+                                                                    class="col-form-label">Paciente:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="recipient-name" value="{{intervencion[0]}}"
+                                                                    disabled>
+                                                            </div>
+                                                            <div class="mb-2">
+                                                                <label for="message-text"
+                                                                    class="col-form-label">Duración:</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="message-text"
+                                                                    value="{{intervencion[1]*ventana}} minutos"
+                                                                    disabled>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <!-- Añadimos el final -->
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Cerrar</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {%endfor%}
+                                        </div>
+                                        <div class="swiper-pagination"></div>
+                                    </div>
+                                </section>
+                                </p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
