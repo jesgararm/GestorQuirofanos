@@ -234,4 +234,306 @@ Y comenzamos a especificar cada uno de ellos:
 	\caption{CU-4 Modificación de Usuarios.}
  \end{table}
 
+   % Caso de Uso 5 -> Login de Usuarios.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-5}    & {Login de Usuarios}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-3.1 \\
+		\textbf{Descripción}          & Se encarga de iniciar sesión en el sistema \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Solicitud de email y contraseña.
+   \item Encriptación de contraseña introducida.
+   \item Acceso a base de datos.
+   \item Comparación de email y contraseña introducidos con los almacenados.
+   \item Comprobación de rol de usuario.
+   \item Redirección a sesión en función del rol almacenado.
+\end{enumerate}\\
+		\textbf{Postcondición}        &  Redirección.\\
+		\textbf{Excepciones}          & Email inexistente en base de datos (mensaje de error: Usuario inexistente)\\
+  & Contraseña introducida no coincide (mensaje de error: Contraseña incorrecta)\\
+		\textbf{Importancia}          & Alta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-5 Login de Usuarios.}
+ \end{table}
+
+   % Caso de Uso 6 -> Asignación de Privilegios.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-6}    & \textbf{Asignación de Privilegios}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-3.1.1 \\
+		\textbf{Descripción}          & Se encarga de administrar los roles de usuario. \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+  & Existe un usuario con rol de administrador.\\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Identificación de usuario administrador
+   \item Acceso a función de agregar/modificar usuario.
+   \item Selección de opción de administrador.
+   \item Inserción/Actualización en base de datos
+\end{enumerate}\\
+		\textbf{Postcondición}        &  Mensaje de modificación/creación satisfactoria. \\
+  & Actualización de la base de datos.\\
+		\textbf{Excepciones}          & Base de datos no accesible (mensaje de error)\\
+  & Campos incorrectos (mensaje de error)\\
+		\textbf{Importancia}          & Media \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-6 Asignación de Privilegios.}
+ \end{table}
+
+    % Caso de Uso 7 -> Gestión de Predicciones.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-7}    & \textbf{Gestión de Predicciones}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-1 \\
+		\textbf{Descripción}          & Se encarga de predecir la duración de una intervención quirúrgica. \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+  & Existe un usuario activo.\\
+  & Existe conexión con un servicio de predicción basado en ML.\\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Identificación de usuario.
+   \item Acceso a función de gestión de predicciones.
+   \item Visualización de listado de predicciones previas del usuario.
+   \item Posibilidad de visualizar, eliminar o agregar predicción.
+   \item Recepción de mensajes de feedback en función de la opción seleccionada.
+   \item Actualización y persistencia en base de datos.
+\end{enumerate}\\
+		\textbf{Postcondición}        &  Mensaje de modificación/creación/eliminación satisfactoria. \\
+  & Actualización de la base de datos.\\
+		\textbf{Excepciones}          & Base de datos no accesible (mensaje de error)\\
+  & Fichero incorrecto (mensaje de error)\\
+		\textbf{Importancia}          & Alta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-7 Gestión de Predicciones.}
+ \end{table}
+
+  % Caso de Uso 8-> Visualización de Predicciones.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-8}    & \textbf{Visualización de Predicciones}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-1.3; RF-1.4; RF-2.2 \\
+		\textbf{Descripción}          & Se encarga de visualizar las predicciones almacenadas en la base de datos. \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+  & Existe un usuario activo.\\
+  & Existen predicciones almacenadas en la base de datos.\\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Identificación de usuario.
+   \item Acceso a función de gestión de predicciones.
+   \item Visualización de listado de predicciones previas del usuario.
+   \item Selección de opción de visualizar.
+   \item Se muestra un listado formateado por pantalla.
+\end{enumerate}\\
+		\textbf{Postcondición}        &  Redirección a listado formateado.\\
+		\textbf{Excepciones}          & Base de datos no accesible (mensaje de error)\\
+		\textbf{Importancia}          & Media \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-8 Visualización de Predicciones.}
+ \end{table}
+
+  % Caso de Uso 9 -> Obtención de Predicciones.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-9}    & \textbf{Obtención de Predicciones}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-1.2; RF-1.3; RF-2.1 ; RF-2.2 \\
+		\textbf{Descripción}          & Se encarga de obtener la predicción de duración. \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+  & Existe un usuario activo.\\
+  & Existe conexión con un servicio de predicción basado en ML.\\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Identificación de usuario.
+   \item Acceso a función de gestión de predicciones.
+   \item Visualización de listado de predicciones previas del usuario.
+   \item Funcionalidad de agregar predicción.
+   \item Selección de archivo de nuestro sistema.
+   \item Conexión con API de predicción.
+   \item Validación de contenido del fichero y cálculo de predicción en la API.
+   \item Recepción de respuesta.
+\end{enumerate}\\
+		\textbf{Postcondición}        &  Mensaje de creación satisfactoria. \\
+  & Actualización de la base de datos.\\
+		\textbf{Excepciones}          & Base de datos no accesible (mensaje de error)\\
+  & Fichero incorrecto (mensaje de error)\\
+  & Campos del fichero incorrectos (mensaje de error)\\
+		\textbf{Importancia}          & Alta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-9 Obtención de Predicciones.}
+ \end{table}
+
+  % Caso de Uso 10 -> Validación de Datos.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-10}    & \textbf{Validación de Datos}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-2.1.1; RF-2.1.2 \\
+		\textbf{Descripción}          & Se encarga de validar los ficheros enviados a la API. \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+  & Existe un usuario activo.\\
+  & Existe conexión con una API gestora de los servicios de predicción y planificación.\\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Identificación de usuario.
+   \item Acceso a función de gestión de predicciones y/o planificaciones.
+   \item Envío de fichero a API.
+   \item Recepción de mensajes de feedback en función de las características del fichero introducido.
+\end{enumerate}\\
+		\textbf{Postcondición}        &  Mensaje de envío satisfactorio. \\
+  & Actualización de la base de datos.\\
+		\textbf{Excepciones}          & Base de datos no accesible (mensaje de error)\\
+  & Fichero incorrecto (mensaje de error)\\
+  & Extensión de fichero incorrecta (mensaje de error).\\
+		\textbf{Importancia}          & Baja \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-10 Validación de Datos.}
+ \end{table}
+
+   % Caso de Uso 11 -> Gestión de Planificaciones.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-11}    & \textbf{Gestión de Planificaciones}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-2; RF-4 \\
+		\textbf{Descripción}          & Se encarga de obtener y visualizar las planificaciones propuestas por el sistema . \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+  & Existe un usuario activo.\\
+  & Existe conexión con una API gestora de los servicios de predicción y planificación.\\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Identificación de usuario.
+   \item Acceso a función de gestión de planificaciones.
+   \item Visualización de un listado de planificaciones.
+   \item Opciones de añadir, visualizar o eliminar una planificación.
+   \item Recepción de mensajes de feedback en función de la opción seleccionada.
+\end{enumerate}\\
+		\textbf{Postcondición}        &  Mensaje/s de solicitud/es satisfactorias.\\
+		\textbf{Excepciones}          & Base de datos no accesible (mensaje de error)\\
+  & Parámetros incorrectos (mensaje de error)\\
+		\textbf{Importancia}          & Alta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-11 Gestión de Planificaciones.}
+ \end{table}
+
+ % Caso de Uso 12 -> Obtención de Planificaciones.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-12}    & \textbf{Obtención de Planificaciones}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-2.2; RF-2.3; RF-2.4; RF-4.1 \\
+		\textbf{Descripción}          & Se encarga de obtener las planificaciones propuestas por el sistema . \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+  & Existe un usuario activo.\\
+  & Existe conexión con una API gestora de los servicios de predicción y planificación.\\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Identificación de usuario.
+   \item Acceso a función de gestión de planificaciones.
+   \item Visualización de un listado de planificaciones.
+   \item Opción de añadir una nueva planificación.
+   \item Envío de archivo a API.
+   \item Recepción de respuesta.
+\end{enumerate}\\
+		\textbf{Postcondición}        &  Mensaje de solicitud satisfactoria.\\
+  & Actualización de la base de datos.\\
+		\textbf{Excepciones}          & Base de datos no accesible (mensaje de error)\\
+  & Parámetros incorrectos (mensaje de error)\\
+		\textbf{Importancia}          & Alta \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-12 Obtención de Planificaciones.}
+ \end{table}
+
+ % Caso de Uso 13 -> Visualización de Planificaciones.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-13}    & \textbf{Visualización de Planificaciones}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Jesús García Armario \\
+		\textbf{Requisitos asociados} & RF-2.5; RF-4.2 \\
+		\textbf{Descripción}          & Se encarga de visualizar las planificaciones propuestas por el sistema . \\
+		\textbf{Precondición}         & Existe una base de datos disponible. \\
+  & Existe un usuario activo.\\
+  & Existe conexión con una API gestora de los servicios de predicción y planificación.\\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Identificación de usuario.
+   \item Acceso a función de gestión de planificaciones.
+   \item Visualización de un listado de planificaciones.
+   \item Opción de visualizar una planificación.
+   \item Se visualiza propuesta formateada por pantalla.
+\end{enumerate}\\
+		\textbf{Postcondición}        &  Visualización de propuesta en formato de agenda temporal por pantalla.\\
+		\textbf{Excepciones}          & Base de datos no accesible (mensaje de error)\\
+		\textbf{Importancia}          & Media \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-13 Visualización de Planificaciones.}
+ \end{table}
  
