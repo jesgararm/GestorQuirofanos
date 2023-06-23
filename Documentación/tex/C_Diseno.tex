@@ -2,9 +2,29 @@
 
 \section{Introducción}
 
-
+En este apartado desglosaremos las estrategias de diseño tomadas en consideración: \textit{conjuntos de datos, clases, procedimientos..}, para el cumplimiento de los requerimientos funcionales y no funcionales reseñados en el primer apartado.
 
 \section{Diseño de datos}
+
+\subsection{Entidades}
+
+\begin{itemize}
+    \item \textbf{Usuario (\textit{User})}: Consta de un identificador auto-incrementado como clave primaria, así como atributos para el \textit{nombre}, su \textit{correo electrónico}, contraseña \textit{encriptada} y fechas de \textit{creación} y \textit{modificación}.
+    \item \textbf{Planificación:} Consta de un identificador como clave primaria, el identificador del usuario que la creó (\textit{FK}) y la fecha de creación.
+    \item \textbf{Predicción:} Sigue la misma estructura de atributos que la entidad \textit{Planificación}.
+\end{itemize}
+
+\newpage
+\subsection{Diagrama Relacional}
+
+\imagen{diagRel}{Diagrama Relacional}
+
+
+\subsection{Diagrama E-R}
+
+\imagen{diagERD}{Diagrama Relacional}
+
+\newpage
 
 \section{Diseño procedimental}
 
