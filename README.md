@@ -4,7 +4,7 @@
 #### Autor: Jesús García Armario
 #### Tutores: Bruno Baruque Zanon, Daniel Urda Muñoz y Raúl Marticorena Sánchez.
 [![Maintainability](https://api.codeclimate.com/v1/badges/eed3c55e1a5f27911913/maintainability)](https://codeclimate.com/github/jesgararm/GestorQuirofanos/maintainability)
-
+ [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 ## Definición
 API basada en Inteligencia Computacional para la estimación de la duración de una intervención quirúrgica y posterior optimización de la planificación basada en una gestión de recursos eficiente y concurrente con las restricciones impuestas al modelo.
@@ -16,3 +16,9 @@ API basada en Inteligencia Computacional para la estimación de la duración de 
 - Conjunto de Jupyter Notebooks y funciones de Python que describen el proceso de Aprendizaje Supervisado para la predicción de la duración de las intervenciones quirúrgicas.
 - Conjunto de Jupyter Notebooks y funciones en Python que describen el proceso de Optimización para la planificación quirúrgica en base a la maximización de la prioridad y la minimización del tiempo desaprovechado.
 - API generada en Flask y modelo de clases de diseño tras obtener el resultado de la investigación.
+- APP-Web generada en Flask, integrada con la API.
+- Despliegue de APP-WEB, API y BBDD en AWS.
+
+## Acceso:
+El recurso se encuentra desplegado en AWS, mediante su funcionalidad ECS (Elastic Container Service).
+Se puede visitar el despligue en la siguiente dirección: http://16.16.68.199:5000/
