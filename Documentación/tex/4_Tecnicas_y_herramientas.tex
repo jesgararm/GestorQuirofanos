@@ -58,6 +58,8 @@ Además, nos permite integrar el desarrollo con \textbf{nuestro repositorio}, as
 
 Por último, se ha contado con el apoyo de \href{https://www.mendeley.com/reference-management/reference-manager}{Mendeley Reference Manager} para almacenar las referencias y artículos empleados como apoyo bibliográfico en nuestro trabajo, permitiéndose el acceso a sus recursos gracias a la licencia proporcionada a los estudiantes de la Universidad de Burgos (\textit{modalidad de acceso institucional}).
 
+Tal y como podemos comprobar en la tabla \ref{tabla:IDEs}, hemos variado de un entorno de desarrollo a otro en función de las características del código fuente, en función de las funcionalidades que queramos aprovechar de los mismos de cara al apoyo de nuestra redacción.
+
 \tablaSmallSinColores{Resumen de IDEs}{c|c}{IDEs}
 { \textbf{Lenguaje}  &  \textbf{IDE} \\}{ 
  Python & Visual Studio Code\\ 
@@ -65,7 +67,7 @@ Por último, se ha contado con el apoyo de \href{https://www.mendeley.com/refere
  CSS & Visual Studio Code\\
  JavaScript & Visual Studio Code\\
  MySQL & MySQL Workbench\\
- & phpMyAdmin
+ & phpMyAdmin\\
 LaTeX & Overleaf \\
  BibTeX & Mendeley Reference Manager\\}
 
@@ -74,16 +76,19 @@ LaTeX & Overleaf \\
 
  Una \textbf{librería} no es más que un conjunto de \textit{archivos de código} empleados para el desarrollo de software. En función de su finalidad, existen librerías para gran variedad de funcionalidades: cálculo matricial, manejo de ficheros, protocolos de comunicaciones, representación gráfica, algoritmia...
 
- Tal y como hemos reseñado en apartados anteriores, uno de los aspectos más positivos de Python para este proyecto es la disposición de \textit{librerías específicas} para las labores de inteligencia computacional y análisis de datos. 
+ Tal y como hemos reseñado en apartados anteriores, uno de los aspectos más positivos de Python para este proyecto es la disponibilidad de \textit{librerías específicas} para las labores de inteligencia computacional y análisis de datos. 
 
- De entre todas las usadas, que se resumen en la tabla, conviene \textbf{destacar}: 
+ De entre todas las usadas, que se resumen en la tabla \ref{tabla:libPython}, conviene \textbf{destacar}: 
 
  \begin{enumerate}
-     \item \textbf{Scikit-Learn}: Esta librería\cite{Pedregosa2011Scikit-learn:Python} es una de las gratuitas para Python. Cuenta con la implementación de varios algoritmos de clasificación, regresión, clustering y reducción de la dimensionalidad, convirtiéndose en una \textit{herramienta básica} para programar sistemas de modelado y análisis de datos.
+     \item \textbf{Scikit-Learn}: Esta librería \cite{Pedregosa2011Scikit-learn:Python} es una de las gratuitas para Python. Cuenta con la implementación de varios algoritmos de clasificación, regresión, clustering y reducción de la dimensionalidad, convirtiéndose en una \textit{herramienta básica} para programar sistemas de modelado y análisis de datos.
      \item \textbf{DEAP}: Se trata de un framework para realizar labores de computación evolutiva \cite{Fortin2012DEAP:Easy}, proveyendo a los desarrolladores del \textit{pegamento esencial} para construir algoritmos evolutivos para sistemas sofisticados.
+     \item \textbf{Flask}: Framework de python, encargado de realizar labores de \textit{controlador} entre la lógica de negocio y la vista en una aplicación web. Se basa en el motor de renderizado de plantillas \textit{Jinja2} y en la especificación WSGI de Wekzeug.
+     \item \textbf{Pandas:} Librería repleta de utilidades para realizar labores de preprocesamiento, análisis y minería de datos. Su uso ha sido esencial a la hora de importar y exportar los conjuntos de datos empleados en las labores de explotación y experimentación de los modelos.
+     \item \textbf{Matplotlib:} Contiene funciones dedicadas a la representación de datos. Muy útil para evaluar el rendimiento de los modelos de inteligencia artificial y mostrar de forma empírica sus resultados en la documentación.
  \end{enumerate}
 
- \tablaSmall{Librerías Python Empleadas}{c|c|c|c|c|c|c}{IDEs}
+ \tablaSmall{Librerías Python Empleadas}{c|c|c|c|c|c|c}{libPython}
 { \textbf{Librerías}  &  SK-Learn & Pandas & NumPy & Matplotlib & DEAP & Flask \\}{ 
  Preprocesado &  & X &  X & X &  & \\
 Análisis de datos & X & X & X & X &  & \\
@@ -95,11 +100,34 @@ Análisis de datos & X & X & X & X &  & \\
  Métricas y Cálculo &  &  & X &  &  & \\
  Integración API &  &  &  &  &  & X \\}
 
- 
+ \section{Integración y Despliegue}
+
+ \subsection{Docker}
+
+ Un contenedor, o \textit{docker}, nos permite encapsular la lógica de una aplicación, incluyendo su código, librerías y dependencias funcionales, para su ejecución en un entorno virtualizado, sin necesidad de que los usuarios deban preparar su entorno de ejecución o desarrollo para ejecutar las funcionalidades del sistema.
+
+ Este tipo de solución se encuentra ampliamente extendida para el desarrollo y portabilidad de soluciones ML y aplicaciones distribuidas, sobretodo, desde el auge de las tecnologías de \textit{computación en la nube}, ofreciendo una infraestructura idónea para el \textbf{despliegue} y el acceso remoto a estas funcionalidades.
+
+ Para su construcción, debemos instalar el cliente \textbf{Docker Desktop} y confeccionar un fichero \textit{Dockerfile} que especifique a la herramienta las dependencias y la estructura del contenedor:
+
+ \imagen{dockerfile}{Ejemplo de fichero Dockerfile para construcción de un contenedor}{.9}
 
 
+\subsection{Amazon Web Services}
+
+Tal y como hemos señalado en apartados anteriores,  el objetivo final de este proyecto será obtener una \textit{\textbf{interfaz}} operativa que integre las funcionalidades y requerimientos desarrollados durante el transcurso del trabajo.
+
+Para permitir el acceso \textit{remoto} a las funcionalidades del sistema, hemos optado por desplegar los contenedores y la base de datos haciendo uso del paquete de \textit{Cloud Computing} ofrecido por Amazon Web Services.
+
+En concreto, han sido necesarias las siguientes \textit{dependencias} para el despliegue:
+
+\begin{itemize}
+    \item \textbf{Amazon RCS:} Para mantener el esquema de la base de datos relacional y los contenidos persistentes. Usamos el lenguaje MySQL y el motor InnoDB.
+    \item \textbf{Amazon ECR:} Almacenamiento de los contenedores desarrollados a partir de Docker, para su posterior despliegue.
+    \item \textbf{Amazon ECS:} Creación de un clúster y despliegue de cada uno de los contenedores a modo de \textit{servicios y tareas}.
+\end{itemize}
 
 
-
+\imagen{RCS}{Panel de control de Amazon RCS}{.9}
 
 

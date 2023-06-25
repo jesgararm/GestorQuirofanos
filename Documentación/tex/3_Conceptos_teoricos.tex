@@ -4,7 +4,7 @@ En el siguiente proyecto se hace uso de algunas técnicas de \textbf{aprendizaje
 
 Tal y como se ha comentado, se parte de un \textbf{modelo predictivo}, basado en técnicas de \textit{aprendizaje supervisado} para estimar la duración de una intervención quirúrgica en base a los datos introducidos por el usuario.
 
-Posteriormente, partiremos de la salida del modelo para realizar una \textbf{programación} de tipo \textit{parallel scheduling}\footnote{Programar n trabajos en m máquinas paralelas \cite{Xing2000ParallelJobs}, se asemeja a programar n intervenciones en m quirófanos simultáneos}, usando una aproximación con restricciones que definen un problema \textbf{MIP}\footnote{\textit{Mixed Integer Programming}: Problemas de programación dinámica en la que algunas de sus variables deben ser enteras \cite{RichardsMixed-integerControl}} \cite{Lin2020AScheduling}  y resultan en un problema \textit{NP-Hard}.
+Posteriormente, partiremos de la salida del modelo para realizar una \textbf{programación} de tipo \textit{parallel scheduling}\footnote{Programar \textit{n} trabajos en \textit{m} máquinas paralelas \cite{Xing2000ParallelJobs}, se asemeja a programar \textit{n} intervenciones en \textit{m} quirófanos simultáneos}, usando una aproximación con restricciones que definen un problema \textbf{MIP}\footnote{\textit{Mixed Integer Programming}: Problemas de programación dinámica en la que algunas de sus variables deben ser enteras  \cite{RichardsMixed-integerControl}} \cite{Lin2020AScheduling}  y resultan en un problema \textit{NP-Hard}.
 
 
 
@@ -49,11 +49,11 @@ Y la \textit{ordenada en el origen} en términos de b:
     a = \bar{y}-b\bar{x}
 \end{equation}
 
-\subsection{K-Nearest Neightbors}
+\subsection{K-Nearest Neightbors (KNN)} 
 
 Se trata de una de las formas más simples de aplicar un algoritmo de aprendizaje supervisado, con utilidad para tareas tanto de \textbf{regresión} como de \textbf{clasificación}.
 
-Se considera un algoritmo \textit{no paramétrico} en tanto que no existen preconceptciones acerca de los datos subyacentes \cite{Belyadi2021SupervisedLearning}.
+Se considera un algoritmo \textit{no paramétrico} en tanto que no existen preconcepciones acerca de los datos subyacentes \cite{Belyadi2021SupervisedLearning}.
 
 La base de su funcionamiento es la estimación de proximidad mediante el cálculo de \textbf{distancias}, en especial la \textbf{distancia euclídea} \cite{Greenacre2009CorrespondenceAnalysis}:
 \begin{equation}
@@ -64,7 +64,7 @@ Podemos describir el algoritmo en los siguientes pasos \cite{Almomany2022Optimiz
 \begin{enumerate}
     \item Determinar el número de vecinos más cercanos, conocido como el parámetro \textit{K}.
     \item Usar la función de \textbf{distancia} para calcular la distancia entre cada instancia del conjunto a predecir y todos los del entrenamiento.
-    \item Ordena la distancia de menor a mayor y elige tantos elementos del conjunto de entrenamiento como K.
+    \item Ordenar la distancia de menor a mayor y elegir tantos elementos del conjunto de entrenamiento como K.
     \item Obtener la etiqueta o el valor numérico de los K-Vecinos.
     \item Devolver la \textit{media} (regresión) o la \textit{moda} (clasificación).
 \end{enumerate}
@@ -74,7 +74,7 @@ Podemos describir el algoritmo en los siguientes pasos \cite{Almomany2022Optimiz
 
 Se trata de otro tipo de aprendizaje supervisado que, al igual que KNN, puede ser usado para ambos tipos de problema.
 
-Actualmente, consiste un una de las herramientas \textbf{más usadas} para la toma de decisiones \cite{Navada2011OverviewLearning} en todo el mundo.
+Actualmente, es una de las herramientas \textbf{más usadas} para la toma de decisiones \cite{Navada2011OverviewLearning} en todo el mundo.
 
 Para cumplir con esta tarea, se dibuja un árbol con diferentes \textit{ramas} y hojas, de forma que se incluyan \textit{todos los valores} de una situación particular \cite{Navada2011OverviewLearning}:
 
@@ -110,40 +110,40 @@ Debemos tener en consideración que la implementación del paquete \textit{sciki
 
 \subsection{Random Forest}
 
-Este algoritmo permite la resolución tanto de problemas de clasificación como de regresión, siendo descrito por primera vez en: \cite{Ho1995RandomForests}, cuya \textbf{esencia} radica en la construcción de múltiples árboles dentro de un subespacio aleatorio del conjunto de variables de entrada.
+Este algoritmo permite la resolución tanto de problemas de clasificación como de regresión, siendo descrito por primera vez por \textit{Tin Kam Ho en 1995}  \cite{Ho1995RandomForests}, cuya \textbf{esencia} radica en la construcción de múltiples árboles dentro de un subespacio aleatorio del conjunto de variables de entrada.
 
 Un modelo \textit{Random Forest} consiste en una colección de clasificadores con estructura \textit{en árbol}: 
 \({h(x,\Theta_{k}), k = 1, ...}\)
-Donde el conjunto de 
-\(\Theta_{k}\) son vectores aleatorios independientes y con distribución \textbf{idéntica} y cada árbol emite un \textit{único voto} hacia la clase más popular de la entrada \textit{x}\cite{Breiman2001RandomForests}.
+donde el conjunto de 
+\(\Theta_{k}\) son vectores aleatorios independientes y con distribución \textbf{idéntica} y cada árbol emite un \textit{único voto} hacia la clase más popular de la entrada \textit{x} \cite{Breiman2001RandomForests}.
 
-Aunque la definición previa hace referencia al modelo clásico, podemos hacer extrapolación hacia \textbf{árboles de regresión} y obtener predicciones en dicho ámbito \cite{Belyadi2021SupervisedLearning}.
+Aunque la definición previa hace referencia al modelo clásico, podemos hacer extrapolación hacia \textbf{árboles de regresión} y obtener predicciones en dicho ámbito  \cite{Belyadi2021SupervisedLearning}.
 
 \imagen{randomForest}{Ejemplo de Random Forest}{.8}
 
-Algunos problemas recientes, como los \textbf{diagnósticos y procedimientos médicos}, tienen demasiadas variables de entrada, aunque cada una de ella tan sólo contiene una pequeña cantidad de información. En estos casos, un árbol de decisión o regresión único ofrecerá resultados tan sólo un poco mejores que la selección aleatoria. Sin embargo, la \textit{combinación} de árboles con un crecimiento usando características aleatorias puede \textbf{mejorar la precisión}\cite{Breiman2001RandomForests}.
+Algunos problemas recientes, como los \textbf{diagnósticos y procedimientos médicos}, tienen demasiadas variables de entrada, aunque cada una de ella tan sólo contiene una pequeña cantidad de información. En estos casos, un árbol de decisión o regresión único ofrecerá resultados tan sólo un poco mejores que la selección aleatoria. Sin embargo, la \textit{combinación} de árboles con un crecimiento usando características aleatorias puede \textbf{mejorar la precisión} \cite{Breiman2001RandomForests}.
 
-Generalmente, existen \textbf{dos técnicas} para combinar varios árboles en uno solo\cite{Belyadi2021SupervisedLearning}:
+Generalmente, existen \textbf{dos técnicas} para combinar varios árboles en uno solo \cite{Belyadi2021SupervisedLearning}:
 
 \begin{enumerate}
-    \item \textbf{Bagging}: En este método, propuesto por Leo Breiman\cite{Breiman1996BaggingPredictors}, se crean múltiples versiones de un predictor para alcanzar un único modelo agregado. Mediante el \textit{promedio} o la \textit{moda}, se produce la salida. Cada una de las versiones se forman realizando muestras aleatorias en tiempo de ejecución del conjunto de datos de entrenamiento y usándolas como un nuevo conjunto.
+    \item \textbf{Bagging}: En este método, propuesto por Leo Breiman \cite{Breiman1996BaggingPredictors}, se crean múltiples versiones de un predictor para alcanzar un único modelo agregado. Mediante el \textit{promedio} o la \textit{moda}, se produce la salida. Cada una de las versiones se forman realizando muestras aleatorias en tiempo de ejecución del conjunto de datos de entrenamiento y usándolas como un nuevo conjunto.
     \item \textbf{Boosting}: Al contrario que en la metodología anterior, los modelos son construidos de forma \textit{secuencial}, de manera similar al proceso de aprendizaje en el \textit{descenso de gradiente}, donde los pesos se centran en las instancias con predicciones incorrectas, buscando impulsar las predicciones de casos \textit{desafiantes}. Por tanto, las predicciones no provienen de una votación o promedio igualitario, sino \textit{ponderado}.
 \end{enumerate}
 
 
 \subsection{Redes Neuronales Artificiales}
 
-Las \textbf{redes neuronales artificiales} son sistemas complejos basados en modelos matemáticos inspirados en la función, estructura y el procesamiento de la información del cerebro humano y el sistema nervioso central.\cite{Huang2022AutomaticNetworks}
+Las \textbf{redes neuronales artificiales} son sistemas complejos basados en modelos matemáticos inspirados en la función, estructura y el procesamiento de la información del cerebro humano y el sistema nervioso central \cite{Huang2022AutomaticNetworks}.
 
 De esta forma, una red es concebido como un sistema capaz de \textit{aprender} a predecir salidas tras realizar numerosas iteraciones.
 
 Durante el proceso de aprendizaje, la salida de cada una de las neuronas será tomada como la entrada de la siguiente, tras pasar por una \textit{función umbral}. Para obtener la mejor \textit{precisión}, se aplica un algoritmo de entrenamiento con \textbf{propagación hacia detrás}.
 
-Este proceso de aprendizaje se ha convertido en una valiosa herramienta para encontrar relaciones lineales y no lineales \textit{complejas}, de forma similar a una \textbf{caja negra}, y con múltiples aplicaciones en ingeniería, biología, matemáticas y medicina\cite{Moayedi2020AApplications}.
+Este proceso de aprendizaje se ha convertido en una valiosa herramienta para encontrar relaciones lineales y no lineales \textit{complejas}, de forma similar a una \textbf{caja negra}, y con múltiples aplicaciones en ingeniería, biología, matemáticas y medicina \cite{Moayedi2020AApplications}.
 
 \subsubsection{Perceptrón}
 
-El concepto de perceptrón fue derivado del modelo descrito por McCulloch y Pitts \cite{McCulloh1943ANets}, los cuales simularon los principios de las células nerviosas en un modelo matemática, comprobando que una única neurona es \textbf{capaz de realizar funciones lógicas}.
+El concepto de perceptrón fue derivado del modelo descrito por McCulloch y Pitts \cite{McCulloh1943ANets}, los cuales simularon los principios de las células nerviosas en un modelo matemático, comprobando que una única neurona es \textbf{capaz de realizar funciones lógicas}.
 
 \begin{equation}
 \sum w_{i}x_{i} \ge b
@@ -181,7 +181,7 @@ Y usando un \textbf{descenso de gradiente} obtenemos el cambio en cada peso\cite
 
 Antes de desarrollar cualquier medida que tenga como objetivo alcanzar una mejora de \textbf{rendimiento en la planificación quirúrgica (\textit{OR performance})}, debemos definir qué entendemos por rendimiento y, en su caso, \textit{cómo medirlo}. 
 
-Algunas de las más importantes son los referidos en  la tabla \ref{Métricas de Quirófano}.
+Algunas de las más importantes son las referidas en  la tabla \ref{Métricas de Quirófano}.
 \begin{table}[]
     \centering
     \begin{tabular}{p{7cm}|p{7cm}}
@@ -199,7 +199,7 @@ Algunas de las más importantes son los referidos en  la tabla \ref{Métricas de
 \end{table}
 
 No obstante, las métricas usadas para cuantificar el rendimiento de las medidas de optimización en quirófano son muy diversas a lo largo de la literatura.
-Muchos artículos focalizan la eficiencia en aspectos meramente cualitativos, mientras que otros se centran en mejorar las métricas más objetivas, buscando la minimización del malgasto de recursos y la correcta gestión del tiempo. \cite{Schouten2023OperatingReview}.
+Muchos artículos focalizan la eficiencia en aspectos meramente cualitativos, mientras que otros se centran en mejorar las métricas más objetivas, buscando la minimización del malgasto de recursos y la correcta gestión del tiempo \cite{Schouten2023OperatingReview}.
 
 Además, debemos tener en consideración que, mientras que estas medidas de rendimiento personalizan la estructura del problema, también limitan su tamaño, pues cuanto mayor es el número de los criterios de evaluación, la estructura será de mayor tamaño y complicación \cite{Gur2018ApplicationOverview}. 
 
@@ -209,7 +209,7 @@ En nuestro caso, optaremos por \textbf{maximizar} la tasa de utilización del si
 { \textbf{Eficiencia}  &  \textbf{Calidad} \\}{ 
 Maximizar utilización y reducción de retrasos y esperas & Calidad en cuidados\\ 
                                             & Seguridad del paciente\\ 
-                                            &  Bienhacer profesional.\\ } 
+                                            &  \textit{Buen hacer }profesional.\\ } 
 
 Podemos resumir, por tanto, que un correcto rendimiento debe satisfacer requisitos de \textbf{eficiencia }y \textbf{calidad} \cite{Sandbaek2014ImpactEfficiency}.
 
@@ -302,12 +302,12 @@ La primera de ellas se basa en el \textbf{mayor tiempo de procesado} (LPT\footno
 
 \subsection{Algoritmo Genético}
 
-Un algoritmo genético es una \textbf{metaheurística} inspirada en los procesos naturales de selección, evolución y herencia. En ellos, se combina la \textit{supervivencia del más adaptado} sobre las estructuras, así como con un intercambio de información estructurado y aleatorizado, formando un \textbf{algoritmo de búsqueda} inspirado en las mecánicas de evolución \textit{humanas}.  \cite{Goldberg1989GeneticLearning}
+Un algoritmo genético es una \textbf{metaheurística} inspirada en los procesos naturales de selección, evolución y herencia. En ellos, se combina la \textit{supervivencia del más adaptado} sobre las estructuras, así como con un intercambio de información estructurado y aleatorizado, formando un \textbf{algoritmo de búsqueda} inspirado en las mecánicas de evolución \textit{humana}   \cite{Goldberg1989GeneticLearning}.
 
 
 Tras un proceso de \textbf{codificación} de los individuos en \textit{cromosomas}, obtendremos un \textit{genotipo} generado, en principio, de forma aleatoria. Se aplicarán operadores de \textbf{selección}, \textbf{evaluación}, \textbf{cruce} y \textbf{mutación} a dicha población hasta que se satisfaga un \textit{criterio de parada}, devolviendo al mejor individuo como solución.
 
-Según los autores \cite{Lin2020AScheduling}\cite{Goldberg1989GeneticLearning}, el mayor desafío para resolver un problema con este enfoque será el diseño de los cromosomas y la función de evaluación.
+Según los autores \cite{Lin2020AScheduling,Goldberg1989GeneticLearning}, el mayor desafío para resolver un problema con este enfoque será el diseño de los cromosomas y la función de evaluación.
 
 \begin{algorithm}
 \caption{Estructura AG}\label{alg:ag}
