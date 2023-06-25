@@ -2,9 +2,55 @@
 
 \section{Introducción}
 
+En este apartado desglosaremos las estrategias de diseño tomadas en consideración: \textit{conjuntos de datos, clases, procedimientos..}, para el cumplimiento de los requerimientos funcionales y no funcionales reseñados en el primer apartado.
+
 \section{Diseño de datos}
 
+\subsection{Entidades}
+
+\begin{itemize}
+    \item \textbf{Usuario (\textit{User})}: Consta de un identificador auto-incrementado como clave primaria, así como atributos para el \textit{nombre}, su \textit{correo electrónico}, contraseña \textit{encriptada} y fechas de \textit{creación} y \textit{modificación}.
+    \item \textbf{Planificación:} Consta de un identificador como clave primaria, el identificador del usuario que la creó (\textit{FK}) y la fecha de creación.
+    \item \textbf{Predicción:} Sigue la misma estructura de atributos que la entidad \textit{Planificación}.
+\end{itemize}
+
+\newpage
+\subsection{Diagrama Relacional}
+
+\imagen{diagRel}{Diagrama Relacional}
+
+
+\subsection{Diagrama E-R}
+
+\imagen{diagERD}{Diagrama Relacional}
+
+\newpage
+
 \section{Diseño procedimental}
+
+En este apartado, se desgranan los procedimientos que permiten especificar el funcionamiento interno de las aplicaciones.
+
+Existen muchos tipos de diagramas que pueden representar estas funcionalidades, aunque para esta ocasión hemos elegido los \textit{diagramas de interacción}  \cite{Britton2005IdentifyingDiagrams}. En él, registraremos el comportamiento de nuestro sistema mediante una secuencia de eventos \textbf{ordenados por tiempo}.
+
+En primer lugar, reflejaremos la acción de \textit{modificar el perfil} de un usuario en nuestro interfaz:
+
+\imagen{UsuarioEst}{Diag Int-Seq: Modificar Perfil de Usuario}
+
+Mostramos ahora las acciones que puede realizar el usuario \textbf{administrador} sobre las acciones de creación, modificación y eliminación de usuario:
+
+\imagen{AdminUs}{Diag Int-Seq: Gestión de Usuarios}
+
+Dentro de este proyecto, podemos diferenciar dos \textbf{funcionalidades:} Planificación de Intervenciones y Predicción de duración, tanto de forma \textit{independiente} como \textit{interrelacionada} (llamada de una funcionalidad a otra en caso de ser requerida).
+
+El usuario puede \textit{crear, visualizar o eliminar} una determinada \textbf{predicción}, siguiendo el siguiente esquema (partiendo del supuesto de un inicio de sesión exitoso):
+
+\imagen{PredUs}{Diag Int-Seq: Gestión de Predicciones}
+
+De modo similar, gestionaremos las \textbf{planificaciones:}
+
+
+\imagen{PlanUs}{Diag Int-Seq: Gestión de Planificaciones}
+
 
 \section{Diseño arquitectónico}
 
