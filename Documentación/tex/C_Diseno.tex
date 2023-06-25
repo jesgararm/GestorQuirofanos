@@ -54,4 +54,65 @@ De modo similar, gestionaremos las \textbf{planificaciones:}
 
 \section{Diseño arquitectónico}
 
+Al haber optado para el despliegue por el desarrollo tanto de una API como proveedora de servicios como por una \textit{aplicación web} que sirva de GUI para los usuarios clientes, se han seguido los patrones \textbf{cliente-servidor} y \textbf{MVC} (\textit{Modelo Vista Controlador}) en el diseño de la arquitectura de este proyecto software.
+
+\subsection{Modelo Cliente-Servidor}
+
+La arquitectura cliente-servidor, nos presenta una serie de \textit{ventajas de diseño}\cite{Rana2022HighDesign}:
+
+\begin{enumerate}[label=\Alph*]
+    \item Facilita el \textbf{mantenimiento}, dado que los roles se encuentran distribuidos a lo largo de varios servidores independientes.
+    \item Permite una fácil \textbf{escalabilidad} y modularidad del sistema.
+    \item Los datos están centralizados, de forma que varios clientes distintos pueden acceder desde diversas localizaciones. La existencia de recursos compartidos facilita a su vez la gestión, modificación y \textbf{reutilización} de módulos software.
+\end{enumerate}
+
+Siguiendo este modelo, y aplicado al sistema particular desarrollado en el proyecto, podríamos definir \textbf{dos modelos} cliente-servidor:
+
+\begin{itemize}
+    \item La comunicación entre el \textbf{interfaz web y la API} proveedora de servicios de predicción y planificación:
+\imagen{diagCSAPI}{Esquema Cliente-Servidor de APP-WEB y API}
+    \item Por otra parte, definiremos la comunicación entre los \textbf{usuarios clientes} y la \textbf{aplicación web distribuida}:
+\imagen{diagCSAPP}{Esquema Cliente-Servidor de Usuario y APP-WEB}
+\end{itemize}
+
+\subsection{Modelo-Vista-Controlador}
+
+En este caso, debido a la implementación de una base de datos, así como de dos servicios computacionales \textit{externalizados}, parece ser adecuado separar la \textbf{vista} del \textbf{modelo de datos} subyacente\cite{Pop2014DesigningDevelopment}.
+
+Aquí, tanto el interfaz de usuario, como la lógica de negocio y la integración con otros sistemas y subsistemas han sido desarrolladas en Python, y desplegadas en servidores externos a partir de las funcionalidades que ofrece Amazon Web Services:
+
+\begin{itemize}
+    \item \textbf{AWS Elastic Container Services}: Para ejecutar los servidores y las tareas.
+    \item \textbf{AWS RDS}: Para almacenamiento y lógica de base de datos relacional.
+    \item \textbf{AWS Elastic Container Registry:} Para almacenamiento persistente de los \textit{contenedores} construidos a partir de los ficheros fuente de la aplicación.
+\end{itemize}
+
+\imagen{MVC}{Modelo-Vista-Controlador}
+
+Podemos comprobar cómo el \textit{Framework Flask} es el encargado de aportar la solución al desarrollo del interfaz web siguiendo este modelo, comportándose como el controlador y aislando el modelo de datos de la vista.
+
+\subsection{Diseño de Paquetes}
+
+Para facilitar la \textit{legibilidad} del código, tratamos de ofrecer una estructuración del sistema en dos \textit{subsistemas} (API y APP-WEB), comunicados según el patrón cliente-servidor, de forma distribuida, y dividiendo los paquetes de cada uno de ellos siguiendo un \textit{enfoque por características}.
+
+En este enfoque, todas las clases requeridas para una misma funcionalidad se encuentran en el mismo paquete, consiguiendo una \textbf{alta cohesión} entre las clases de un mismo paquete y un \textbf{acoplamiento reducido} entre diferentes paquetes.
+
+Así, podemos comprobar la notación de los paquetes y cómo se distribuyen según su funcionalidad de forma jerárquica y caracterizable:
+
+\imagen{packages_API}{Diagrama de Paquetes API}
+
+
+
+\imagen{packages_APPWEB}{Diagrama de Paquetes APP-WEB}
+
+
+
+Por último, podemos ver el diagrama de clases desglosadas dentro de cada subsistema, y localizar su posición en el paquete a partir de los diagramas de paquetes mostrados con anterioridad, siguiendo la notación \textit{\textbf{dot}}.
+
+
+\imagen{classes_API}{Diagrama de clases del subsistema API}
+
+
+
+\imagen{classes_APPWEB}{Diagrama de clases del subsitema APP-WEB}
 
