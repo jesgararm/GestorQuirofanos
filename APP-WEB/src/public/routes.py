@@ -89,6 +89,7 @@ def uploadScheduling():
             params = {"n_quirofanos":request.form["n_quirofanos"], "n_dias":request.form["n_dias"], "ventana":request.form["ventana"]}
             # Llamamos a la API
             url = "http://localhost:7000/schedule"
+            #url = "http://13.50.109.201:4000/schedule"
             planificacion = requests.get(url, files={"file": open(ruta, "rb")}, params=params)
             flash("Planificación realizada correctamente")
             # Eliminamos el archivo para ahorrar espacio
@@ -135,6 +136,7 @@ def upload():
             ruta = "src/static/uploads/" + file.filename
             # Llamamos a la API
             url = "http://localhost:7000/predict"
+            #url = "http://13.50.109.201:4000/predict"
             predicciones = requests.get(url, files={"file": open(ruta, "rb")})
             flash("Predicciones realizadas correctamente")
             # Eliminamos el archivo para ahorrar espacio
