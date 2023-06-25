@@ -2,7 +2,7 @@
 
 \section{Introducción}
 
-Dentro de las etapas que configuran un proyecto, la \textbf{planificación} constituye un elemento esencial. Durante esta fase, realizaremos una estimación de los costes relativos a su ejecución: \textit{económicos directos e indirectos}, \textit{temporales}... etc.
+Dentro de las etapas que configuran un proyecto, la \textbf{planificación} constituye un elemento esencial. Durante esta fase, realizaremos una estimación de los costes relativos a su ejecución: \textit{económicos directos e indirectos}, \textit{temporales}, etc.
 
 Dividiremos este plan en dos apartados:
 \begin{enumerate}
@@ -87,26 +87,69 @@ Se validaron, por tanto, los pasos realizados en la iteración previa, planteand
 \subsubsection{Sprint 4: 15 de Abril de 2023 a 15 de Mayo de 2023}
 
 Tras finalizar esta iteración, valoramos en la reunión los resultados y la manera de integrarlos en un producto para el cliente.
-Se decidió, como hito importante, que el entregable final fuese una API, planteando los siguientes objetivos:
+Se decidió plantear como entregable final una API:
 
 \begin{itemize}
     \item Refactorizar clases y modelos.
-    \item Familiarizarse con el diseño de API con un framework de Python.
-    \item Implementar API siguiendo los objetivos y requerimientos.
+    \item Familiarizarse con el diseño de una API con un \textit{framework} de Python.
+    \item Implementar una API siguiendo los objetivos y requerimientos.
     \item Pruebas de Integración y Sistema.
     \item Finalizar memoria. 
     \item Comenzar anexos.
 \end{itemize}
 
-\subsubsection{Sprint 5: 15 de Mayo de 2023 a 12 de Junio de 2023}
+\subsubsection{Sprint 5: 15 de Mayo de 2023 a 10 de Junio de 2023}
 
-En la última reunión se comprobaron y detallaron especificaciones del último entregable:
+En la última reunión se comprobaron y detallaron especificaciones del último entregable. Decidimos prolongar la entrega y añadir al entregable la implementación de la interfaz.
 
 \begin{itemize}
-    \item Corrección de memoria. Finalizar anexos.
-    \item Confección de presentaciones teóricas y grabación de vídeos.
-    \item Integrar API en Docker para exportación.
-    \item Preparar entrega y depositarla.
+    \item Añadir funcionalidades. Refactorizaciones de código.
+    \item Diseño de interfaz como aplicación web.
+    \item Contenerización y migración a cloud de la API.
+    \item Diseño de sistema de gestión de usuarios.
+    \item Diseño e implementación de base de datos relacional.
+\end{itemize}
+
+\subsubsection{Sprint 6: 10 de Junio de 2023 a 24 de Junio de 2023}
+
+El interfaz contaba ya con un sistema de gestión de usuarios y las pruebas de sistema con la API desarrollada y publicada en un servidor remoto fueron satisfactorias.
+
+Planteamos el desarrollo durante esta iteración de:
+
+\begin{itemize}
+    \item Implementación del sistema de gestión de predicciones.
+    \item Implementación del sistema de gestión de planificaciones.
+    \item Pruebas de integración con la API en servidor local y remoto.
+    \item Pruebas de integración con la Base de Datos en servidor local y remoto.
+    \item Despliegue de versión inicial de aplicación web en servidor remoto (AWS).
+    \item Pruebas de sistema sobre el despliegue en AWS.
+    \item Reestructurar memoria y anexos, añadiendo cambios.
+\end{itemize}
+
+\subsubsection{Sprint 7: 24 de Junio de 2023 a 30 de Junio de 2023}
+
+El despliegue ha sido satisfactorio y muestra la funcionalidad requerida, cumpliendo los requerimientos funcionales y los casos de uso de mayor prioridad.
+
+En esta iteración se propone:
+
+\begin{itemize}
+    \item Completar anexos de la memoria, últimos apartados de diseño y manuales técnicos y de usuario.
+    \item Pruebas de Usuario en base a los requerimientos.
+    \item Ampliar funcionalidad y refactorizar en base al resultado de las pruebas.
+    \item Corrección de errores en documentos de memoria y anexos.
+\end{itemize}
+
+\subsubsection{Sprint 8: 30 de Junio de 2023 a 4 de Julio de 2023}
+
+Documentación finalizada y revisada.
+
+Proponemos:
+\begin{itemize}
+    \item Confección de presentación de diapositivas para la defensa.
+    \item Grabación de vídeo demostrativo.
+    \item Grabación de vídeo de presentación.
+    \item Última revisión y corrección de errores de última hora en los documentos entregables.
+    \item Depósito de trabajo de fin de grado.
 \end{itemize}
 
 \newpage
@@ -127,33 +170,45 @@ En el primer apartado, consideraremos los costes de una empresa para contratar a
 \tablaSmallSinColores{Costes de Personal}{c|c|c}{cost:Pers}{
 \textbf{Concepto} & \textbf{Coste Anual} & \textbf{Prorrateo (5 meses)}\\
 }{
-\textit{Salario Bruto} & 24.000€ & 10.000€\\
-\textit{Retención IRPF} & 3.252€ & 1.355€\\
-\textit{Seguridad Social} & 1.524€ & 635€\\
-\textit{Salario Neto} & 19.224€ & 8.010€\\ 
+\textit{Salario Bruto} & 24.000,00€ & 10.000,00€\\
+\textit{Retención IRPF} & 3.252,00€ & 1.355,00€\\
+\textit{Seguridad Social} & 1.524,00€ & 635,00€\\
+\textit{Salario Neto} & 19.224,00€ & 8.010,00€\\ 
 }
 
 Hemos aplicado un \textit{13,55\%} de retención sobre la nómina IRPF, considerando ausencia de deducciones tributarias.
 
 Siguiendo la estela del análisis de costes, pasamos a analizar los empleados en el equipamiento (\textit{hardware, licencias software}) para el desarrollo de esta herramienta:
 
-\tablaSmallSinColores{Costes de Equipamiento}{c|c|c}{cost:Equip}{
-\textbf{Concepto} & \textbf{Coste Total} & \textbf{Coste Amortizado}\\
+\tablaSmallSinColores{Costes de Equipamiento}{c|c S[
+                table-number-alignment = center,
+                separate-uncertainty = true,
+                table-figures-uncertainty = 1,
+                table-figures-decimal = 2,
+                table-figures-integer = 1
+        ]|c S[
+                table-number-alignment = center,
+                separate-uncertainty = true,
+                table-figures-uncertainty = 1,
+                table-figures-decimal = 2,
+                table-figures-integer = 1
+        ]}{cost:Equip}{
+\textbf{Concepto} & \textbf{Coste Total} & \textbf{Coste Amortizado}(\textit{5 Meses})\\
 }{
-\textit{Ordenador Portátil} & 1.330€ & 110,83€\\
-\textit{Licencia MS Windows 10} & 279€ & 58,125€\\
-\textit{Suscripción Overleaf} & 10€ & 50€\\
-\textit{Suscripción Internet} & 43€ & 215€\\ 
+\textit{Ordenador Portátil} & 1.330,00€ & 110,83€\\
+\textit{Licencia MS Windows 10} & 279,00€ & 58,12€\\
+\textit{Suscripción Overleaf} & 50,00€ & 50,00€\\
+\textit{Suscripción Internet} & 278,00€ & 215,00€\\ 
 }
 
 Por último, pasamos a realizar una estimación de aquellos \textbf{costes} que no encajan en ninguna de las otras categorías anteriores:
 
 \tablaSmallSinColores{Costes Extra}{c|c|c}{cost:Extra}{
-\textbf{Concepto} & \textbf{Coste Total} & \textbf{Coste Amortizado}\\
+\textbf{Concepto} & \textbf{Coste Total} & \textbf{Coste Amortizado}(\textit{5 Meses})\\
 }{
-\textit{Consumo Eléctrico} & 300€ & 99,99€\\
-\textit{Espacio de Trabajo} & 4.000€ & 1333,33€\\
-\textit{Material de Oficina} & 10€ & 8€\\
+\textit{Consumo Eléctrico} & 300,00€ & 99,99€\\
+\textit{Espacio de Trabajo} & 4.000,00€ & 1333,33€\\
+\textit{Material de Oficina} & 10,00€ & 8,00€\\
 }
 
 
@@ -162,7 +217,7 @@ Por último, se calculan los costes totales en base a los amortizados:
 \tablaSmallSinColores{Costes Totales}{c|c}{cost:Tot}{
 \textbf{Concepto} & \textbf{Coste}\\
 }{
-\textit{Costes de Personal} & 10.000€\\
+\textit{Costes de Personal} & 10.000,00€\\
 \textit{Coste de Equipamiento} & 433,95€\\
 \textit{Coste Extra} & 1.441,32€\\
 \textit{\textbf{TOTAL}} & 11.875,27€\\
