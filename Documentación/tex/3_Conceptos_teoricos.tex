@@ -4,7 +4,7 @@ En el siguiente proyecto se hace uso de algunas técnicas de \textbf{aprendizaje
 
 Tal y como se ha comentado, se parte de un \textbf{modelo predictivo}, basado en técnicas de \textit{aprendizaje supervisado} para estimar la duración de una intervención quirúrgica en base a los datos introducidos por el usuario.
 
-Posteriormente, partiremos de la salida del modelo para realizar una \textbf{programación} de tipo \textit{parallel scheduling}\footnote{Programar n trabajos en m máquinas paralelas\cite{Xing2000ParallelJobs}, se asemeja a programar n intervenciones en m quirófanos simultáneos}, usando una aproximación con restricciones que definen un problema \textbf{MIP}\footnote{\textit{Mixed Integer Programming}: Problemas de programación dinámica en la que algunas de sus variables deben ser enteras.\cite{RichardsMixed-integerControl}} \cite{Lin2020AScheduling} y resultan en un problema \textit{NP-Hard}.
+Posteriormente, partiremos de la salida del modelo para realizar una \textbf{programación} de tipo \textit{parallel scheduling}\footnote{Programar n trabajos en m máquinas paralelas \cite{Xing2000ParallelJobs}, se asemeja a programar n intervenciones en m quirófanos simultáneos}, usando una aproximación con restricciones que definen un problema \textbf{MIP}\footnote{\textit{Mixed Integer Programming}: Problemas de programación dinámica en la que algunas de sus variables deben ser enteras \cite{RichardsMixed-integerControl}} \cite{Lin2020AScheduling}  y resultan en un problema \textit{NP-Hard}.
 
 
 
@@ -12,7 +12,7 @@ Posteriormente, partiremos de la salida del modelo para realizar una \textbf{pro
 
 El aprendizaje supervisado es un enfoque de inteligencia altificial en el cual un algoritmo es entrenado a partir de datos de entrada para producir una \textbf{determinada salida}. 
 
-Este modelo es entrenado hasta que es capaz de detectar los patrones y relaciones entre los datos de entrada y las \textit{etiquetas} de salida, de forma que pueda otorgar resultados precisos cuando se le presenten datos \textit{nuevos}\cite{PeterssonSupervisedLearning}.
+Este modelo es entrenado hasta que es capaz de detectar los patrones y relaciones entre los datos de entrada y las \textit{etiquetas} de salida, de forma que pueda otorgar resultados precisos cuando se le presenten datos \textit{nuevos} \cite{PeterssonSupervisedLearning}.
 
 Reflejaremos en las siguientes subsecciones los diferentes algoritmos empleados para el proceso predictivo.
 
@@ -20,18 +20,18 @@ Reflejaremos en las siguientes subsecciones los diferentes algoritmos empleados 
 
 Existen diferentes tipos de algoritmos de regresión, siendo cada uno de ellos el más adecuado en función del problema a resolver.
 
-El mecanismo de regresión lineal más \textbf{simple} es aquel definido para dibujar una línea a través de un grafo que muestra dependencia lineal entre ambas variables y su ecuación es\cite{Belyadi2021SupervisedLearning}:
+El mecanismo de regresión lineal más \textbf{simple} es aquel definido para dibujar una línea a través de un grafo que muestra dependencia lineal entre ambas variables y su ecuación es \cite{Belyadi2021SupervisedLearning}:
 \begin{equation}
     y=mx+b
 \end{equation}
 Donde \textit{m} representa a la pendiente de la recta, \textit{b} a la ordenada en el origen, \textit{y} es la variable dependiente (característica de salida) y \textit{x} la independiente (característica de entrada).
 
-Para modelos de regresión lineal múltiple, que es el que manejaremos en nuestro trabajo, usamos la ecuación siguiente\cite{Belyadi2021SupervisedLearning}: 
+Para modelos de regresión lineal múltiple, que es el que manejaremos en nuestro trabajo, usamos la ecuación siguiente \cite{Belyadi2021SupervisedLearning}: 
 \begin{equation}
     y = m_{1} x_{1} + m_{2} x_{2} + ... + m_{n}x_{n} + b
 \end{equation}
 \subsubsection{Método de Mínimos Cuadrados}
-Para obtener los parámetros de la ecuación, usaremos el \textbf{método de mínimos cuadrados}, el cual se encarga de buscar la curva que mejor se ajusta a un conjunto de puntos minimizando la suma cuadrática de los residuos a los puntos de la curva\cite{WeissteinLeastFitting}.
+Para obtener los parámetros de la ecuación, usaremos el \textbf{método de mínimos cuadrados}, el cual se encarga de buscar la curva que mejor se ajusta a un conjunto de puntos minimizando la suma cuadrática de los residuos a los puntos de la curva \cite{WeissteinLeastFitting}.
 
 Operando \cite{WeissteinLeastFitting}:
 \begin{equation}
@@ -53,14 +53,14 @@ Y la \textit{ordenada en el origen} en términos de b:
 
 Se trata de una de las formas más simples de aplicar un algoritmo de aprendizaje supervisado, con utilidad para tareas tanto de \textbf{regresión} como de \textbf{clasificación}.
 
-Se considera un algoritmo \textit{no paramétrico} en tanto que no existen preconceptciones acerca de los datos subyacentes\cite{Belyadi2021SupervisedLearning}.
+Se considera un algoritmo \textit{no paramétrico} en tanto que no existen preconceptciones acerca de los datos subyacentes \cite{Belyadi2021SupervisedLearning}.
 
-La base de su funcionamiento es la estimación de proximidad mediante el cálculo de \textbf{distancias}, en especial la \textbf{distancia euclídea}\cite{Greenacre2009CorrespondenceAnalysis}:
+La base de su funcionamiento es la estimación de proximidad mediante el cálculo de \textbf{distancias}, en especial la \textbf{distancia euclídea} \cite{Greenacre2009CorrespondenceAnalysis}:
 \begin{equation}
     d(p,q) = \sqrt{(p-q)^2}
 \end{equation}
 
-Podemos describir el algoritmo en los siguientes pasos\cite{Almomany2022OptimizedStudy}: 
+Podemos describir el algoritmo en los siguientes pasos \cite{Almomany2022OptimizedStudy}: 
 \begin{enumerate}
     \item Determinar el número de vecinos más cercanos, conocido como el parámetro \textit{K}.
     \item Usar la función de \textbf{distancia} para calcular la distancia entre cada instancia del conjunto a predecir y todos los del entrenamiento.
@@ -74,9 +74,9 @@ Podemos describir el algoritmo en los siguientes pasos\cite{Almomany2022Optimize
 
 Se trata de otro tipo de aprendizaje supervisado que, al igual que KNN, puede ser usado para ambos tipos de problema.
 
-Actualmente, consiste un una de las herramientas \textbf{más usadas} para la toma de decisiones\cite{Navada2011OverviewLearning} en todo el mundo.
+Actualmente, consiste un una de las herramientas \textbf{más usadas} para la toma de decisiones \cite{Navada2011OverviewLearning} en todo el mundo.
 
-Para cumplir con esta tarea, se dibuja un árbol con diferentes \textit{ramas} y hojas, de forma que se incluyan \textit{todos los valores} de una situación particular\cite{Navada2011OverviewLearning}:
+Para cumplir con esta tarea, se dibuja un árbol con diferentes \textit{ramas} y hojas, de forma que se incluyan \textit{todos los valores} de una situación particular \cite{Navada2011OverviewLearning}:
 
 \imagen{Arbol de decisiones}{Ejemplo de Árbol de Decisiones}{.8}
 
@@ -85,7 +85,7 @@ Un árbol divide los datos en \textit{subárboles} de forma progresiva, desde la
 Existen varios algoritmos para la construcción de estos árboles, algunos de los más conocidos son ID3, C4.5, C5.0 y CART.  
 De ellos, quizás el más famoso y del que derivan los demás, sea ID3, con un método de construcción \textbf{descendente y voraz} con atributos categóricos alcanzando la mayor \textit{ganancia de información}.
 
-Conviene hacer referencia al método CART, cuya implementación optimizada por la librería \textit{scikit-learn} es la que hemos empleado en el proyecto. Este método es compatible con árboles de clasificación y regresión, aceptando tanto atributos como variables de decisión numéricas, creando árboles binarios con la mayor ganancia de información en cada nodo.\cite{Belyadi2021SupervisedLearning}
+Conviene hacer referencia al método CART, cuya implementación optimizada por la librería \textit{scikit-learn} es la que hemos empleado en el proyecto. Este método es compatible con árboles de clasificación y regresión, aceptando tanto atributos como variables de decisión numéricas, creando árboles binarios con la mayor ganancia de información en cada nodo \cite{Belyadi2021SupervisedLearning}.
 
 \subsubsection{Selección de Atributos}
 
@@ -94,7 +94,7 @@ Para elegir cuál de los N atributos del conjunto de datos debe ser colocado en 
 Los más usados son:
 
 \begin{enumerate}
-    \item \textbf{Entropía}: Medida de la pureza e incertidumbre. Cuanto mayor sea, menor será su pureza. El cálculo es\cite{Belyadi2021SupervisedLearning}: \begin{equation}
+    \item \textbf{Entropía}: Medida de la pureza e incertidumbre. Cuanto mayor sea, menor será su pureza. El cálculo es \cite{Belyadi2021SupervisedLearning}: \begin{equation}
         E(S) = \sum_{i=1}^{c}-P_{i}\log_{2}P_{i} 
     \end{equation}
     \item \textbf{Ganacia de Información}: Al construir un árbol, debemos seleccionar los atributos que alcancen la \textit{mayor} ganacia de información y menor entropía: \begin{equation}
