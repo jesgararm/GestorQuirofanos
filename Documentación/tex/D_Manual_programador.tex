@@ -2,9 +2,51 @@
 
 \section{Introducción}
 
+Para realizar un correcto \textbf{análisis} del desarrollo de este proyecto, son necesarias algunas consideraciones respecto al entorno de desarrollo, las dependencias funcionales y las opciones de integración y despliegue.
+
 \section{Estructura de directorios}
 
+Dentro del repositorio, podemos encontrar:
+\begin{itemize}
+    \item \textit{./}: Directorio raíz. Contiene la licencia, el logo, el fichero \textit{léeme} para la página principal de GitHub, la estructura de base datos para su importación y todos los paquetes y directorios que conforman el proyecto.
+    \item \textit{./API}:  Sistema que contiene la API con los servicios de Predicción y Planificación quirúrgica.
+    \item ./\textit{API}/\textit{uploads}: Directorio de almacenamiento temporal que recoge los archivos enviados por los usuarios antes de ser procesados y eliminados.
+    \item \textit{./API/src}: Código fuente de la API.
+    \item \textit{./API/src/scheduling}: Contiene las clases y paquetes encargados de la tarea de planificación, así como el archivo Dockerfile para ser encapsulado.
+    \item \textit{./API/src/scheduling/Optimizacion}: Directorio con clases y paquetes con los algoritmos de optimización y planificación.
+    \item \textit{./API/src/scheduling/Optimizacion/Genético}: Clases para el algoritmo genético.
+    \item \textit{./API/src/scheduling/Optimizacion/Heurísticas}: Clases para las heurísticas de planificación.
+    \item \textit{./API/src/predictions}: Directorio con clases encargadas de cargar el modelo de ML predictivo.
+    \item \textit{./API/src/common}: Clases comunes a todos los paquetes. Encargados fundamentalmente de tareas de procesamiento de datos y ficheros.
+    \item \textit{./APP-WEB}: Contiene el Dockerfile y el código fuente de la interfaz web.
+    \item \textit{./APP-WEB/src}: Código fuente de la aplicación.
+    \item \textit{./APP-WEB/src/admin}: Contiene las rutas a las funcionalidades del usuario administrador.
+    \item \textit{./APP-WEB/src/auth}: Contiene las rutas para la funcionalidad de autenticación en sistema.
+    \item \textit{./APP-WEB/src/forms}: Contiene los formularios en formato Flask WTF para incluirlos en las plantillas HTML.
+    \item \textit{./APP-WEB/src/models}: Clases y paquetes que encapsulan el modelo de comunicación con la base de datos.
+    \item \textit{./APP-WEB/src/models/entities}: Contiene las clases que representan las entidades persistentes de la BBDD.
+    \item \textit{./APP-WEB/src/public}: Contiene las rutas para todas las funcionalidades disponibles para los usuarios.
+    \item \textit{./APP-WEB/src/static}: Contiene los archivos de formato de estilos, imágenes... a incluir en las plantillas estáticas.
+    \item \textit{./APP-WEB/src/templates}: Contiene las plantillas en lenguaje de marcado HTML, que se corresponden con la \textit{Vista} del usuario.
+    \item \textit{./APP-WEB/src/templates/admin}: Plantillas dedicadas a la vista del administrador.
+    \item \textit{./APP-WEB/src/templates/user}: Plantillas para la vista de cualquier usuario.
+    \item \textit{./APP-WEB/src/templates/auth}: Plantillas para la función de identificación en el sistema.
+    \item \textit{./Documentación}: Se incluye la memoria, anexos y diagramas.
+    \item \textit{./Documentación/img}: Ruta de las imágenes que se encuentran en el entregable.
+    \item \textit{./Documentación/tex}: Capítulos y apartados de memoria y anexos, en formato latex.
+    \item \textit{./Documentación/UML}: Directorio con diagramas de casos de uso, interacción y secuencia.
+    \item \textit{./Experimentación}: Colección de Jupyter Notebooks que ilustran el proceso de investigación llevado a cabo hasta obtener la solución propuesta.
+    \item \textit{./Experimentación/Datos}: Colección de conjuntos de datos anonimizados para labores de ML.
+    \item \textit{./Experimentación/Modelos}: Análisis, diseño y explotación de modelos predictivos de aprendizaje supervisado.
+    \item \textit{./Experimentación/Optimización}: Análisis, diseño y explotación de algoritmos de planificación paralela.
+    \item \textit{./Experimentación/Preprocesado:} Herramientas de preprocesamiento de datos a partir de los listados originales.
+    \item \textit{./Preprocesado}: Clase con utilidades para estandarizar y homogeneizar las fuentes de datos en un formato compatible con los modelos propuestos.
+\end{itemize}
+
+
 \section{Manual del programador}
+
+
 
 \section{Compilación, instalación y ejecución del proyecto}
 

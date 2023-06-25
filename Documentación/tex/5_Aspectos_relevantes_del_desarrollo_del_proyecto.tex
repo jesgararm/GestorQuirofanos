@@ -21,7 +21,7 @@ Se obtuvieron datos relativos a las siguientes \textbf{especialidades quirúrgic
 
 En total, se consideraron \textbf{25492 individuos} tras la realización de labores de adecuación e integración de las fuentes de datos.
 
- \imagen{tiposDatos}{Variables del Conjunto de Datos Base}{.9}
+ \imagen{tiposDatos}{Variables del Conjunto de Datos Base}{.9}\footnote{NHC: Número de Historia Clínica - Identificador.}
 
 Por otro lado, contamos con otro dataset, de menor tamaño y limitado a una única especialidad (\textit{Cirugía Plástica y Reparadora}), que \textbf{amplía} el número de variables.
  
@@ -34,17 +34,16 @@ Algunas de las características que han sido tomadas en consideración a lo larg
     \item Presencia de atributos \textit{missing} o inválidos (valores nulos, incongruencia de tipos...).
     \item Imprecisión de los \textit{instrumentos de medida} (errores humanos en la recogida de datos, registros inapropiados...) que generan valores atípicos (\textbf{outliers}).
     \item Baja \textit{validez interna} (valores de \textbf{error} sobre el conjunto de prueba más elevados) compensada por una elevada \textit{validez interna} (métricas \textbf{estables} en extrapolación poblacional).
-    \item 
 \end{itemize}
 
 
  \subsection{Preparación y Estadísticos}
 
- Tras obtener los \textbf{listados} de la Base de Datos anteriormente mencionada, se realizó una labor de \textit{adecuación} de los mismos a nuestro entorno de trabajo, \cite{McKinney2010DataPython}.
+ Tras obtener los \textbf{listados} del repositorio de datos relativos a intervenciones quirúrgicas en el hospital, se realizó una labor de \textit{adecuación} de los mismos a nuestro entorno de trabajo, \cite{McKinney2010DataPython}.
 
  \imagen{previaPreprocesado}{Aspecto de la Base de Datos antes de la edición.}{.9}
 
-\imagen{postLimpieza}{Aspecto de los datos tras la limpieza y edición}{.9}
+\imagen{postLimpieza}{Aspecto de los datos tras la limpieza y edición. Previo a codificación}{.9}
 
  Una vez obtuvimos nuestro dataset listo para la realización de labores de \textbf{minería}, procedimos a efectuar un \textit{análisis preliminar}, donde cabe destacar que la \textit{media} de duración de cada intervención \textbf{no varía} de forma estadísticamente significativa en función de la especialidad (\textit{ANOVA-Test}\footnote{Análisis de la varianza. Test estadístico realizado para valorar si existen diferencias significativas en las medias de los valores entre varios grupos}.)
 
@@ -66,9 +65,9 @@ Algunas de las características que han sido tomadas en consideración a lo larg
      \item Para las variables \textbf{nominales}, usamos la técnica de \textit{One Hot Encoding}\footnote{Técnica que consiste en la división de una variable categórica en cada uno de sus posibles valores, realizando una asignación binaria en función del mismo a la instancia de entrenamiento.}, al tratarse de una de las técnicas más recomendadas para el manejo de variables categóricas en el entrenamiento de modelos de aprendizaje automático\cite{Potdar2017AClassifiers}.
  \end{enumerate}
 
- El seguimiento y proceso tanto de los procesos de \textbf{codificación} y \textbf{procesado}, así como de exportación posterior, se encuentra detallado en los Jupyter Notebooks: \textit{.\\Datos\\PreprocesadoDatos.ipynb} y \textit{.\\Datos\\codificacionDatos.ipynb}.
+ El seguimiento y proceso tanto de los procesos de \textbf{codificación} y \textbf{procesado}, así como de exportación posterior, se encuentra detallado en los Jupyter Notebooks: \textit{./Datos/PreprocesadoDatos.ipynb} y \textit{./Datos/codificacionDatos.ipynb}.
 
-Por último, de entre todas las estrategias\cite{Emmanuel2021ALearning} existentes para lidiar con los valores \textbf{ausentes} durante la fase de procesamiento, optamos por la \textbf{eliminación} de instancias, dado que el carácter arbitrario de las labores de codificación y la \textit{escasez} de variables correladas dificultan la aplicación de métodos basados en \textit{sustitución o interpolación}. 
+Por último, de entre todas las estrategias\cite{Emmanuel2021ALearning} existentes para lidiar con los valores \textbf{ausentes} durante la fase de procesamiento, optamos por la \textbf{eliminación} de instancias, dado que el carácter arbitrario de las labores de codificación y la \textit{escasez} de variables correlacionadas dificultan la aplicación de métodos basados en \textit{sustitución o interpolación}. 
 
 \newpage
 
@@ -78,17 +77,17 @@ En este apartado se describe el procedimiento de exploración, análisis e imple
 
 \subsection{Dificultades Iniciales}
 
-Tras comenzar la implementación de varios modelos con el \textbf{dataset principal}, observamos que las métricas de error devolcían unos valores \textit{desproporcionados}, en torno a miles de minutos de error medio, muy diferentes  otorgados por otros estudios\cite{ShahabiKargar2014PredictingSurgery}.
+Tras comenzar la implementación de varios modelos con el \textbf{dataset principal}, observamos que las métricas de error devolvían unos valores \textit{desproporcionados}, en torno a miles de minutos de error medio, muy diferentes  otorgados por otros estudios \cite{ShahabiKargar2014PredictingSurgery}.
 
 Esta situación nos hizo sospechar de la presencia de numerosos \textit{outliers} en nuestro conjunto de datos inicial. 
 
-Este problema fue solucionado haciendo uso del IQR\footnote{Técnica de selección de datos del conjunto de entrenamiento que escoge aquellas instancias con valores de la variable dependiente comprendidos entre 1.5 veces por debajo y por encima de los cuartiles primero y tercero, respectivamente.}\cite{Bonthu2021DetectingOutliers}.
+Este problema fue solucionado haciendo uso del IQR\footnote{Técnica de selección de datos del conjunto de entrenamiento que escoge aquellas instancias con valores de la variable dependiente comprendidos entre 1.5 veces por debajo y por encima de los cuartiles primero y tercero, respectivamente.} \cite{Bonthu2021DetectingOutliers}.
 
 Como podemos comprobar, la ejecución muestra unos valores mucho más coherentes y concordantes de la literatura, constituyendo un buen punto de partida para nuestro ensayo.
 
 \subsection{Explotación de los Modelos}
 
-Los modelos de aprendizaje han sido aplicados siguiendo las bases teóricas especificadas en apartados anteriores y basándonos en la implementación de la librería \textit{scikit-learn}\cite{2021Scikit-LearnPython}, ejecutándose en ambos conjuntos de datos.
+Los modelos de aprendizaje han sido aplicados siguiendo las bases teóricas especificadas en apartados anteriores y basándonos en la implementación de la librería \textit{scikit-learn} \cite{2021Scikit-LearnPython}, ejecutándose en ambos conjuntos de datos.
 
 Para el ajuste de los hiperparámetros, empleamos un modelo de validación cruzada de tipo \textit{GridSearch}\footnote{Técnica de validación cruzada incluida en scikit-learn, consistente en extraer los mejores valores y combinaciones introducidos en la cuadrícula de parámetros.}.
 
@@ -113,13 +112,13 @@ Tras el entrenamiento y validación de los algoritmos de aprendizaje, comparamos
 \textbf{\textit{Modelos}} & \textit{MSE} & \textit{RMSE} & \textit{MAE} \\
 }{
 \textbf{Regresión Lineal} & 3461.43 & 58.83 & 43.27\\
-\textbf{Árbol de Regresion} & 2143.10 & 46.29 & 33.48\\
-\textbf{KNN} & 3084.32 & 55.54 & 39.82\\
-\textbf{Random Forest} & 2364.55 & 48.63 & 34.75 \\
-\textbf{Perceptrón Multicapa} & 2804 & 52.96 & 40.46\\
+\textbf{Árbol de Regresion} & 2143.10 & 46.29 & \textbf{33.48}\\
+\textbf{KNN} & 3084.32 & 55.54 & \textbf{39.82}\\
+\textbf{Random Forest} & 2364.55 & 48.63 & \textbf{34.75} \\
+\textbf{Perceptrón Multicapa} & 2804.00 & 52.96 & 40.46\\
 }
 
-En base a estos resultados\footnote{Para más detalles, consultar los Jupyter Notebooks incluidos en la carpeta 'Modelos' del respositorio.}, decidimos seleccionar el \textbf{árbol de regresión}, ya entrenado y guardado\footnote{Las librerías \textit{pickle} y \textit{joblib} permiten serializar y deserializar objetos.} para su uso como servicio por los clientes.
+En base a estos resultados\footnote{Para más detalles, consultar los Jupyter Notebooks incluidos en la carpeta \textit{Experimentación/Modelos} del respositorio.}, decidimos seleccionar el \textbf{árbol de regresión}, ya entrenado y guardado\footnote{Las librerías \textit{pickle} y \textit{joblib} permiten serializar y deserializar objetos.} para su uso como servicio por los clientes.
 
 
 \imagen{decTree}{Representación de rendimiento del árbol de regresión}{.9}
@@ -146,13 +145,13 @@ Donde $L$ representa los huecos libres en el quirófano $i$ el día $j$ y $P$ la
     L_{i}\geq 0
 \end{equation}
 
-Tal y como pudimos comprobar en la sección \ref{heur}, se adaptaron en primer lugar dos heurísticas\cite{Lin2020AScheduling}. 
+Tal y como pudimos comprobar en la sección \ref{heur}, se adaptaron en primer lugar dos heurísticas \cite{Lin2020AScheduling}. 
 En el enfoque original, se consideraba una fecha límite para priorizar los casos en dos grupos, ordenándolos por tiempo en una cola. Nosotros dividimos los valores de prioridad en deciles y, una vez allí, reordenamos por tiempo antes de incluirlos en la cola.
 
 Posteriormente, codificamos un \textbf{algoritmo genético}, siguiendo una disposición cromosómica \textit{vectorial}, usando separadores para diferenciar quirófanos y días y generando individuos \textbf{válidos} para la población inicial.
 A la función de \textit{evaluación} se le añadió una comprobación de \textit{validez} y \textit{distancia} \cite{CoelloCoello2002TheoreticalArt}.
 
-Para la \textit{selección}, empleamos el \textbf{torneo con elitismo}, como mecanismo de \textit{cruce}, adaptamos el concepto de \textbf{cruce ordenado en dos puntos} al diseño de nuestro individuo\cite{Lin2020AScheduling} y para la mutación el \textbf{intercambio en un punto}.
+Para la \textit{selección}, empleamos el \textbf{torneo con elitismo}, como mecanismo de \textit{cruce}, adaptamos el concepto de \textbf{cruce ordenado en dos puntos} al diseño de nuestro individuo \cite{Lin2020AScheduling} y para la mutación el \textbf{intercambio en un punto}.
 
  Cabe destacar que introducimos en la población dos individuos generados a partir de las heurísticas anteriores, con el objetivo de \textbf{acelerar} la convergencia.
 
@@ -161,8 +160,8 @@ Para la \textit{selección}, empleamos el \textbf{torneo con elitismo}, como mec
  \tablaSmallSinColores{Resultados con N=100, 3 Quirófanos y 5 días}{c|c|c}{compOpti}{ \textbf{Modelos} & \textbf{Fitness} & \textbf{Tiempo}\\}{
  \textit{LPT} & 0,0043 & 0,001s\\
  \textit{LPT/EDD} & 0,0049 & 0,001s\\
- \textit{Genético Random} & 0,00252 & 20.52s\\
- \textit{Genético + Heurísticas} & 0,00203& 17,52s\\
+ \textit{Genético Random} & 0,0025 & 20,520s\\
+ \textit{Genético + Heurísticas} & 0,0020 & 17,520s\\
  }
 
  Como podemos comprobar, el algoritmo que mejor responde a nuestros objetivos, siguiendo un \textbf{tiempo de ejecución razonable} se basa en la combinación de las heurísticas con el enfoque genético, motivo por el cual ha sido el \textbf{seleccionado} para el desarrollo del producto.
@@ -175,7 +174,7 @@ Para la \textit{selección}, empleamos el \textbf{torneo con elitismo}, como mec
 
  Una vez explorados y seleccionados los algoritmos base para la consecución de los \textbf{objetivos} planteados en nuestro trabajo, decidimos integrar el desarrollo en una API.
 
- Para su desarrollo, empleamos el framework \textit{Flask}\cite{Grinberg2018FlaskPython} para Python, encapsulando los siguientes \textbf{servicios} para los clientes:
+ Para su desarrollo, empleamos el framework \textit{Flask} \cite{Grinberg2018FlaskPython} para Python, encapsulando los siguientes \textbf{servicios} para los clientes:
  
  \begin{enumerate}
      \item Recepción y validación de listados en formato CSV o JSON.
@@ -186,5 +185,31 @@ Para la \textit{selección}, empleamos el \textbf{torneo con elitismo}, como mec
 
 Uno de los principales problemas más frecuentes para el despliegue de herramientas de \textit{Machine Learning} o cualquier otro tipo de solución computacional consiste en adaptar los equipos/servidores de los clientes al entorno empleado para su desarrollo (\textit{lenguajes, librerías, OS...}). 
 
-Como solución a este paradigma, una vez desarrollada y lista para su explotación, planteamos para su \textbf{despliegue} recurrir a un \textit{Docker}\cite{Merkel2014Docker:Deployment} que contenga tanto los recursos del sistema operativo como los lenguajes y librerías necesarios para poder proveer del servicio desarrollado, bien de forma local o remota, garantizando su adecuada \textbf{portabilidad} y \textbf{usabilidad}.
+Como solución a este paradigma, una vez desarrollada y lista para su explotación, planteamos para su \textbf{despliegue} recurrir a un \textit{Docker} \cite{Merkel2014Docker:Deployment} que contenga tanto los recursos del sistema operativo como los lenguajes y librerías necesarios para poder proveer del servicio desarrollado, bien de forma local o remota, garantizando su adecuada \textbf{portabilidad} y \textbf{usabilidad}.
+
+Así, una vez desplegado, podemos comprobar cómo recibe y devuelve de forma \textit{satisfactoria} las peticiones de los clientes:
+
+\imagen{postman}{Ejemplo de comunicación con API para planificación (GET)}{.9}
+
+\subsection{Interfaz Web}
+
+De forma paralela al desarrollo de la API, permitiendo su uso y adaptación a cualquier interfaz por parte de los clientes, decidimos ejemplificar su funcionamiento elaborando una aplicación web que aproveche los servicios implementados y desplegados con anterioridad.
+
+De nuevo, mediante el \textit{framework Flask} y algunas de sus dependencias (\textit{Flask-Login, Flask-MySQL, Flask-WTF...}), el motor de renderizado de plantillas \textit{Jinja2}, el lenguaje de marcado HTML y un modelo de base de datos relacional MySQL, implementamos esta \textbf{solución} siguiendo el paradigma \textit{Modelo-Vista-Controlador}.
+
+En cuanto a las definiciones de \textbf{estilo} de las plantillas estáticas, se tomaron las definiciones \textit{CSS} publicadas y ofrecidas por \textit{\textbf{Bootstrap 5}}, de código abierto.
+
+En primer lugar, desarrollamos un sistema de \textbf{gestión de usuarios}, distinguiendo el rol de \textit{administrador} y cediéndole los permisos para la creación, modificación y eliminación de nuevas cuentas, y permitiendo ejecutar las funciones de manera sencilla y \textit{transparente} a través del interfaz:
+
+\imagen{panelUsuarios}{Visualización del Panel de Gestión de Usuarios}{.9}
+
+En segundo lugar, ofrecimos la \textit{persistencia} de las solicitudes (predicción o planificación), permitiendo a los clientes la creación, visualización o eliminación de las mismas.
+
+Dentro del apartado de \textbf{creación de planificaciones}, será el \textit{usuario} quien deberá indicar el número de quirófanos, el tiempo de recambio entre cada paciente y los días a programar, como parámetros que se envían al algoritmo distribuido.
+
+Durante este nivel del desarrollo, destaca el \textit{formato} de cara a la visualización de los datos calculados en los terminales de los clientes, tanto los listados de pacientes junto a la \textbf{duración}, como las planificaciones y su línea temporal.
+
+\imagen{panelPredicciones}{Visualización de un listado de predicciones}{.9}
+
+\imagen{panelPlanificaciones}{Visualización de un ejemplo de planificación}{.9}
 
