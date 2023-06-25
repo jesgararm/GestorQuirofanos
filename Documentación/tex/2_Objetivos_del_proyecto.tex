@@ -2,13 +2,11 @@
 
 \section{Definición de Objetivos}
 
-El objetivo \textbf{principal} del proyecto consiste en la elaboración de un \textit{sistema de gestión de quirófanos} que permita al usuario la introducción de un set de pacientes listos para intervenir, junto a una planificación de los recursos disponibles, y genere \textbf{automáticamente} una propuesta de planificación en base a los tiempos estimados y los recursos disponibles.
+El objetivo \textbf{principal} del proyecto consiste en la elaboración de un \textit{sistema de gestión de quirófanos} que permita al usuario la introducción de un conjunto de pacientes listos para intervenir, junto a una recopilación de los recursos y restricciones disponibles, para generar \textbf{automáticamente} una propuesta de planificación en base a los tiempos predichos y los recursos disponibles.
 
 Específicamente, podemos subdividir los objetivos en función de una de las tres áreas principales a implementar, tal y como podemos consultar en la siguiente figura:
 
 \imagen{objetivosProyecto}{Subdivisión del Proyecto}{0.8}
-
-\renewcommand{\theenumii}{\roman{enumi}}
 
 \begin{enumerate}
     \item \textbf{Objetivos del Proyecto de Software} 
@@ -18,32 +16,35 @@ Específicamente, podemos subdividir los objetivos en función de una de las tre
         \item Recibir, almacenar y validar los datos.
         \item Devolver una salida al cliente.
     \end{enumerate}
+
     \item \textbf{Objetivos para Predecir la Duración}
 \begin{enumerate}
     \item Obtener una predicción del tiempo quirúrgico estimado en base a un conjunto de variables fijas.
     \item Calcular la predicción en un tiempo de ejecución asumible por el usuario.
     \item Obtener un error de predicción igual o inferior a los calculados en otros estudios y registrados en la literatura.
-    \item Integrable con la entrada del objetivo 3.
+    \item Integrarla con la entrada del objetivo 3.
 \end{enumerate}
+
 \item \textbf{Objetivos para Optimizar la Planificación}
         \begin{enumerate}
             \item Generar un plan quirúrgico capaz de priorizar pacientes.
             \item Obtener una planificación que no sobrepase el límite de tiempo establecido.
             \item Crear una propuesta que minimice la aparición de huecos vacíos.
-            \item Generación de propuesta en tiempo asumible.
-            \item Integrable con la salida del objetivo 2.
+            \item Generar la propuesta en tiempo asumible.
+            \item Integrarla con la salida del objetivo 2.
         \end{enumerate}
+
         \item \textbf{Objetivos de la API}
         \begin{enumerate}
             \item Fácil de usar para los usuarios.
-            \item Informe al cliente de las transacciones y errores.
+            \item Informar al cliente de las transacciones y errores.
             \item Capaz de guiar al usuario en caso de error y corregirlo.
             \item Acceso y respuesta en tiempo razonable.
-            \item Ofrezca la opción de predecir, planificar o combinar ambas funciones.
-            \item Sea compatible con formatos estándares de entrada y salida de información: CSV, JSON...
+            \item Ofrecer la opción de predecir, planificar o combinar ambas funciones.
+            \item Ser compatible con formatos estándares de entrada y salida de información: CSV, JSON...
             \end{enumerate}
             \end{enumerate}
-
+\newpage
 
 \section{Consideraciones y Marco de Trabajo}
 
@@ -51,7 +52,7 @@ Una vez efectuada la definición \textbf{formal} de las metas que deseamos alcan
 
 En definitiva, nos encontramos ante un proyecto cimentado sobre dos áreas principales: \textbf{aprendizaje automático} y \textbf{optimización}, las cuales conforman una capa extensa de \textit{backend}, tras los procesos intermedios de análisis, exploración y selección.
 
-Sobre esta capa se implementará otra de servicios, \textit{frontend}, encargada de la interacción que los clientes y planteada a modo de API para poder ofrecer la \textbf{funcionalidad} requerida y su fácil adaptación al interfaz deseada.
+Sobre esta capa se implementará otra de servicios, \textit{frontend}, encargada de la interacción con los clientes y planteada a modo de API para poder ofrecer la \textbf{funcionalidad} requerida y su fácil adaptación a la interfaz deseada.
 
 \imagen{diagramaProyecto}{Marco de Trabajo del Proyecto}{.9}
 
