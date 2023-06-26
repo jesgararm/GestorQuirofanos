@@ -203,14 +203,81 @@ Tras la ejecución \textit{automática} de los pasos detallados en \textit{Docke
 
 \subsection{Tercer paso: Desplegar la API}
 
+\subsubsection{Publicación en Amazon ECR}
+
 Para desplegar la API debemos, en primer lugar, almacenar el docker en un \textbf{repositorio} Amazon, haciendo uso de la herramienta \href{https://aws.amazon.com/es/ecr/}{Elastic Container Registry}.
 
-Debemos crear un nuevo repositorio (\textit{enlace en la ventana principal}), seleccionar la visibilidad pública y añadir un nombre, no siendo necesarias más modificaciones.
+Debemos crear un nuevo repositorio (\textit{enlace en la ventana principal}), seleccionar la visibilidad pública y añadir un nombre que \textbf{coincida} con el del contenedor, no siendo necesarias más modificaciones.
 
 \imagen{formECR}{Formulario de creación de un repositorio Amazon ECR}
 
+Para el siguiente paso, es conveniente tener instalado el gestor en línea de comandos \href{https://docs.aws.amazon.com/es_es/cli/latest/userguide/getting-started-install.html}{AWS CLI}.
+
+Una vez instalada esta utilidad, seleccionaremos nuestro repositorio y marcaremos la opción \texttt{Mostrar claves de envío}, abriéndose una ventana con los pasos a seguir para publicar la imagen del contenedor en nuestro repositorio:
+
+\imagen{postECR}{Ejemplo de claves de envío Amazon ECR}
+
+Si seguimos los pasos detallados en la ventana, conseguiremos publicar la imagen del contenedor en nuestro repositorio:
+
+\imagen{pushECR}{Ejecución satisfactoria de la subida de un contenedor a repositorio Amazon ECR}
+
+\subsubsection{Despliegue en Amazon ECS}
+
+Una vez almacenado, podremos ejecutar el contenedor en un servidor proporcionado por AWS, mediante la función \textit{Elastic Container Services}.
+
+Deberemos crear (\textit{si no disponemos aún}) un clúster, encargado de ejecutar contenedores a modo de \textbf{servicios y tareas}:
+
+\imagen{vistaClusterTFG}{Visualización de panel de de configuración de nuestro cluster \textbf{ubutfgcluster}}
 
 
+Crearemos un nuevo \textit{servicio} mediante la opción habilitada para ello en nuestro panel. Podremos dejar todas las opciones marcadas \textbf{por defecto}, debiendo añadir una \textit{definición de tarea} con la URI de la imagen en ECR y el puerto 4000, guardándola con el nombre de \textit{API-TFG}:
+
+\imagen{defTarea}{Definición de familia de tareas API-TFG, añadiendo enlace a la imagen del contenedor en ECR}
+
+Tras la definición de la tarea, volveremos al formulario anterior, donde registraremos el servicio \textit{gestorquirofanosapi}, ligándolo a la familia de tareas API-TFG:
+
+\imagen{defServicio}{Definición de servicio \textbf{\textit{gestorquirofanosapi}} en el cluster}
+
+El servicio arrancará unos instantes después, permitiendo obtener la dirección de acceso a la API en ejecución y pasar al encapsulamiento y despliegue del interfaz.
+
+\subsection{Cuarto Paso: Configuración de rutas de acceso a la API}
+
+Tras arrancar el servicio, deberemos obtener la \textbf{dirección pública} de la tarea en ejecución. Para ello: \texttt{Selección de servicio > Tareas > Tarea > Condiguración > IP pública}
+
+\imagen{tareaIP}{Localización de URL del despliegue de la API}
+
+Una vez allí, en los métodos localizados en \texttt{./APP-WEB/src/public/routes.py} donde se especifique la conexión con la API  (\textit{upload y uploadSched}), comentaremos la línea de conexión con el servidor local y añadiremos:
+
+\begin{itemize}
+    \item \textit{http://[url]:4000/predict}: Para las funciones de predicción.
+    \item \textit{http://[url]:4000/schedule}: Para las funciones de planificación.
+\end{itemize}
+
+\imagen{modRoute}{Modificación de las rutas}
+
+\subsection{Quinto Paso: Encapsulamiento en Docker y despliegue}
+
+De forma similar al paso anterior, nos situamos en línea de comandos en el directorio \texttt{./APP-WEB} y ejecutamos:
+
+\texttt{docker build -t gestorquirofanosapp .}
+
+Tras su ejecución, crearemos un nuevo repositorio, de nombre \textit{gestorquirofanosapp}, siguiendo los comandos del \textbf{tercer paso} (\textit{aunque sustituyendo el nombre gestorquirofanosapi por gestorquirofanosapp}):
+
+\imagen{postECR2}{Comandos de envío del contenedor \textbf{\textit{gestorquirofanosapp}} al nuevo repositorio ECR}
+
+Por último, deberemos definir una nueva tarea (que hemos nombrado como \textit{APP-TFG}) y seleccionarla como base de un nuevo servicio en el clúster, que llamaremos \textit{gestorquirofanosapp}, estableciendo el puerto 5000.
+
+Una vez iniciado el servicio, accederemos a la tarea y a su dirección, siendo ésta la base para la construcción de la \textbf{URL del despliegue de nuestra aplicación web}:
+
+\textit{URL = http://[url-tarea]:5000}
+
+\imagen{urlAPP}{Obtención de la dirección pública del despligue de la APP}
+
+\subsection{Sexto Paso: Comprobación del despliegue}
+
+Accedemos a la URL y comprobamos su funcionamiento:
+
+\imagen{despliegueAPP}{Comprobación del correcto despliegue del sistema en AWS}
 
 \section{Pruebas del sistema}
 
