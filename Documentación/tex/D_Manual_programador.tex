@@ -46,9 +46,171 @@ Dentro del repositorio, podemos encontrar:
 
 \section{Manual del programador}
 
+En este apartado desglosaremos la estructura del sistema de forma que sirva de referencia para futuros desarrolladores para su análisis y contribución al proyecto.
 
+Para ello, haremos referencia al \textbf{entorno y dependencias} necesarias para el desarrollo, la obtención del \textbf{código fuente}, su \textbf{ejecución} y posterior \textbf{exportación}.
+
+\subsection{Entorno de desarrollo}
+
+Para comenzar con la \textit{explotación} del sistema, se recomiendan las siguientes herramientas y dependencias:
+
+\subsubsection{Python 3.8-3.11}
+
+En nuestro caso hemos usado la última versión ofrecida por \textbf{Anaconda}, pues ya incluye gran parte de las librerías necesarias para las tareas de análisis y minería de datos, cuya guía de instalación se encuentra disponible \href{https://docs.anaconda.com/free/anaconda/install/index.html}{aquí}.
+
+\subsubsection{Virtualenv}
+
+Incluido en la mayor parte de distribuciones de Python (\textit{incluido en Anaconda}). Permite trabajar con entornos \textit{virtuales}, de gran utilidad cuando construimos subsistemas exportables y queremos \textbf{acotar} las librerías necesarias para cada entorno.
+
+En caso de no estar disponible, puede instalarse con el comando pip:
+\texttt{\textit{pip -U install virtualenv}}
+
+\subsubsection{IDEs}
+
+Se recomienda la instalación de una interfaz de apoyo al desarrollo compatible con Python.
+Recomendamos la instalación de \href{https://code.visualstudio.com/download}{Visual Studio Code}, la \href{https://marketplace.visualstudio.com/items?itemName=ms-python.python}{extensión de Python} y el \href{https://marketplace.visualstudio.com/items?itemName=HansUXdev.bootstrap5-snippets}{plugin de plantillas Bootstrap 5}.
+
+Por otra parte, el IDE Pycharm, en su versión \textbf{Professional}, incluye soporte y apoyo al desarrollo web con Flask, añadiendo integración con HTML, JS y SQL y está disponible de forma \textit{gratuita} para la comunidad educativa y es accesible desde \href{https://www.jetbrains.com/es-es/pycharm/download/#section=windows}{aquí}.
+
+Sin embargo, pese a haber explorado ambos IDE para la confección del código fuente, la totalidad del proyecto puede ser desarrollado desde cualquiera de ellos, sin necesidad de combinar su uso.
+
+\subsubsection{Git}
+
+Necesario para hacer uso del \href{https://github.com/jesgararm/GestorQuirofanos}{repositorio}. Nuestro repositorio es público, recomendándose realizar un \textit{fork} del mismo en una cuenta privada de \textit{GitHub} y trabajar desde una copia privada del mismo en nuestro entorno:
+
+\imagen{fork}{Vista del repositorio y función de fork}
+
+Por otro lado, es recomendable disponer de \textit{git} instalado en el computador principal, para poder acceder al código fuente y poder realizar modificaciones con cambios persistentes.
+
+Recomendamos para tal índole la instalación de la suite \href{https://docs.github.com/en/desktop/installing-and-configuring-github-desktop/installing-and-authenticating-to-github-desktop/installing-github-desktop}{Github Desktop}, pues permite desde un interfaz sencillo y comprensible realizar la clonación del repositorio en un equipo local y manejar las modificaciones y las \textit{ramas} de trabajo sin necesidad de conocer los parámetros y funcionalidades \textit{git} desde la línea de comandos.
+
+\subsubsection{Sistema Gestor de Bases de Datos (SGBD)}
+
+Es recomendable, para realizar pruebas y comprender el diseño de datos, contar con un sistema gestor de base de datos \textbf{compatible con MySQL e InnoDB}.
+
+Recomendamos la instalación de \href{https://www.apachefriends.org/es/index.html}{XAMPP}, que es un entorno de desarrollo PHP que incluye el SGBD phpmyadmin. Desde ese entorno hemos diseñado y realizado las pruebas locales del sistema, previa a su exportación del esquema en fichero sql.
+
+\subsubsection{Docker}
+
+Dado que usaremos contenedores para encapsular la lógica del sistema y, posteriormente, desplegarlos para su funcionamiento desde cualquier computador, debemos tener el \textit{daemon} Docker instalado en nuestro sistema.
+
+Al igual que con \textit{git}, recomendamos la instalación del GUI oficial de Docker, \href{https://docs.docker.com/desktop/install/windows-install/}{Docker Desktop}. 
+
+
+\subsection{Obtención del código fuente}
+
+Una vez instalado \textit{\textbf{Github Desktop}} y realizado un \textit{fork} del repositorio, podemos obtener su contenido desde el propio interfaz: \texttt{File > Clone Repository}
+
+\imagen{githubdesktop}{Clonar Repositorio con Github Desktop}
+
+Por otro lado, desde \textit{Git Bash}, abriendo la terminal en el directorio local donde deseemos obtener la copia del código fuente, bastará con ejecutar el siguiente comando:
+
+\texttt{git clone https://github.com/jesgararm/GestorQuirofanos.git}
+
+\subsection{Importación del proyecto e instalación de dependencias}
+
+Dado que Python es un lenguaje \textit{interpretado}, no es necesaria su compilación, por lo que los IDEs no requieren de proyectos con dependencias funcionales preestablecidas (\textit{al contrario que otros desarrollados en lenguajes compilados, como Java}).
+
+Para empezar a trabajar en el repositorio clonado, basta con añadir al entorno de trabajo de nuestro IDE la localización local del repositorio. Por ejemplo, desde VS Code:
+\texttt{File > Add Folder to Workspace}
+
+\imagen{vscodefolderpng}{Agregar repositorio local al entorno de trabajo de Visual Studio Code}
+
+\subsubsection{Entornos virtuales e instalación de librerías y dependencias}
+
+Python y la librería \textit{virtualenv} nos permiten trabajar con \textbf{entornos virtuales}. Esto nos permite instalar y trabajar con entornos de python \textbf{aislados}, cada uno con sus librerías y dependencias independientes del paquete que tengamos instalados en la raíz de nuestro sistema.
+
+Cabe destacar que, una vez instalado y activado un entorno, todas las dependencias agregadas al mismo serán \textit{exclusivas} de éste y no serán duplicadas en el entorno principal. Del mismo modo, las librerías principales no serán accesibles desde el nuevo entorno, debiendo configurarlo y definirlo desde 0 tras su activación.
+
+Recomendamos la creación de \textbf{dos entornos virtuales}, uno para cada subsistema. Para ello, nos situaremos en el directorio \textit{./API} o \textit{./APP-WEB} y ejecutaremos el comando:
+
+\texttt{virtualenv [nombreentorno]}
+
+Una vez realizado, pasaremos a su activación, ejecutando el script correspondiente (desde Windows):
+
+\texttt{./[nombreentorno]/Scripts/activate}
+
+Desde allí, podemos instalar las librerías y dependencias. Se incluye un fichero \textit{requirements.txt} con las librerías en la raíz de ambos directorios (API y APP-WEB), por lo que su instalación es sencilla con el comando pip:
+
+\texttt{pip install -r requirements.txt}
+
+Para salir del entorno y pasar al principal (PATH de nuestro S.O), ejecutaremos \texttt{deactivate}.
+
+\imagen{venv}{Activación y desactivación de entorno virtual}
 
 \section{Compilación, instalación y ejecución del proyecto}
+
+El proyecto está elaborado principalmente en python, lenguaje \textit{interpretado}, por lo que tan sólo se requiere un intérprete de python con las librerías necesarias para su ejecución, no siendo necesaria su \textbf{compilación}.
+
+Por otro lado, se ofrece un \textit{despliegue} en Amazon Web Services desde al que acceder al mismo. El enlace a la aplicación web se encuentra actualizado en la sección \href{https://github.com/jesgararm/GestorQuirofanos#readme}{README} del repositorio:
+
+\imagen{readme}{Localización de enlace al despliegue de la aplicación en GitHub}
+
+Por tanto, en este apartado se describen los pasos a seguir para \textit{desplegar} la aplicación en AWS.
+
+\subsection{Primer paso: Configuración de base de datos}
+
+\subsubsection{Creación e inicio de Base de Datos en AWS}
+
+Accederemos, tras iniciar sesión, a \href{https://aws.amazon.com/es/rds/}{Amazon RDS}, que es el servicio de base de datos relacionales. Una vez allí, crearemos una nueva base de datos (\textit{existe un enlace directo a la funcionalidad desde el panel principal}), seleccionando MySQL y configurando los datos de usuario maestro según el contenido del fichero \texttt{./APP-WEB/src/config.py}, que en nuestro caso se corresponden con \textit{root} como nombre de usuario y \textit{gestorquirofanos} como contraseña.
+
+
+\imagen{rdscreate}{Configuración de usuario maestro en base de datos RDS}
+
+El resto de los parámetros pueden mantenerse inalterables hasta finalizar el formulario.
+
+\subsubsection{Obtención de parámetros de conexión e importación del esquema}
+
+Tras la creación, desde el panel \textit{Bases de Datos} de la barra de herramientas en RDS, obtendremos un listado de todas las BBDD relacionales creadas.
+
+Al seleccionar la recién creada, acudiremos a un panel que muestra las características de la misma. Desde allí, en el apartado \texttt{Conectividad y Seguridad > Punto de enlace y puerto}, obtendremos los parámetros de conexión para la gestión de la base de datos desde un SGBD.
+
+\imagen{panelrds}{Panel de configuración y características de BD en Amazon RDS}
+
+Tras su obtención, nos conectaremos a la misma, creando una nueva conexión y añadiendo los valores de enlace y puerto, así como el usuario y contraseña.
+
+\imagen{ejemploMySQLWorkbench}{Ejemplo de conexión a BD RDS usando MySQL Workbench}
+
+Tras establecerse la conexión, deberemos crear un \textit{nuevo schema}, denominado \textit{gestor\_quirófanos} y, tras seleccionarlo, ejecutar el script \texttt{./schema\_gestor\_quirofanos.sql}.
+
+Tras la ejecución del script, se crearán las tablas y las dependencias funcionales entre ellas, así como habrá algunos usuarios, predicciones y planificaciones de prueba.
+
+\imagen{schemaGestorQuirofanos}{Vista de script y resultado de su ejecución en conexión a BD RDS}
+
+\subsubsection{Actualización de parámetros de conexión a BD}
+
+Es en el fichero \texttt{./APP-WEB/src/config.py} donde se especifican los parámetros de conexión de nuestro interfaz con la base de datos.
+
+Allí encontramos dos definiciones en la clase \textbf{\textit{DevelopmentConfig}}, una para la conexión con la BD local y otra para la remota.
+
+Para configurarlo, bastará con dejar comentada la porción de código que no nos interesa y actualizar los datos de conexión en la variable \textit{MYSQL\_HOST}.
+
+\imagen{config}{Código fuente con las rutas de conexión con el esquema \textit{gestor\_quirófanos} en la base de datos}
+
+\subsection{Segundo paso: Creación de contenedor API}
+
+Contando con la existencia del \textit{daemon} Docker ejecutándose (basta con iniciar el interfaz Docker Desktop en segundo plano) y los ficheros \textit{Dockerfile}, podremos crear con facilidad desde línea de comandos estos contenedores.
+
+Debemos crear dos contenedores, uno en cada subsistema, a partir del contenido del directorio \texttt{API} y \texttt{APP-WEB}.
+
+Dado que debemos contar con la \textbf{información de conexión de la API} de cara a ejecutar el interfaz web, debemos proceder con estos pasos de forma secuencial para cada uno de ambos subsistemas.
+
+Por ello, nos situamos en \texttt{./API} y ejecutamos \texttt{docker build -t [nombreapi] .}
+
+Tras la ejecución \textit{automática} de los pasos detallados en \textit{Dockerfile}, se creará una \textit{imagen} del contenedor, que podremos ejecutar o desplegar en un servidor.
+
+\imagen{dockerAPI}{Creación de contenedor para la API desde línea de comandos}
+
+\subsection{Tercer paso: Desplegar la API}
+
+Para desplegar la API debemos, en primer lugar, almacenar el docker en un \textbf{repositorio} Amazon, haciendo uso de la herramienta \href{https://aws.amazon.com/es/ecr/}{Elastic Container Registry}.
+
+Debemos crear un nuevo repositorio (\textit{enlace en la ventana principal}), seleccionar la visibilidad pública y añadir un nombre, no siendo necesarias más modificaciones.
+
+\imagen{formECR}{Formulario de creación de un repositorio Amazon ECR}
+
+
+
 
 \section{Pruebas del sistema}
 
