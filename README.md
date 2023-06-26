@@ -21,4 +21,4 @@ API basada en Inteligencia Computacional para la estimación de la duración de 
 
 ## Acceso:
 El recurso se encuentra desplegado en AWS, mediante su funcionalidad ECS (Elastic Container Service).
-Se puede visitar el despligue en la siguiente dirección:[ ](http://16.171.71.106:5000)
+Se puede visitar el despligue en la siguiente dirección:[URL APP Gestor Quirófanos ](http://16.171.71.106:5000)
