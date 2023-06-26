@@ -1,7 +1,7 @@
 class Config():
     SECRET_KEY = 'gestorQuirofanosUBU'
     
-
+'''
 class DevelopmentConfig(Config):
     DEBUG = True
     MYSQL_HOST = 'localhost'
@@ -16,7 +16,7 @@ class DevelopmentConfig(Config):
     MYSQL_USER = 'root'
     MYSQL_PASSWORD = 'gestorquirofanos'
     MYSQL_DB = 'gestor_quirofanos'
-'''
+
 config = {
     'development': DevelopmentConfig
 }
