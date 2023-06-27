@@ -281,4 +281,52 @@ Accedemos a la URL y comprobamos su funcionamiento:
 
 \section{Pruebas del sistema}
 
+Podemos distinguir varias etapas en nuestro proceso de pruebas del sistema: 
+
+\begin{itemize}
+    \item Pruebas de los modelos de aprendizaje supervisado.
+    \item Pruebas de los algoritmos de optimización.
+    \item Pruebas de sistema en la API.
+    \item Pruebas de sistema e integración en aplicación web.
+\end{itemize}
+
+\subsection{Pruebas de los modelos de aprendizaje supervisado y de algoritmos de optimización}
+
+En este tipo de pruebas se analizó el \textbf{rendimiento} de los distintos modelos, incluyendo representaciones gráficas de la adaptación y ajuste de los mismos respecto a los valores \textit{reales}.
+
+Aprovechando la \textbf{versatilidad} de python como lenguaje \textit{interpretado} y la existencia de los cuadernos Jupyter, pudimos documentar todo el proceso de análisis y pruebas dentro de los mismos.
+
+\imagen{KNNPerf}{Ejemplo de gráfico de rendimiento (\textit{KNN}) disponible en los Jupyter Notebooks}
+
+Todos los cuadernos, con las celdas de código ejecutadas, pueden encontrarse en: \texttt{./Experimentación/Modelos}.
+
+Por otro lado y, siguiendo un enfoque similar, se documentaron las pruebas y el análisis del rendimiento de los algoritmos de optimización (\textit{genético, heurísticas y PSO}) en Jupyter. Accesibles en: 
+\texttt{./Experimentación/Optimizacion}
+
+\subsection{Pruebas en la API}
+
+Una vez integrados los modelos en una API, procedimos a su \textit{testeo} mediante un enfoque de \textbf{caja negra}.
+
+Para ello, nos valimos del software \href{https://www.postman.com/}{Postman}, que es una API capaz de conectarse y explotar otras APIs (\textit{realizar peticiones GET ,POST ,UPDATE...}) y es ampliamente usada en la comunidad de desarrolladores para la ejecución de pruebas de sistema sobre otras interfaces de programación de aplicaciones.
+
+Se siguieron las recomendaciones habituales para el diseño de los casos de prueba:
+
+\begin{itemize}
+    \item Un caso de prueba por cada requerimiento.
+    \item Empleo de valores límites en los parámetros del formulario.
+    \item Prueba de valores válidos e inválidos.
+\end{itemize}
+
+\imagen{postman}{Ejemplo de \textit{request} y \textit{response} durante las pruebas de sistema en la API}
+
+Una vez publicada y en funcionamiento dentro del servicio AWS ECS, se actualizaron las direcciones y puerto, repitiéndose la ejecución de los casos de prueba.
+
+\subsection{Pruebas en aplicación web}
+
+De nuevo, mediante un enfoque de \textbf{caja negra}, se ampliaron los casos de prueba añadiendo los requisitos funcionales de \textit{gestión de usuario} y no funcionales de la \textit{interfaz}.
+
+Las pruebas se realizaron \textbf{manualmente}, dado que el número de casos de prueba y funcionalidades a testear no requirieron de automatización.
+
+Como hecho diferenciador, se añadieron \textbf{pruebas de usuario} sobre la interfaz, solicitando y otorgando acceso a la aplicación a tres perfiles de usuario \textit{diferentes}: cirujano, enfermero y administrativo.
+Sin supervisión directa, exploraron el interfaz y entregaron, en una reunión posterior, su punto de vista y recomendaciones de cara a la adecuación del software a sus requisitos.
 
