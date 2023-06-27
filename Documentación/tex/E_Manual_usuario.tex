@@ -2,10 +2,90 @@
 
 \section{Introducción}
 
+En este apartado se detallan los requisitos que deben cumplir los usuarios de cara al uso de esta aplicación, así como un recorrido que exprese las diferentes funcionalidades del interfaz y sirva como guía de uso para los mismos.
+
 \section{Requisitos de usuarios}
+
+En esta sección exploraremos los requerimientos que deben cumplir los clientes del producto para hacer uso con éxito de las funciones ofertadas.
+
+\subsection{Requisitos de acceso}
+
+El sistema \textbf{no incluye} una opción de registro, de modo que cualquier usuario potencial debe ser \textit{autorizado} y \textit{registrado} en el sistema por parte de un usuario con \textbf{privilegios de administrador}, pudiendo ser sancionado con la \textit{eliminación} del registro si incumpliese las normas de uso definidas por la organización sanitaria cliente del producto.
+
+\subsection{Requisitos del sistema}
+
+Dado que la ejecución de la lógica interna se realiza en \textbf{servidores externos} provistos por AWS, no son necesarios como \textit{requisitos mínimos} la posesión de \textit{cualquier dispositvo} (incluye renderizado móvil) con conexión a internet y navegador compatible con lenguaje de marcado HTML5 y protocolo HTTP v1.1.
 
 \section{Instalación}
 
+No es necesaria la instalación de la aplicación, dado que se encuentra desplegada en AWS ECS.
+Se incluye un enlace en la \href{https://github.com/jesgararm/GestorQuirofanos}{página principal del repositorio} con acceso al despliegue desde cualquier navegador.
+
 \section{Manual del usuario}
+
+Incluimos en este apartado un recorrido por la interfaz, así como las diferentes funcionalidades.
+
+\subsection{Usuario sin privilegios de administrador}
+
+\subsubsection{Inicio de sesión}
+
+Introducir el enlace en la barra de navegación y acceder a la página del login. Allí, tras introducir el email y la contraseña facilitadas por el administrador, podremos acceder al panel de usuario.
+
+En caso de error, se mostrarán mensajes aclarativos.
+
+\imagen{loginIncorrecto}{Ejemplo de mensaje de error al no localizar al usuario}
+
+\imagen{panelUsuario}{Login satisfactorio y redirección al panel de usuario}
+
+\subsubsection{Perfil de usuario}
+
+En la esquina superior derecha del panel, sobre la barra de navegación, se encuentra el \textbf{nombre de usuario}. Al seleccionarlo, se abrirá un desplegable desde el que podremos acceder a la opción \textit{Perfil}.
+
+\imagen{perfil}{Localización de perfil de usuario}
+
+Se actualizará el contenido del panel, mostrando una \textit{tarjeta} con información actual del usuario, pudiendo editar (nombre y/o email) la información referente desde el botón \textit{Editar}.
+
+\imagen{editar}{Panel de usuario y función de edición}
+
+Para regresar desde \textbf{cualquier punto} del aplicativo hacia la página principal, bastará con seleccionar el nombre "Gestor Quirófanos" en la esquina superior izquierda, en el interior de la barra de navegación.
+
+\subsubsection{Predicciones}
+
+Accedemos desde la barra de navegación a la opción \textit{Predicciones} para visualizar el panel de predicciones.
+
+Allí se cargará un listado de las predicciones solicitadas por el usuario, de forma que podamos visualizarlas, eliminarlas o crearlas.
+
+\imagen{predicciones}{Vista del Panel de Predicciones}
+
+A la hora de \textbf{solicitar} una predicción, debemos subir un fichero en \textit{formato CSV}, incluyendo las restricciones descritas en la tabla \ref{tabla:variables}
+
+\tablaSmallSinColores{Restricciones en variables de datos}{c|c|c}{variables}{
+\textbf{Nombre de columna} & \textbf{Tipo de variable} & \textbf{Valores Posibles}\\
+}{
+NHC & Entero & Cualquiera\\
+INTERVENCIÓN & Real & Catálogo CIE-9\\
+TIPO & Literal & Mayor\\
+&&Menor \\
+TURNO & Literal & Mañana\\
+&&Tarde\\
+CARÁCTER ECONÓMICO & Literal & Actividad Ordinaria\\
+&&Continuidad Asistencial\\
+PONDERACIÓN & Entero & Cualquiera\\
+ESPECIALIDAD & Literal & PLASTICA\\
+&& TORACICA\\ 
+&&MAXILOFACIAL\\ 
+&&NEUROCIRUGIA\\ 
+&&MAXILOFACIAL\\ 
+&&TRAUMATOLOGIA\\ 
+&&OTORRINOLARINGOLOGIA\\
+}
+
+En caso de error en el formato del fichero o en las variables, se mostrará un \textbf{mensaje de error}. Si se ha desarrollado sin incidencias, la redirección mostrará el listado actualizado junto a un \textbf{mensaje de éxito}.
+
+\imagen{subirPrediccion}{Ventana flotante para solicitar una nueva predicción a la API}
+
+
+\subsubsection{Planificaciones}
+
 
 
