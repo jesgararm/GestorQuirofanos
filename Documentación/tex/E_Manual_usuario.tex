@@ -87,5 +87,42 @@ En caso de error en el formato del fichero o en las variables, se mostrará un \
 
 \subsubsection{Planificaciones}
 
+Al igual que en el apartado anterior, accederemos al \textbf{panel de planificaciones} seleccionando la opción \textit{Planificaciones} de la barra de navegación.
 
+\imagen{panelPlan}{Acceso al panel de planificaciones}
 
+Desde allí podremos, de forma similar al paso anterior, crear, ver o eliminar todas las planificaciones realizadas por el usuario.
+
+Seleccionando el botón \textbf{Añadir Planificación}, accederemos a una ventana flotante donde seleccionar el archivo csv, con \textit{las mismas restricciones} que el apartado anterior, así como añadir las especificaciones de: \textbf{número de quirófanos (1-10), tiempo entre pacientes (1-60 minutos) y días a programar (1-4 semanas)}.
+
+\imagen{addPlan}{Ventana flotante para añadir una nueva planificación}
+
+Por último, al seleccionar la opción \textbf{Ver}, seremos redirigidos a la planificación propuesta, mostrada como una \textit{agenda} donde seleccionaremos el día y se mostrarán, a modo desplegable, los quirófanos numerados junto a una línea temporal:
+
+\imagen{verPlan}{Se muestra ejemplo de visualización de la programación}
+
+Además, si seleccionamos alguno de los pacientes en la línea temporal, accederemos a una visualización detallada de su identificador y la duración propuesta por el modelo de predicción.
+
+\imagen{verPaciente}{Detalle de la planificación}
+
+\subsection{Usuario con privilegios de administrador}
+
+A las funciones anteriormente descritas, se añade la \textbf{gestión de usuarios}.
+
+\subsubsection{Gestión de usuarios}
+
+Podremos acceder, tras identificarse como usuario administrador, al \textit{panel de administrador}:
+
+\imagen{panelAdmin}{Vista del panel de administrador, incluyendo función de gestión de usuarios}
+
+Desde allí, en la barra de navegación, encontraremos una función inexistente para el resto de usuarios: \textbf{Gestión de Usuarios}.
+
+\imagen{panelUsuarios}{Panel de gestión de usuarios}
+
+Para añadir un usuario, accederemos al formulario de creación seleccionando la opción correspondiente (\textit{Añadir Usuario}), donde introduciremos \textbf{nombre, email, contraseña y marcaremos si es administrador o no}.
+
+\imagen{crearUsuario}{Formulario de creación de usuario}
+
+Del mismo modo y, de vuelta al panel anterior, modificaremos los datos de otros usuarios (\textbf{nombre, email y privilegios}), \textit{sobreescribiendo} los previos o dejándolos inalterados:
+
+\imagen{modUser}{Ventana de modificación de usuario}
