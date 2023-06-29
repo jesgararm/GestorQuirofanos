@@ -379,13 +379,13 @@
 
 \noindent\includegraphics[width=\textwidth]{cabecera}\vspace{1cm}
 
-\noindent D. Bruno Baruque Zanon y D. Daniel Urda Muñoz , profesores del departamento de Digitalización, área de Ciencia de la Computación e Inteligencia Artificial y D. Raúl Marticorena Sánchez, profesor del departamento de Ingeniería Informática, área de Lenguajes y Sistemas Informáticos.
+\noindent D. Bruno Baruque Zanon y D. Daniel Urda Muñoz, profesores del departamento de Digitalización, área de Ciencia de la Computación e Inteligencia Artificial y D. Raúl Marticorena Sánchez, profesor del departamento de Ingeniería Informática, área de Lenguajes y Sistemas Informáticos.
 
 \noindent Exponen:
 
 \noindent Que el alumno D. \nombre, con DNI 47338433-V, ha realizado el Trabajo final de Grado en Ingeniería Informática titulado \textbf{Aplicación de Gestión de Quirófanos mediante Inteligencia Computacional}. 
 
-\noindent Y que dicho trabajo ha sido realizado por el alumno bajo la dirección del que suscribe, en virtud de lo cual se autoriza su presentación y defensa.
+\noindent Y que dicho trabajo ha sido realizado por el alumno bajo la dirección de los que suscriben, en virtud de lo cual se autoriza su presentación y defensa.
 
 \begin{center} %\large
 En Burgos, {\large \today}
@@ -437,16 +437,19 @@ D. Raúl Marticorena Sánchez
 \renewcommand*\abstractname{Resumen}
 \begin{abstract}
 \textbf{Introducción}: La planificación y gestión del tiempo quirúrgico constituye más del 60\% del esfuerzo económico de un hospital. A lo largo de la literatura se han propuesto múltiples enfoques para optimizar este problema, donde la estimación de la \textit{duración} de las intervenciones constituye uno de los desafíos más importantes en la actualidad.
-Proponemos en este trabajo una solución que aborde ambas perspectivas (predicción y optimización) aplicando algoritmos de inteligencia computacional e integrando la solución en una API para su reutilización.\\
+Proponemos en este trabajo una solución que aborde ambas perspectivas (predicción y optimización) aplicando algoritmos de inteligencia computacional e integrando la solución en una API que sirva como proveedora de servicios a una aplicación web integrada en la nube de Amazon (AWS).\\
 \textbf{Material y método}: Se parte de un dataset de más de 24000 pacientes intervenidos entre 2016 y 2022. El lenguaje seleccionado para la implementación de los algoritmos ha sido Python, apoyado en librerías nativas y dedicadas (\textit{Scikit-learn}, \textit{Pandas} o \textit{DEAP} entre otras).
-Para desarrollar la API empleamos el framework \textit{Flask} y la integramos en un \textit{Docker} para su explotación.\\
-\textbf{Resultados}: Alcanzamos valores de RMSE en la línea de  los conseguidos por otros autores (40-50min). Conseguimos alcanzar la convergencia en la fase de optimización tras combinar un enfoque basado en heurísticas y algoritmos bio-inspirados.\\
+Para el diseño de datos, empleamos el lenguaje MySQL con el motor InnoDB, desplegándolo en Amazon RCS.
+Para desarrollar la API y la aplicación web empleamos el framework \textit{Flask} junto al lenguaje HTML, plantillas de estilo CSS de Booststrap 5 y Javascript.
+Los espacios de trabajo fueron integrados en un \textit{Docker}, almacenado en Amazon ECR y desplegados en Amazon ECS .\\
+\textbf{Resultados}: Alcanzamos valores de RMSE en la línea de  los conseguidos por otros autores (40-50min). Conseguimos alcanzar la convergencia en la fase de optimización tras combinar un enfoque basado en heurísticas y algoritmos bio-inspirados.
+Los modelos y algoritmos se integraron correctamente en una API funcionante, con tiempos de respuesta aceptables e integradas sobre una aplicación web con un interfaz comprensible para el usuario.\\
 \textbf{Conclusiones y discusión}: Hemos logrado ofrecer una solución útil y eficaz para la tarea de gestionar eficientemente los quirófanos. Sin embargo, existen restricciones y variables no exploradas provistas en la literatura que podrían mejorar el rendimiento de este proyecto de cara a desarrollos futuros. 
 \end{abstract}
 
 \renewcommand*\abstractname{Descriptores}
 \begin{abstract}
-Gestión hospitalaria, Planificación quirúrgica, Predicción de tiempos, Estimación de duración de intervenciones, Inteligencia Computacional, Aprendizaje Supervisado, Aprendizaje Máquina, Red neuronal, Árbol de regresión, Optimización, Metaheurísticas, Algoritmo Genético.
+Gestión hospitalaria, Planificación quirúrgica, Predicción de tiempos, Estimación de duración de intervenciones, Inteligencia Computacional, Aprendizaje Supervisado, Aprendizaje Máquina, Red neuronal, Árbol de regresión, Optimización, Metaheurísticas, Algoritmo Genético, AWS, AWS ECR, Flask, MySQL, Bootstrap, Docker, Container, API, Computación en la nube.
 \end{abstract}
 
 \clearpage
@@ -456,16 +459,17 @@ Gestión hospitalaria, Planificación quirúrgica, Predicción de tiempos, Estim
 \begin{abstract}
 \textbf{Introduction}: Surgery time and OR scheduling represent more than 60\% of the costs inside a hospital. Many solutions have been provided along specialized publications. 
 Besides, predicting surgery time durations has became the most challenging issue regarding this topic.
-We propose a solution within both perspectives (prediction and optimization) applying machine learning algorithms and developing our solution inside an API for further reutilization.\\
+We propose a solution within both perspectives (prediction and optimization) applying machine learning algorithms and developing our solution inside an API as a service provider for a web application deployed on AWS.\\
 \textbf{Material and methods}:  We began composing a dataset containing data from 24000 patients who received surgery between 2016 and 2022. We chose Python to implement our algorithms, supported by native and dedicated (\textit{Scikit-learn}, \textit{Pandas}, \textit{DEAP.}..) libraries.
-Finally, we used \textit{Flask Framework} to build an API and encapsulate it insede a \textit{Docker}.\\
-\textbf{Results}: We achieved RMSE values similar to those reviewed inside the bibliography (40-50 minutes). During optimization stage, we managed to obtain convergence after developing a heuristic and bio-inspired approach.\\
+We used MySQL and InnoDB to design our database model and it was deployed inside Amazon RCS.
+Finally, we used \textit{Flask Framework}, HTML,Bootstrap 5 CSS stylesheets and javascript to build our API and web application. These workspaces were integrated on a Docker container, stored inside Amazon ECR and deployed on Amazon ECS.\\
+\textbf{Results}: We achieved RMSE values similar to those reviewed inside the bibliography (40-50 minutes). During optimization stage, we managed to obtain convergence after developing a heuristic and bio-inspired approach. Also, these models and algorithms were successfully integrated to build a functional API, obtaining good response times and being able to communicate efficiently with a web application having an user friendly GUI.\\
 \textbf{Summary and discussion}: After our efforts, we managed to develop an useful and efficient approach. However, there are still many restrictions and attributes not reviewed in this project that may provide a powerful improvement after future explorations. 
 \end{abstract}
 
 \renewcommand*\abstractname{Keywords}
 \begin{abstract}
-Health Management, Surgery Scheduling, Time prediction, Surgical time prediction, Artificial Intelligence, Supervised Learning, Machine Learning, Artificial Neural Network, Regression tree, Optimization, Metaheuristic, Genetic Algorithm.
+Health Management, Surgery Scheduling, Time prediction, Surgical time prediction, Artificial Intelligence, Supervised Learning, Machine Learning, Artificial Neural Network, Regression tree, Optimization, Metaheuristic, Genetic Algorithm,  AWS, AWS ECR, Flask, MySQL, Bootstrap, Docker, Container, API, Cloud Computing.
 \end{abstract}
 
 \clearpage

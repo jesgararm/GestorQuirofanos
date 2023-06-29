@@ -10,7 +10,7 @@ Posteriormente, partiremos de la salida del modelo para realizar una \textbf{pro
 
 \section{Aprendizaje Supervisado}
 
-El aprendizaje supervisado es un enfoque de inteligencia altificial en el cual un algoritmo es entrenado a partir de datos de entrada para producir una \textbf{determinada salida}. 
+El aprendizaje supervisado es un enfoque de inteligencia artificial en el cual un algoritmo es entrenado a partir de datos de entrada para producir una \textbf{determinada salida}. 
 
 Este modelo es entrenado hasta que es capaz de detectar los patrones y relaciones entre los datos de entrada y las \textit{etiquetas} de salida, de forma que pueda otorgar resultados precisos cuando se le presenten datos \textit{nuevos} \cite{PeterssonSupervisedLearning}.
 
@@ -49,7 +49,7 @@ Y la \textit{ordenada en el origen} en términos de b:
     a = \bar{y}-b\bar{x}
 \end{equation}
 
-\subsection{K-Nearest Neightbors (KNN)} 
+\subsection{K-Nearest Neighbors (KNN)} 
 
 Se trata de una de las formas más simples de aplicar un algoritmo de aprendizaje supervisado, con utilidad para tareas tanto de \textbf{regresión} como de \textbf{clasificación}.
 
@@ -76,7 +76,7 @@ Se trata de otro tipo de aprendizaje supervisado que, al igual que KNN, puede se
 
 Actualmente, es una de las herramientas \textbf{más usadas} para la toma de decisiones \cite{Navada2011OverviewLearning} en todo el mundo.
 
-Para cumplir con esta tarea, se dibuja un árbol con diferentes \textit{ramas} y hojas, de forma que se incluyan \textit{todos los valores} de una situación particular \cite{Navada2011OverviewLearning}:
+Para cumplir con esta tarea, se dibuja un árbol con diferentes \textit{ramas} y hojas, de forma que se incluyan \textit{todos los valores} de una situación particular \cite{Navada2011OverviewLearning}, tal y como podemos ver en la figura \ref{fig:Arbol de decisiones}:
 
 \imagen{Arbol de decisiones}{Ejemplo de Árbol de Decisiones}{.8}
 
@@ -97,7 +97,7 @@ Los más usados son:
     \item \textbf{Entropía}: Medida de la pureza e incertidumbre. Cuanto mayor sea, menor será su pureza. El cálculo es \cite{Belyadi2021SupervisedLearning}: \begin{equation}
         E(S) = \sum_{i=1}^{c}-P_{i}\log_{2}P_{i} 
     \end{equation}
-    \item \textbf{Ganacia de Información}: Al construir un árbol, debemos seleccionar los atributos que alcancen la \textit{mayor} ganacia de información y menor entropía: \begin{equation}
+    \item \textbf{Ganancia de Información}: Al construir un árbol, debemos seleccionar los atributos que alcancen la \textit{mayor} ganancia de información y menor entropía: \begin{equation}
         GI(Y,X) = E(Y) - E(Y,X)
     \end{equation}
     \item \textbf{Índice Gini}: Al contrario que la GI, este índice favorece la existencia de conjuntos de \textit{gran tamaño} y se calcula como la diferencia entre la unidad y la suma cuadrada de probabilidades para cada clase. \begin{equation}
@@ -118,6 +118,8 @@ donde el conjunto de
 \(\Theta_{k}\) son vectores aleatorios independientes y con distribución \textbf{idéntica} y cada árbol emite un \textit{único voto} hacia la clase más popular de la entrada \textit{x} \cite{Breiman2001RandomForests}.
 
 Aunque la definición previa hace referencia al modelo clásico, podemos hacer extrapolación hacia \textbf{árboles de regresión} y obtener predicciones en dicho ámbito  \cite{Belyadi2021SupervisedLearning}.
+
+Podemos ver un ejemplo de construcción de este modelo en la figura \ref{fig:randomForest}
 
 \imagen{randomForest}{Ejemplo de Random Forest}{.8}
 
@@ -155,7 +157,7 @@ Este modelo consiste en \textit{dos capas}. La primera, conocida como \textbf{ca
 
 \subsubsection{Perceptrón Multicapa}
 
-Para una mejora en la resolución de \textit{problemas no lineales}, Hetch-Nielsen propuso una variante del perceptrón, añadiendo capas adicionales de neuronas entre la \textbf{entrada} y la \textbf{salida}\cite{Hecht-Nielsen1989Neurocomputing}.
+Para una mejora en la resolución de \textit{problemas no lineales}, Hetch-Nielsen propuso una variante del perceptrón, añadiendo capas adicionales de neuronas entre la \textbf{entrada} y la \textbf{salida} \cite{Hecht-Nielsen1989Neurocomputing}.
 
 \imagen{MLP.jpg}{Perceptrón Multicapa \cite{Huang2022AutomaticNetworks}}{.8}
 
