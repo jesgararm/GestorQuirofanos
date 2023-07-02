@@ -163,11 +163,11 @@ Para una mejora en la resolución de \textit{problemas no lineales}, Hetch-Niels
 
 En este modelo, diferenciamos dos componentes principales: \textit{neuronas} y \textit{conexiones}. Las neuronas serán las unidades de procesamiento, y cada conexión tendrá un peso y/o un sesgo correspondiente. Además, las capas ocultas tratarán de ser independientes del entorno, motivo por el cual reciben el nombre de \textit{capas ocultas}.
 
-Al igual que en el perceptrón, el entrenamiento se realiza mediante un proceso de \textbf{retropropagación}, realizando correcciones a los pesos de los nodos para minimizar el error de la salida, dado por\cite{Haykin1998NeuralFoundation}:
+Al igual que en el perceptrón, el entrenamiento se realiza mediante un proceso de \textbf{retropropagación}, realizando correcciones a los pesos de los nodos para minimizar el error de la salida, dado por \cite{Haykin1998NeuralFoundation}:
 \begin{equation}
     \varepsilon (n) = \frac{1}{2}\sum_{j}e_{j}^2(n)
 \end{equation}
-Y usando un \textbf{descenso de gradiente} obtenemos el cambio en cada peso\cite{Haykin1998NeuralFoundation}:
+Y usando un \textbf{descenso de gradiente} obtenemos el cambio en cada peso \cite{Haykin1998NeuralFoundation}:
 
 \begin{equation}
     \Delta w_{ji}(n) = -\eta \frac{\partial \varepsilon (n)}{\partial v_{j}(n)}y_{i}(n)
@@ -184,18 +184,21 @@ Y usando un \textbf{descenso de gradiente} obtenemos el cambio en cada peso\cite
 Antes de desarrollar cualquier medida que tenga como objetivo alcanzar una mejora de \textbf{rendimiento en la planificación quirúrgica (\textit{OR performance})}, debemos definir qué entendemos por rendimiento y, en su caso, \textit{cómo medirlo}. 
 
 Algunas de las más importantes son las referidas en  la tabla \ref{Métricas de Quirófano}.
-\begin{table}[]
+\begin{table}
     \centering
-    \begin{tabular}{p{7cm}|p{7cm}}
-        \toprule
-            \textbf{Métrica}   &  \textbf{Descripción}  \\
-         \midrule
+    \renewcommand*{\arraystretch}{1.5}
+    \begin{tabularx}{\linewidth}
+       {
+    >{\columncolor[HTML]{FFCC67}\bfseries\raggedright}p{3.4cm}
+    *{2}{>{\raggedright\arraybackslash}X}
+   }
+            \rowcolor[HTML]{CD9934} \textbf{Métrica}   &  \textbf{Descripción}  \\
+            \hline \hline
               \textit{Hora de Comienzo}  &  Retraso o anticipo en el comienzo de la actividad quirúrgica. \\
               \textit{Tiempo de Recambio }& Tiempo entre cada uno de los pacientes. \\
               \textit{Uso del bloque} & Proporción del tiempo asignado que se dedica a la realización de la actividad. \\
               \textit{Tasa de Cancelaciones} & Las suspensiones o cancelaciones suponen tiempo de actividad desaprovechado. \\
-       \bottomrule
-    \end{tabular}
+    \end{tabularx}
     \caption{Métricas de Quirófano}
     \label{Métricas de Quirófano}
 \end{table}
@@ -226,7 +229,7 @@ De forma preliminar a explicar el proceso de diseño e implementación de la sol
 
 La programación \textbf{matemática}, en especial la que incluye restricciones basadas en enteros junto a otras (\textit{MILP}), es una de las más usadas para modelar problemas de planificación debido a su rigurosidad, flexibilidad y extensibilidad \cite{Floudas2005MixedApplications}, pudiendo ser usadas por procesos \textbf{simples} que incluyen una única etapa y unidad, hasta procesos complejos de varias etapas y objetivos.
 
-La naturaleza de los problemas de planificación es inherentemente \textbf{combinatoria}, dado el gran número de decisiones \textit{discretas} a tener en cuenta (localización, equipamiento, tiempo...), lo que incrementa el tiempo de resolución \textbf{exponencialmente} a medida que aumenta el tamaño del problema (\textit{NP-Completo}\cite{Garey1990ComputersNP-Completeness}).
+La naturaleza de los problemas de planificación es inherentemente \textbf{combinatoria}, dado el gran número de decisiones \textit{discretas} a tener en cuenta (localización, equipamiento, tiempo...), lo que incrementa el tiempo de resolución \textbf{exponencialmente} a medida que aumenta el tamaño del problema (\textit{NP-Completo} \cite{Garey1990ComputersNP-Completeness}).
 
 \subsubsection{Formulación Matemática}
 
@@ -252,7 +255,7 @@ Por otro lado, si una tarea comienza a ejecutarse en una unidad dentro de ese in
 
 \subsection{Heurísticas} \label{heur}
 
-Tal y como definió Coen \cite{Koen1984TowardMethod}: \textit{El rol de la ingeniería es: Haz lo que creas que representa la mejor práctica en el momento de la decisión. La definición del método de ingeniería depende de la heurística... Toda la ingeniería es heurística.}
+Tal y como definió Coen \cite{Koen1984TowardMethod}: \textit{`` El rol de la ingeniería es: Haz lo que creas que representa la mejor práctica en el momento de la decisión. La definición del método de ingeniería depende de la heurística... Toda la ingeniería es heurística. '' }
 
 Dado a que el problema estudiado puede ser \textbf{similar} al paradigma de la mochila y es idéntico a la planificación paralela, hemos implementado \textit{dos heurísticas} modificando el enfoque de \cite{Lin2020AScheduling} y ajustándolo a nuestras restricciones.
 
@@ -309,7 +312,7 @@ Un algoritmo genético es una \textbf{metaheurística} inspirada en los procesos
 
 Tras un proceso de \textbf{codificación} de los individuos en \textit{cromosomas}, obtendremos un \textit{genotipo} generado, en principio, de forma aleatoria. Se aplicarán operadores de \textbf{selección}, \textbf{evaluación}, \textbf{cruce} y \textbf{mutación} a dicha población hasta que se satisfaga un \textit{criterio de parada}, devolviendo al mejor individuo como solución.
 
-Según los autores \cite{Lin2020AScheduling,Goldberg1989GeneticLearning}, el mayor desafío para resolver un problema con este enfoque será el diseño de los cromosomas y la función de evaluación.
+Según los autores \cite{Goldberg1989GeneticLearning, Lin2020AScheduling}, el mayor desafío para resolver un problema con este enfoque será el diseño de los cromosomas y la función de evaluación.
 
 \begin{algorithm}
 \caption{Estructura AG}\label{alg:ag}

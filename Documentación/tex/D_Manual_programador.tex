@@ -120,7 +120,7 @@ Para empezar a trabajar en el repositorio clonado, basta con añadir al entorno 
 
 Python y la librería \textit{virtualenv} nos permiten trabajar con \textbf{entornos virtuales}. Esto nos permite instalar y trabajar con entornos de python \textbf{aislados}, cada uno con sus librerías y dependencias independientes del paquete que tengamos instalados en la raíz de nuestro sistema.
 
-Cabe destacar que, una vez instalado y activado un entorno, todas las dependencias agregadas al mismo serán \textit{exclusivas} de éste y no serán duplicadas en el entorno principal. Del mismo modo, las librerías principales no serán accesibles desde el nuevo entorno, debiendo configurarlo y definirlo desde 0 tras su activación.
+Cabe destacar que, una vez instalado y activado un entorno, todas las dependencias agregadas al mismo serán \textit{exclusivas} de éste y no serán duplicadas en el entorno principal. Del mismo modo, las librerías principales no serán accesibles desde el nuevo entorno, debiendo configurarlo y definirlo desde cero tras su activación.
 
 Recomendamos la creación de \textbf{dos entornos virtuales}, uno para cada subsistema. Para ello, nos situaremos en el directorio \textit{./API} o \textit{./APP-WEB} y ejecutaremos el comando:
 
@@ -140,7 +140,7 @@ Para salir del entorno y pasar al principal (PATH de nuestro S.O), ejecutaremos 
 
 \section{Compilación, instalación y ejecución del proyecto}
 
-El proyecto está elaborado principalmente en python, lenguaje \textit{interpretado}, por lo que tan sólo se requiere un intérprete de python con las librerías necesarias para su ejecución, no siendo necesaria su \textbf{compilación}.
+El proyecto está elaborado principalmente en Python, lenguaje \textit{interpretado}, por lo que tan sólo se requiere un intérprete de Python con las librerías necesarias para su ejecución, no siendo necesaria su \textbf{compilación}.
 
 Por otro lado, se ofrece un \textit{despliegue} en Amazon Web Services desde al que acceder al mismo. El enlace a la aplicación web se encuentra actualizado en la sección \href{https://github.com/jesgararm/GestorQuirofanos#readme}{README} del repositorio:
 
@@ -171,7 +171,8 @@ Tras su obtención, nos conectaremos a la misma, creando una nueva conexión y a
 
 \imagen{ejemploMySQLWorkbench}{Ejemplo de conexión a BD RDS usando MySQL Workbench}
 
-Tras establecerse la conexión, deberemos crear un \textit{nuevo schema}, denominado \textit{gestor\_quirófanos} y, tras seleccionarlo, ejecutar el script \texttt{./schema\_gestor\_quirofanos.sql}.
+Tras establecerse la conexión, deberemos crear un \textit{nuevo schema}, denominado \textit{gestor\_quirófanos} y, tras seleccionarlo, ejecutar el script  localizado en:
+\texttt{./schema\_gestor\_quirofanos.sql}.
 
 Tras la ejecución del script, se crearán las tablas y las dependencias funcionales entre ellas, así como habrá algunos usuarios, predicciones y planificaciones de prueba.
 
