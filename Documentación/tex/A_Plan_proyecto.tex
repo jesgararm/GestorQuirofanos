@@ -6,19 +6,19 @@ Dentro de las etapas que configuran un proyecto, la \textbf{planificación} cons
 
 Dividiremos este plan en dos apartados:
 \begin{enumerate}
-    \item \textbf{Planificación Temporal}: Trataremos de conformar un cronograma donde esbocemos las restricciones temporales, tanto para cada uno de los apartados del proyecto, como asignando fechas \textit{inicio} y \textit{finalización} estimadas.
+    \item \textbf{Planificación Temporal}: yrataremos de conformar un cronograma donde esbocemos las restricciones temporales, tanto para cada uno de los apartados del proyecto, como asignando fechas \textit{inicio} y \textit{finalización} estimadas.
 
-    \item \textbf{Estudio de Viabilidad:} Estimación y previsión de \textit{restricciones} y \textit{costes} a los que puede enfrentarse el desarrollo de nuestro trabajo. A su vez, distinguimos:
+    \item \textbf{Estudio de Viabilidad:} estimación y previsión de \textit{restricciones} y \textit{costes} a los que puede enfrentarse el desarrollo de nuestro trabajo. A su vez, distinguimos:
 \begin{enumerate}
-        \item \textit{Viabilidad Económica}: Encargada de la previsión de costes y beneficios del desarrollo.
+        \item \textit{Viabilidad Económica}: encargada de la previsión de costes y beneficios del desarrollo.
 
-        \item \textit{Viabilidad Legal}: Realiza un análisis del contexto legal del desarrollo del trabajo, generalmente las licencias o la LOPD\footnote{Ley Orgánica de Protección de Datos}.
+        \item \textit{Viabilidad Legal}: realiza un análisis del contexto legal del desarrollo del trabajo, generalmente las licencias o la LOPD\footnote{Ley Orgánica de Protección de Datos}.
     \end{enumerate}
 \end{enumerate}
 
 \section{Planificación temporal}
 
-Tal y como indicamos en la memoria, la metodología de gestión de proyectos empleada para el desarrollo ha sido \textbf{ágil}, \textit{inspirada en Scrum}\cite{SaezHurtado2021ComoUtilizarla}.
+Tal y como indicamos en la memoria, la metodología de gestión de proyectos empleada para el desarrollo ha sido \textbf{ágil}, \textit{inspirada en Scrum} \cite{SaezHurtado2021ComoUtilizarla}.
 
 Existen, sin embargo, algunas consideraciones que deben ser tenidas en cuenta:
 \begin{itemize}
@@ -30,7 +30,7 @@ Existen, sin embargo, algunas consideraciones que deben ser tenidas en cuenta:
     \item Priorización de tareas al estilo \textit{kanban}.
 \end{itemize}
 
-Cabe destacar que los \textit{Sprints} fueron definidos en el apartado \textit{Milestones} de \textit{GitHub} y las tareas como \textit{issues} del mismo.
+Cabe destacar que los \textit{sprints} fueron definidos en el apartado \textit{Milestones} de \textit{GitHub} y las tareas como \textit{issues} del mismo.
 Por otro lado, en base a los \textit{Story Points}, se clasificó cada una de las tareas en función de su \textbf{complejidad y duración estimada.}
 
 \subsection{Sprints}
@@ -93,7 +93,7 @@ Se decidió plantear como entregable final una API:
     \item Refactorizar clases y modelos.
     \item Familiarizarse con el diseño de una API con un \textit{framework} de Python.
     \item Implementar una API siguiendo los objetivos y requerimientos.
-    \item Pruebas de Integración y Sistema.
+    \item Pruebas de integración y sistema.
     \item Finalizar memoria. 
     \item Comenzar anexos.
 \end{itemize}
@@ -105,7 +105,7 @@ En la última reunión se comprobaron y detallaron especificaciones del último 
 \begin{itemize}
     \item Añadir funcionalidades. Refactorizaciones de código.
     \item Diseño de interfaz como aplicación web.
-    \item Contenerización y migración a cloud de la API.
+    \item Contenerización y migración a \textit{cloud} de la API.
     \item Diseño de sistema de gestión de usuarios.
     \item Diseño e implementación de base de datos relacional.
 \end{itemize}
@@ -134,7 +134,7 @@ En esta iteración se propone:
 
 \begin{itemize}
     \item Completar anexos de la memoria, últimos apartados de diseño y manuales técnicos y de usuario.
-    \item Pruebas de Usuario en base a los requerimientos.
+    \item Pruebas de usuario en base a los requerimientos.
     \item Ampliar funcionalidad y refactorizar en base al resultado de las pruebas.
     \item Corrección de errores en documentos de memoria y anexos.
 \end{itemize}
@@ -165,9 +165,9 @@ Repasaremos una aproximación a los \textbf{costes} y \textbf{beneficios} espera
 Podemos considerar tres apartados principales en este estudio:
 \textbf{Personal, Equipamiento y Otros}. 
 
-En el primer apartado, consideraremos los costes de una empresa para contratar a un desarrollador a tiempo completo, tomando como referencia el salario anual, prorrateado a 5 meses:
+En el primer apartado, consideraremos los costes de una empresa para contratar a un desarrollador a tiempo completo, tomando como referencia el salario anual, prorrateado a 5 meses, tal y como vemos en la tabla \ref{tabla:costPers}
 
-\tablaSmallSinColores{Costes de Personal}{c|c|c}{cost:Pers}{
+\tablaSmallSinColores{Costes de Personal}{l|r|r}{costPers}{
 \textbf{Concepto} & \textbf{Coste Anual} & \textbf{Prorrateo (5 meses)}\\
 }{
 \textit{Salario Bruto} & 24.000,00€ & 10.000,00€\\
@@ -178,21 +178,9 @@ En el primer apartado, consideraremos los costes de una empresa para contratar a
 
 Hemos aplicado un \textit{13,55\%} de retención sobre la nómina IRPF, considerando ausencia de deducciones tributarias.
 
-Siguiendo la estela del análisis de costes, pasamos a analizar los empleados en el equipamiento (\textit{hardware, licencias software}) para el desarrollo de esta herramienta:
+Siguiendo la estela del análisis de costes, pasamos a analizar los empleados en el equipamiento (\textit{hardware, licencias software}) para el desarrollo de esta herramienta, tal y como comprobamos en la tabla \ref{tabla:costEquip}
 
-\tablaSmallSinColores{Costes de Equipamiento}{c|c S[
-                table-number-alignment = center,
-                separate-uncertainty = true,
-                table-figures-uncertainty = 1,
-                table-figures-decimal = 2,
-                table-figures-integer = 1
-        ]|c S[
-                table-number-alignment = center,
-                separate-uncertainty = true,
-                table-figures-uncertainty = 1,
-                table-figures-decimal = 2,
-                table-figures-integer = 1
-        ]}{cost:Equip}{
+\tablaSmallSinColores{Costes de Equipamiento}{l|r|r}{costEquip}{
 \textbf{Concepto} & \textbf{Coste Total} & \textbf{Coste Amortizado}(\textit{5 Meses})\\
 }{
 \textit{Ordenador Portátil} & 1.330,00€ & 110,83€\\
@@ -201,9 +189,9 @@ Siguiendo la estela del análisis de costes, pasamos a analizar los empleados en
 \textit{Suscripción Internet} & 278,00€ & 215,00€\\ 
 }
 
-Por último, pasamos a realizar una estimación de aquellos \textbf{costes} que no encajan en ninguna de las otras categorías anteriores:
+Por último, pasamos a realizar una estimación de aquellos \textbf{costes} que no encajan en ninguna de las otras categorías anteriores, en la table \ref{tabla:cost:Extra}
 
-\tablaSmallSinColores{Costes Extra}{c|c|c}{cost:Extra}{
+\tablaSmallSinColores{Costes Extra}{l|r|r}{cost:Extra}{
 \textbf{Concepto} & \textbf{Coste Total} & \textbf{Coste Amortizado}(\textit{5 Meses})\\
 }{
 \textit{Consumo Eléctrico} & 300,00€ & 99,99€\\
@@ -212,9 +200,9 @@ Por último, pasamos a realizar una estimación de aquellos \textbf{costes} que 
 }
 
 
-Por último, se calculan los costes totales en base a los amortizados:
+Por último, se calculan los costes totales en base a los amortizados, en la tabla \ref{tabla:cost:Tot}
 
-\tablaSmallSinColores{Costes Totales}{c|c}{cost:Tot}{
+\tablaSmallSinColores{Costes Totales}{l|r}{cost:Tot}{
 \textbf{Concepto} & \textbf{Coste}\\
 }{
 \textit{Costes de Personal} & 10.000,00€\\
@@ -237,19 +225,19 @@ Podemos considerar dos enfoques principales en esta materia:
     \item Licencias
 \end{enumerate}
 
-La Ley General de Sanidad establece, en su artículo 18, que una de las actuaciones del sistema de salud es la promoción de la investigación científica en el campo de la salud\cite{GarridoElustondo2012InvestigacionPrimaria}.
+La Ley General de Sanidad establece, en su artículo 18, que una de las actuaciones del sistema de salud es la promoción de la investigación científica en el campo de la salud \cite{GarridoElustondo2012InvestigacionPrimaria}.
 
 No obstante, todos los pacientes tienen derecho a que se preserve sus datos personales y obliga a la confidencialidad. La LOPD establece que sólo los facultativos que tienen acceso directo al tratamiento o diagnóstico del paciente pueden tener acceso a sus datos sanitarios.
 
-Esto podría dificultar el acceso a datos sanitarios para investigación, no obstante, si estos datos están \textbf{anonimizados}, el tratamiento de la información estaría fuera de los requerimientos establecidos por la LOPD y, en este supuesto, se establece que los datos \textit{anónimos} y los registros \textit{anonimizados} pueden ser utilizados y cedidos SIN el consentimiento informado de los sujetos\cite{GarridoElustondo2012InvestigacionPrimaria}.
+Esto podría dificultar el acceso a datos sanitarios para investigación, no obstante, si estos datos están \textbf{anonimizados}, el tratamiento de la información estaría fuera de los requerimientos establecidos por la LOPD y, en este supuesto, se establece que los datos \textit{anónimos} y los registros \textit{anonimizados} pueden ser utilizados y cedidos SIN el consentimiento informado de los sujetos \cite{GarridoElustondo2012InvestigacionPrimaria}.
 
 Este hecho se haya refrendado, aún en nuestros días, en la Ley Orgánica 3/2018 de Protección de Datos y Garantía de Derechos Digitales, donde vemos en su artículo 16.1: \textit{«el acceso a la historia clínica con estos fines (de investigación o docencia) obliga a preservar los datos de identificación personal del paciente, separados de los de carácter clínico-asistencial, de manera que como regla general quede asegurado el anonimato, salvo que el propio paciente haya dado su consentimiento para no separarlos»}.
 
-Creando dos paradigmas en cuanto al tratamiento de la información: uso de datos \textbf{disociados} o \textbf{no disociados}. En caso de que pertenezcan al \textit{primer grupo} (Los datos no permiten identificar de forma unívoca al individuo), el tratamiento de estos datos quedará \textit{excluido} de la aplicación de la normativa en materia de Protección de Datos.
+Creando dos paradigmas en cuanto al tratamiento de la información: uso de datos \textbf{disociados} o \textbf{no disociados}. En caso de que pertenezcan al \textit{primer grupo} (los datos no permiten identificar de forma unívoca al individuo), el tratamiento de estos datos quedará \textit{excluido} de la aplicación de la normativa en materia de Protección de Datos.
 
 En nuestro proyecto, hemos hecho uso de datos \textbf{anonimizados} y \textbf{codificados}, tanto en su extracción como su posterior procesamiento y análisis posterior, por lo que podemos afirmar que nos encontramos dentro del marco \textit{ético} y \textit{legal} acerca del tratamiento de datos personales.
 
-Por otro lado, el empleo de Software implica el acceso y uso de herramientas registradas, especialmente librerías:
+Por otro lado, el empleo de software implica el acceso y uso de herramientas registradas, especialmente librerías. Algunas de las usadas y las licencias que asocian pueden verse en la tabla \ref{tabla:lib:lic}
 
 \tablaSmallSinColores{Librerías y Licencias}{c|c}{lib:lic}{
 \textbf{Producto} & \textbf{Licencia}\\

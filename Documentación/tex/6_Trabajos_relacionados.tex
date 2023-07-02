@@ -3,7 +3,7 @@
 
 A la hora de revisar la literatura, hemos encontrado un número considerable de trabajos que tratan nuestro planteamiento, aunque siempre dividiendo la estructura en los dos interrogantes iniciales: \textit{predicción} y \textit{planificación}.
 
-Ha resultado especialmente útil la revisión de \textit{Martínez et al., 2021} \cite{Martinez2021MachinePrediction} , donde encontramos las tendencias de diferentes técnicas clásicas de ML , sirviéndonos como punto de comparación con los resultados obtenidos en nuestro enfoque.
+Ha resultado especialmente útil la revisión de \textit{Martínez et al., 2021} \cite{Martinez2021MachinePrediction}, donde encontramos las tendencias de diferentes técnicas clásicas de ML , sirviéndonos como punto de comparación con los resultados obtenidos en nuestro enfoque.
 
 Por otra parte, hemos encontrado alternativas que tratan de ir un paso más allá e integrar la predicción continua dentro del propio quirófano, permitiendo a los gestores tomar decisiones en tiempo real, haciendo uso de redes neuronales \cite{Jiao2022ContinuousNetwork}.
 
@@ -26,7 +26,7 @@ A pesar de su importancia, predecir la duración de una intervención no es fác
 
 El código ligado al procedimiento ha sido identificado como el factor más significativo a la hora de predecir la duración de una intervención \cite{ShahabiKargar2014PredictingSurgery} , aunque éstos pueden presentar mucha variabilidad en función de la complejidad de la misma.
 
-Actualmente, son muchos los hospitales que estiman la duración de una intervención recurriendo a las medias históricas para los mismos grupos diagnósticos a la hora de planificar las cirugías\cite{Wright1996StatisticalTime} , aunque estas aproximaciones han resultado ser ineficaces y se trasladan en un uso inadecuado de los recursos hospitalarios cuando se trasladan a medidas de planificación \cite{ShahabiKargar2014PredictingSurgery}.
+Actualmente, son muchos los hospitales que estiman la duración de una intervención recurriendo a las medias históricas para los mismos grupos diagnósticos a la hora de planificar las cirugías \cite{Wright1996StatisticalTime} , aunque estas aproximaciones han resultado ser ineficaces y se trasladan en un uso inadecuado de los recursos hospitalarios cuando se trasladan a medidas de planificación \cite{ShahabiKargar2014PredictingSurgery}.
 
 \subsection{Evolución del estado del arte}
 
@@ -41,13 +41,13 @@ Es por ello que se recomienda recopilar y añadir datos que afecten a las caract
 
 A lo largo de la literatura, son varios los estudios centrados en analizar conjuntos de datos individuales y explorar diferentes modelos predictivos que atañen la duración de una determinada intervención quirúrgica.
 
-Por ejemplo, en un estudio reciente \cite{Master2017ImprovingLearning} basado en la población pediátrica, llegaron a la conclusión de que los algoritmos basados en \textbf{árboles} para la predicción basada en variables categóricas (Sexo, raza, edad, diagnóstico, riesgo anestésico...) obtienen menor error predictivo que el uso de las técnicas convencionales de predicción basadas en la experiencia.
+Por ejemplo, en un estudio reciente \cite{Master2017ImprovingLearning} basado en la población pediátrica, llegaron a la conclusión de que los algoritmos basados en \textbf{árboles} para la predicción basada en variables categóricas (sexo, raza, edad, diagnóstico, riesgo anestésico...) obtienen menor error predictivo que el uso de las técnicas convencionales de predicción basadas en la experiencia.
 
 Por otro lado, en otro estudio que exploró hasta nueve especialidades quirúrgicas \cite{Martinez2021MachinePrediction} e incorporó variables como el identificador del cirujano responsable y su experiencia, comparó cuatro modelos de ML (Regresión Lineal, SVM, Árboles de Regresión y Bagged Trees), obteniendo \textbf{mejores métricas} que los estudios previos en todos los modelos, concluyendo que los mejores resultados se obtuvieron con Bagged Trees.
 
 \subsection{Consideraciones Finales}
 
-Actualmente, el método más común empleado en los sistemas sanitarios se basa en \textbf{asumir} las decisiones de los cirujanos, las cuales se basan en su \textit{experiencia previa} con intervenciones similares. No obstante, los profesionales tienden a \textbf{evitar riesgos} y presentan grandes limitaciones en su capacidad para estimar la duración, resultando en \textit{sobreestimación} o \textit{infraestimación} en torno al 40\% de los casos\cite{Huang2022AutomaticNetworks}.
+Actualmente, el método más común empleado en los sistemas sanitarios se basa en \textbf{asumir} las decisiones de los cirujanos, las cuales se basan en su \textit{experiencia previa} con intervenciones similares. No obstante, los profesionales tienden a \textbf{evitar riesgos} y presentan grandes limitaciones en su capacidad para estimar la duración, resultando en \textit{sobreestimación} o \textit{infraestimación} en torno al 40\% de los casos \cite{Huang2022AutomaticNetworks}.
 
 Hasta el momento, podemos afirmar que los algoritmos de ML son capaces de predecir la duración de los quirófanos, aunque no hay ninguna solución definitiva, y el rendimiento de los modelos depende, fundamentalmente, del conjunto de datos que sirva como objeto de entrenamiento, así como al servicio de aplicación y sus características intrínsecas.
 
@@ -56,7 +56,7 @@ En nuestro proyecto, construiremos un conjunto de datos de entre los disponibles
 \newpage
 \section{Optimización en Planificación}
 
-Tal y como hemos reseñado en apartados anteriores, planificar quirófanos consiste en asignar recursos hospitalarios a casos quirúrgicos individuales en función del tiempo estimado para completar la cirugía, por lo que muchos autores han comparado su resolución como una extensión de un problema de Job Shop, proponiendo modelos de programación lineal para su resolución \cite{Pham2008SurgicalProblem} .
+Tal y como hemos reseñado en apartados anteriores, planificar quirófanos consiste en asignar recursos hospitalarios a casos quirúrgicos individuales en función del tiempo estimado para completar la cirugía, por lo que muchos autores han comparado su resolución como una extensión de un problema de Job Shop, proponiendo modelos de programación lineal para su resolución \cite{Pham2008SurgicalProblem}.
 
 No obstante, los autores difieren en cada uno de los estudios, y parecen aplicar las técnicas de optimización que más encajan con la modelización de su problema, existiendo pocas revisiones en la literatura referentes a la planificación y programación de quirófanos \cite{Gur2018ApplicationOverview}. 
 
@@ -87,7 +87,7 @@ Es por estos motivos por los que hemos decidido centrar nuestros esfuerzos en la
 
 Las medidas computacionales empleadas en gran parte de los estudios tienen como objetivo la minimización del tiempo de espera de los pacientes y el coste hospitalario, junto a la maximización del tiempo de utilización de la sala quirúrgica.
 
-Podemos encontrar gran número de aproximaciones, dado que el problema a modelar es NP-Complejo (ILP). Desde metaheurísticas específicas para un entorno concreto, hasta alternativas genéricas como algoritmos genéticos, recocido simulado, colonias de hormigas, particle swarm, programación dinámica... 
+Podemos encontrar gran número de aproximaciones, dado que el problema a modelar es NP-Complejo (ILP). Desde metaheurísticas específicas para un entorno concreto, hasta alternativas genéricas como algoritmos genéticos, recocido simulado, colonias de hormigas, \textit{particle swarm}, programación dinámica... 
 
 En una revisión reciente \cite{Gur2018ApplicationOverview}, la mayor parte de las aproximaciones fueron por \textit{simulación basada en la experiencia} y usando modelos de programación entera mixta (MILP).
 
@@ -103,7 +103,7 @@ En una revisión reciente \cite{Gur2018ApplicationOverview}, la mayor parte de l
 
 En función del foco a optimizar, encontramos en la literatura gran cantidad de aproximaciones a su modelización.
 
-Podemos considerarlo como un problema de Job Shop Múltiple, o incluso como una evolución del problema de la mochila y procesamiento paralelo \cite{Lin2020AScheduling}, aunque en todos la finalidad será la misma: \textbf{asignar un bloque de tiempo, en una sala determinada, a un paciente dado} para la realización de una intervención quirúrgica.
+Podemos considerarlo como un problema de Job Shop Múltiple, o incluso como una evolución del problema de la mochila y procesamiento paralelo \cite{Lin2020AScheduling}, aunque en todos, la finalidad será la misma: \textbf{asignar un bloque de tiempo, en una sala determinada, a un paciente dado} para la realización de una intervención quirúrgica.
 
 Dependerá, por tanto, de las restricciones y los objetivos que marquemos durante la resolución, así como de la estrategia a implementar.
 

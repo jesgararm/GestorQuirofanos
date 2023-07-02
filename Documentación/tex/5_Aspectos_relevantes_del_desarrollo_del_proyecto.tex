@@ -21,7 +21,7 @@ Se obtuvieron datos relativos a las siguientes \textbf{especialidades quirúrgic
 
 En total, se consideraron \textbf{25492 individuos} tras la realización de labores de adecuación e integración de las fuentes de datos.
 
- \imagen{tiposDatos}{Variables del Conjunto de Datos Base}{.9}\footnote{NHC: Número de Historia Clínica - Identificador.}
+ \imagen{tiposDatos}{Variables del Conjunto de Datos Base}{.9}
 
 Por otro lado, contamos con otro dataset, de menor tamaño y limitado a una única especialidad (\textit{Cirugía Plástica y Reparadora}), que \textbf{amplía} el número de variables.
  
@@ -39,7 +39,7 @@ Algunas de las características que han sido tomadas en consideración a lo larg
 
  \subsection{Preparación y Estadísticos}
 
- Tras obtener los \textbf{listados} del repositorio de datos relativos a intervenciones quirúrgicas en el hospital, se realizó una labor de \textit{adecuación} de los mismos a nuestro entorno de trabajo, \cite{McKinney2010DataPython}.
+ Tras obtener los \textbf{listados} del repositorio de datos relativos a intervenciones quirúrgicas en el hospital, se realizó una labor de \textit{adecuación} de los mismos a nuestro entorno de trabajo. \cite{McKinney2010DataPython}.
 
  \imagen{previaPreprocesado}{Aspecto de la Base de Datos antes de la edición.}{.9}
 
@@ -49,7 +49,7 @@ Algunas de las características que han sido tomadas en consideración a lo larg
 
  \imagen{duracionMedia}{Media de duraciones de intervenciones por Especialidad}{.9}
 
- Por otro lado, efectuamos un estudio de la \textbf{correlación} entre algunas de las variables registradas, centrándonos en los valores devueltos por el \textit{coeficiente de correlación de Spearman}\cite{Page1963OrderedRanks}. 
+ Por otro lado, efectuamos un estudio de la \textbf{correlación} entre algunas de las variables registradas, centrándonos en los valores devueltos por el \textit{coeficiente de correlación de Spearman} \cite{Page1963OrderedRanks}. 
  Tras esta evaluación, encontramos que los valores referentes al \textbf{tipo, código de intervención y prioridad} son aquellos que, a priori, se encuentran más relacionados con la \textbf{duración}.
 
 \imagen{correlacionSpearman}{Matriz de Correlación de Spearman}{.9}
@@ -65,9 +65,14 @@ Algunas de las características que han sido tomadas en consideración a lo larg
      \item Para las variables \textbf{nominales}, usamos la técnica de \textit{One Hot Encoding}\footnote{Técnica que consiste en la división de una variable categórica en cada uno de sus posibles valores, realizando una asignación binaria en función del mismo a la instancia de entrenamiento.}, al tratarse de una de las técnicas más recomendadas para el manejo de variables categóricas en el entrenamiento de modelos de aprendizaje automático\cite{Potdar2017AClassifiers}.
  \end{enumerate}
 
- El seguimiento y proceso tanto de los procesos de \textbf{codificación} y \textbf{procesado}, así como de exportación posterior, se encuentra detallado en los Jupyter Notebooks: \textit{./Datos/PreprocesadoDatos.ipynb} y \textit{./Datos/codificacionDatos.ipynb}.
+ El seguimiento y proceso tanto de los procesos de \textbf{codificación} y \textbf{procesado}, así como de exportación posterior, se encuentra detallado en los Jupyter Notebooks: 
+ 
+ \begin{itemize}
+     \item  \textit{./Datos/PreprocesadoDatos.ipynb}
+     \item \textit{./Datos/codificacionDatos.ipynb}
+ \end{itemize}
 
-Por último, de entre todas las estrategias\cite{Emmanuel2021ALearning} existentes para lidiar con los valores \textbf{ausentes} durante la fase de procesamiento, optamos por la \textbf{eliminación} de instancias, dado que el carácter arbitrario de las labores de codificación y la \textit{escasez} de variables correlacionadas dificultan la aplicación de métodos basados en \textit{sustitución o interpolación}. 
+Por último, de entre todas las estrategias \cite{Emmanuel2021ALearning} existentes para lidiar con los valores \textbf{ausentes} durante la fase de procesamiento, optamos por la \textbf{eliminación} de instancias, dado que el carácter arbitrario de las labores de codificación y la \textit{escasez} de variables correlacionadas dificultan la aplicación de métodos basados en \textit{sustitución o interpolación}. 
 
 \newpage
 
@@ -93,18 +98,18 @@ Para el ajuste de los hiperparámetros, empleamos un modelo de validación cruza
 
 Comenzamos aplicando un modelo simple de \textbf{regresión múltiple}, donde encontramos diferencias entre ambos conjuntos,  disminuyendo el RMSE un 20\% e incrementando un 50\% el índice $R^{2}$.
 
-No obstante, tras aplicar un \textbf{árbol de regresion},  obtuvimos una \textit{reducción de la raíz del error cuadrático medio} ligeramente superior al 20\%, con escasas diferencias entre ambos datasets.
+No obstante, tras aplicar un \textbf{árbol de regresión},  obtuvimos una \textit{reducción de la raíz del error cuadrático medio} ligeramente superior al 20\%, con escasas diferencias entre ambos datasets.
 
 \imagen{ejemploRegressionTree}{Sección del Árbol de Regresión Construido}{.9}
 
 La ejecución de KNN\footnote{K-Vecinos más cercanos, con K=14 y distancia de Manhattan (\(\sum_{i=1}^{n} |p_{i} - q_{i}|\))} y MLP\footnote{Perceptrón Multicapa} ofrecieron métricas de error son \textit{similares} a las otorgadas por el algoritmo de regresión lineal, con un tiempo de ejecución \textbf{sustancialmente mayor}.
 
-Los resultados ofrecidos por el ensemble de \textbf{random forest} fueron muy similares a los devueltos por el árbol de regresión, tanto en métricas de error como en tiempo de ejecución sobre el conjunto de validación.
+Los resultados ofrecidos por el \textit{ensemble} de \textbf{random forest} fueron muy similares a los devueltos por el árbol de regresión, tanto en métricas de error como en tiempo de ejecución sobre el conjunto de validación.
 
 Por último, tratamos de convertir el planteamiento del problema en uno de \textit{clasificación}, dividiendo la duración en intervalos, pero las medidas de validez (\textit{precisión, AUC...}) y la escasez de ejemplos en la literatura que empleasen este enfoque nos hicieron centrarnos en el enfoque inicial.
 
 
-\subsection{Comparación y seleccion del modelo}
+\subsection{Comparación y selección del modelo}
 
 Tras el entrenamiento y validación de los algoritmos de aprendizaje, comparamos las métricas calculadas y seleccionamos aquel modelo que mejor se ajusta a los \textbf{objetivos} planteados en el proyecto.
 
@@ -112,13 +117,13 @@ Tras el entrenamiento y validación de los algoritmos de aprendizaje, comparamos
 \textbf{\textit{Modelos}} & \textit{MSE} & \textit{RMSE} & \textit{MAE} \\
 }{
 \textbf{Regresión Lineal} & 3461.43 & 58.83 & 43.27\\
-\textbf{Árbol de Regresion} & 2143.10 & 46.29 & \textbf{33.48}\\
+\textbf{Árbol de Regresión} & 2143.10 & 46.29 & \textbf{33.48}\\
 \textbf{KNN} & 3084.32 & 55.54 & \textbf{39.82}\\
 \textbf{Random Forest} & 2364.55 & 48.63 & \textbf{34.75} \\
 \textbf{Perceptrón Multicapa} & 2804.00 & 52.96 & 40.46\\
 }
 
-En base a estos resultados\footnote{Para más detalles, consultar los Jupyter Notebooks incluidos en la carpeta \textit{Experimentación/Modelos} del respositorio.}, decidimos seleccionar el \textbf{árbol de regresión}, ya entrenado y guardado\footnote{Las librerías \textit{pickle} y \textit{joblib} permiten serializar y deserializar objetos.} para su uso como servicio por los clientes.
+En base a estos resultados\footnote{Para más detalles, consultar los Jupyter Notebooks incluidos en la carpeta \textit{Experimentación/Modelos} del repositorio.}, decidimos seleccionar el \textbf{árbol de regresión}, ya entrenado y guardado\footnote{Las librerías \textit{pickle} y \textit{joblib} permiten serializar y deserializar objetos.} para su uso como servicio por los clientes.
 
 
 \imagen{decTree}{Representación de rendimiento del árbol de regresión}{.9}
