@@ -50,7 +50,7 @@ Algunas de las características que han sido tomadas en consideración a lo larg
  \imagen{duracionMedia}{Media de duraciones de intervenciones por Especialidad}{.9}
 
  Por otro lado, efectuamos un estudio de la \textbf{correlación} entre algunas de las variables registradas, centrándonos en los valores devueltos por el \textit{coeficiente de correlación de Spearman} \cite{Page1963OrderedRanks}. 
- Tras esta evaluación, encontramos que los valores referentes al \textbf{tipo, código de intervención y prioridad} son aquellos que, a priori, se encuentran más relacionados con la \textbf{duración}.
+ Tras esta evaluación, encontramos que los valores referentes al \textbf{tipo, código de intervención y ponderación (\textit{prioridad})} son aquellos que, a priori, se encuentran más relacionados con la \textbf{duración}.
 
 \imagen{correlacionSpearman}{Matriz de Correlación de Spearman}{.9}
 
@@ -88,7 +88,7 @@ Esta situación nos hizo sospechar de la presencia de numerosos \textit{outliers
 
 Este problema fue solucionado haciendo uso del IQR\footnote{Técnica de selección de datos del conjunto de entrenamiento que escoge aquellas instancias con valores de la variable dependiente comprendidos entre 1.5 veces por debajo y por encima de los cuartiles primero y tercero, respectivamente.} \cite{Bonthu2021DetectingOutliers}.
 
-Como podemos comprobar, la ejecución muestra unos valores mucho más coherentes y concordantes de la literatura, constituyendo un buen punto de partida para nuestro ensayo.
+Tras la aplicación de esta medida, obtuvimos valores de error (\textit{reducción a menos de un 10\% de los previos}) mucho más coherentes y concordantes de la literatura, constituyendo un buen punto de partida para nuestro ensayo.
 
 \subsection{Explotación de los Modelos}
 
