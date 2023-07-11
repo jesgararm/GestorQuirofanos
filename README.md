@@ -26,3 +26,4 @@ Se puede visitar el despligue en la siguiente dirección:[URL APP Gestor Quiróf
 ### Cuenta de pruebas:
 - Email : ubu@ubu.es
 - Contraseña: ubu
+#### Fichero de pruebas: https://github.com/jesgararm/GestorQuirofanos/blob/main/API/toy_dataset.csv
